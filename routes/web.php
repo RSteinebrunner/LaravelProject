@@ -14,19 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/hello', function () {
-    return "hello world";
-});
-Route::get('/helloworld', function () {
-    return view('helloworld');
-});
-Route::get('/test', 'TestController@test');
-Route::get('/test2', 'TestController@test2');
 
-Route::get('/askme', function(){
-    return view('whoami');
-});
 
-Route::post('/whoami', 'WhatsMyNameController@index');
+Route::get('/login','LoginController@showLogin');
+Route::get('/register','LoginController@showRegister');
+Route::post('/doLogin', 'LoginController@authenticate');
+Route::post('/doRegister', 'LoginController@createUser');
+
+
  
  
