@@ -1,3 +1,13 @@
+<!--  
+Project name/Version: LaravelCLC Version: 1
+Module name: showLogin
+Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
+Date: 1/19/2020
+Synopsis: View page that shows the login page when a user attempts to sign into their account
+Version#: 1
+References: N/A
+-->
+
 <html>
 <head>
 <title>Login</title>

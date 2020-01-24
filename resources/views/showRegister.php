@@ -1,3 +1,13 @@
+<!--  
+Project name/Version: LaravelCLC Version: 1
+Module name: showRegister
+Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
+Date: 1/19/2020
+Synopsis: View page that shows the registeration page when signing up for an account
+Version#: 1
+References: N/A
+-->
+
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,3 +1,13 @@
+<!--  
+Project name/Version: LaravelCLC Version: 1
+Module name: Routes
+Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
+Date: 1/19/2020
+Synopsis: Module provides all routing details for controllers and views
+Version#: 1
+References: N/A
+-->
+
 <?php
 
 /*
