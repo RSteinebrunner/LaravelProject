@@ -1,10 +1,19 @@
-Database DRY- dont repeat yourself. Should we change the database structure to be simpler(ie one table with the credentials in it to keep it basic.)
 
-Login Module: save user in session
+Roland:
+	Registration module: Check for duplicate on registration(easier if one table)
+						Fix insert so it works with the new table
+	Login Module: save user in session
+	fix login so it works with new table
+	move connections from the data service to the security service
+	Create Blade Template
+	Setup heroku database
 
-Registration module: Check for duplicate on registration(easier if one table)
 
+Jack:
 Profile Module: User needs to be able to edit user profile
+add diagrams to design report
+
+Anthony:
 
 Administration Module
 	1. List Users
