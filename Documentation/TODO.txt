@@ -1,0 +1,15 @@
+Database DRY- dont repeat yourself. Should we change the database structure to be simpler(ie one table with the credentials in it to keep it basic.)
+
+Login Module: save user in session
+
+Registration module: Check for duplicate on registration(easier if one table)
+
+Profile Module: User needs to be able to edit user profile
+
+Administration Module
+	1. List Users
+	2. Display user role and permissions
+	3. Display user profile
+	4. suspend a user
+	5. delete a user
+	6. Cannot delete or suspend self.
