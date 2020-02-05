@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `laraveldb`.`user` (
   `email` VARCHAR(100) NULL DEFAULT NULL,
   `phoneNumber` VARCHAR(45) NULL,
   `role` VARCHAR(45) NULL,
-  `isSuspened` VARCHAR(45) NULL,
+  `isSuspended` VARCHAR(45) NULL,
   PRIMARY KEY (`userId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 8

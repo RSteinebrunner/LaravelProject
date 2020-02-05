@@ -8,14 +8,17 @@ Version#: 1
 References: N/A
 -->
 
-<html>
-<head><title>Login Success</title></head>
-<body>
+@extends('layouts.appmaster')
+@section('head','Login Success')
+@section('title')
 <h2>You have logged in successfuly</h2>
-<p>
-<?php // echo "Username: ". $username . "<br>Password: " . $password;?></p>
+@endsection
+
+@section('content')
+@php
+    echo '<pre>';
+    var_dump($_SESSION);
+    echo '</pre>';
+@endphp
 <p>Click <a href="login">here</a> to return to the login page.</p>
-</body>
-
-
-</html>
+@endsection

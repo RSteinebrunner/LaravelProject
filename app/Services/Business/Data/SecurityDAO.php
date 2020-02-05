@@ -1,7 +1,6 @@
 <?php
 namespace App\Services\Business\Data;
 use App\Models\UserModel;
-use mysqli;
 
 /*
  Project name/Version: LaravelCLC Version: 1
@@ -17,80 +16,65 @@ use mysqli;
 class SecurityDAO{
     
     //finds users in database and returns true if found
-    public function findUser($username, $password){
+    public function findUser($username, $password,$conn){
         //establic connectionto the database(try to put this in the security service)
-        $conn = new mysqli("localhost","root","root","laraveldb");
         if ($conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
            // echo "Got databse connection!";
             //search database credentials for user'
-            $sql_statement = "SELECT * FROM `credential` WHERE `username` = '$username' AND `password` = '$password' LIMIT 1";
+            $sql_statement = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password' LIMIT 1";
             $result = mysqli_query($conn, $sql_statement);
             if ($result) {
                 if (mysqli_num_rows($result) == 1) {
-                    return true;
+                    $row = mysqli_fetch_assoc($result);
+                    $user = new UserModel($row['userId'], $row['username'], $row['password'], $row['firstName'], $row['lastName'], $row['picture'], $row['age'], $row['gender'], $row['address'], $row['hometown'], $row['email'], $row['phoneNumber'], $row['role'], $row['isSuspended']);
+                    if($row['isSuspended'] == "false")
+                    {
+                        $_SESSION['User'] = $user;
+                        $_SESSION['Role'] = $row['role'];
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
                 }
             }
         }        
     }
     
     //creates user when requested from user registeration page
-    public function makeUser(UserModel $user){
-        //get all variables
-         $firstName = $user->firstName;
-         $lastName = $user->lastName;
-         $username = $user->username;
-         $password = $user->password;
-         $age = $user->age;
-         $email = $user->email;
-         $checkCounter = 0;
-         //connect to database
-         $conn = new mysqli("localhost","root","root","laraveldb");
+    public function makeUser(UserModel $user,$conn){
+       
+            //get all variables from user model
+        $firstName =$user->getFirstName();
+        $lastName = $user->getLastName();
+        $username = $user->getUsername();
+        $password = $user->getPassword();
+        $age = $user->getAge();
+        $email = $user->getEmail();
+        $picture = null;
+        $gender = $user->getGender();
+        $address = $user->getAddress();
+        $hometown = $user->getHometown();
+        $phoneNumber = $user->getPhoneNumber();
+        $role = $user->getRole();
+        $suspended=$user->getStatus();
+        
+         //connect to database       
          if ($conn->connect_error){
              echo "Failed to get databse connection!";
          }else{
-             
              //add user
-             $sql_statement_user = "INSERT INTO `user` (`firstName`,`lastName`,`age`,`email`) VALUES ('$firstName', '$lastName', '$age', '$email')"; 
+             $sql_statement_user = "INSERT INTO `user` (`username`,`password`,`firstName`,`lastName`, `picture`, `age`, `gender`, `address`, `hometown`, `email`, `phoneNumber`, `role`, `isSuspended` ) VALUES ('$username', '$password', '$firstName', '$lastName', '$picture', '$age', '$gender', '$address', '$hometown', '$email', '$phoneNumber', '$role', '$suspended')"; 
              if (mysqli_query($conn, $sql_statement_user)) {
                  //echo "New user created successfully";
-                 $checkCounter++;
+                 return true;
              }else{
                  echo "Error: " . $sql_statement_user . "<br>" . mysqli_error($conn);
              }
-             
-             
-             $sql_statement1 = "SELECT * FROM `user`";
-             
-             //get latest id
-             //unfortunatly we do not know another way to create items in two tables bound by a foreign key another way
-             //We will ask you about this in out class because Gordon did not teach this to us and it seems rather importatant
-             $result = mysqli_query($conn,$sql_statement1);
-             $lastId = 0;
-             if($result){
-                 while($row = mysqli_fetch_assoc($result)){
-                     $lastId =  $row['userId'];    
-                 }
-                // echo $lastId;
-             }else{
-                 echo "Error with sql " . mysqli_error($conn);
-             }
-               
-             //add credentials
-             $sql_statement_credential = "INSERT INTO `credential` (`userId`,`username`,`password`) VALUES ('$lastId', '$username', '$password')";
-             if (mysqli_query($conn, $sql_statement_credential)) {
-                // echo "New credential created successfully";
-                 $checkCounter++;
-             }else{
-                 echo "Error: " . $sql_statement_credential . "<br>" . mysqli_error($conn);
-             }
          }
-         if($checkCounter == 2){
-             return true;
-         }
-         return false;
-         
+        return false;
 
          
          

@@ -12,6 +12,7 @@ References: N/A
 -->
 */
 use App\Models\UserModel;
+use mysqli;
 use App\Services\Business\Data\SecurityDAO;
 
 //securityService class recieves the sent data from Logincontroller and calls the appropriate method in DAO to access the database
@@ -20,9 +21,11 @@ class SecurityService{
     public function authenticate($username, $password){
         //assume did not find
         $result = false;
+        //Set up connection
+        $conn = new mysqli("localhost","root","root","laraveldb");
         //check for user
         $security = new SecurityDAO();
-        $result = $security->findUser($username,$password);
+        $result = $security->findUser($username,$password,$conn);
         //return if found or not
         return $result;
     }
@@ -31,9 +34,11 @@ class SecurityService{
     public function create(UserModel $user){
         //assume creation of user failse
         $result = false;
+        //Database Connection
+        $conn = new mysqli("localhost","root","root","laraveldb");
         //make new user in database using user model
         $security = new SecurityDAO();
-        $result = $security->makeUser($user);
+        $result = $security->makeUser($user,$conn);
         return $result;
     }     
 }

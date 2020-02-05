@@ -25,7 +25,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/loginSuccess',function () {
+    return view('loginSuccess');
+});
+Route::get('/logout','LoginController@logoutUser');
 Route::get('/login','LoginController@showLogin');
 Route::get('/register','LoginController@showRegister');
 Route::post('/doLogin', 'LoginController@authenticate');
