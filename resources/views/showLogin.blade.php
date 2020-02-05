@@ -21,7 +21,7 @@ References: N/A
     <div class = "row justify-content-center">
     <div class = "col-4">
         <form action="doLogin" method = "post">
-        <input type="hidden" name="_token" value="<?php echo csrf_token()?>"/>
+        <input type="hidden" name="_token" value="{{csrf_token()}}"/>
         <div class= "form-group">
             <label for="username">Username:</label>
             <input type="text" class = "form-control" name="username" placeholder = "Enter Username" ></input>

@@ -18,7 +18,7 @@
             </ul>
             <ul class="navbar-nav">
             
-			@if(isset($_SESSION['Role'])==true && $_SESSION['Role'] == "admin")
+			@if(Session::get('Role') == "admin")
 			  
             <!-- Administrator  drop down menu -->
 				<li class="nav-item dropdown">
@@ -32,7 +32,7 @@
              
               @endif
               
-              @if(isset($_SESSION['Role'])==true && $_SESSION['Role'] == "user")
+              @if(Session::get('Role') == "user")
               <!-- User  drop down menu -->
                  <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -45,7 +45,7 @@
                  </li>
                @endif
                
-              @if(isset($_SESSION['Role'])==false)
+              @if(Session::get('Role')==null)
                  	<li class="nav-item"><a class="nav-link" href='register'>Sign Up</a>
                  	<li class="nav-item"><a class="nav-link" href='login'>Login</a>      
                @endif

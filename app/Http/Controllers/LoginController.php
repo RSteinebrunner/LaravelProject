@@ -12,8 +12,8 @@ namespace App\Http\Controllers;
   */
 use App\Models\UserModel;
 use App\Services\Business\SecurityService;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class LoginController extends Controller{
     public function showLogin(){
@@ -70,11 +70,9 @@ class LoginController extends Controller{
         return view('registerFailure');       
     }
     
-    public function logoutUser(Request $request)
+    public function logoutUser()
     {
-        if($request->session()->has('Role'))
-            echo $request->session()->get('Role');
-            else
-                echo 'No data in the session';
+        Session::flush();
+        return view('showLogin');
     }
 }

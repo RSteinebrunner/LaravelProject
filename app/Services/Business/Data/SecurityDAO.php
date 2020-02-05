@@ -1,6 +1,7 @@
 <?php
 namespace App\Services\Business\Data;
 use App\Models\UserModel;
+use Illuminate\Support\Facades\Session;
 
 /*
  Project name/Version: LaravelCLC Version: 1
@@ -31,8 +32,8 @@ class SecurityDAO{
                     $user = new UserModel($row['userId'], $row['username'], $row['password'], $row['firstName'], $row['lastName'], $row['picture'], $row['age'], $row['gender'], $row['address'], $row['hometown'], $row['email'], $row['phoneNumber'], $row['role'], $row['isSuspended']);
                     if($row['isSuspended'] == "false")
                     {
-                        $_SESSION['User'] = $user;
-                        $_SESSION['Role'] = $row['role'];
+                        Session::put('User',$user);
+                        Session::put('Role', $row['role']);
                         return "true";
                     }
                     else{

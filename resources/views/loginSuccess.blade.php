@@ -15,9 +15,8 @@ References: N/A
 
 @section('content')
 @php
-    echo '<pre>';
-    var_dump($_SESSION);
-    echo '</pre>';
+    echo "ROLE: ". Session::get('Role');
+    echo "USER: ". Session::get('User')->toString();
 @endphp
 <p>Click <a href="login">here</a> to return to the login page.</p>
 @endsection
