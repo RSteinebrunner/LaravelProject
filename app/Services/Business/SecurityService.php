@@ -29,6 +29,18 @@ class SecurityService{
         //return if found or not
         return $result;
     }
+    public function findAllUsers($id){
+        session_start();
+        $result = false;
+        //Set up connection
+        $conn = new mysqli("localhost","root","root","laraveldb");
+        //check for user
+        $security = new SecurityDAO();
+        $result = $security->findAllUsers($id);
+        
+        return $result;
+        
+    }
     
     //create method takes user data inputed in registeration page and send information over to the DAO to add the user profile into the Database
     public function create(UserModel $user){

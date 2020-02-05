@@ -31,6 +31,10 @@ Route::get('/loginSuccess',function () {
 Route::get('/logout','LoginController@logoutUser');
 Route::get('/login','LoginController@showLogin');
 Route::get('/register','LoginController@showRegister');
+Route::get('/admin','AdminController@showAdmin');
+Route::get('/editUser','AdminController@showEditUser');
+Route::post('/doEditUser', 'AdminController@updateUser');
+Route::post('/doAdmin', 'AdminController@showAllUsers');
 Route::post('/doLogin', 'LoginController@authenticate');
 Route::post('/doRegister', 'LoginController@createUser');
 
