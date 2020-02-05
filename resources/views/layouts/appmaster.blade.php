@@ -22,7 +22,7 @@
 <body>
     @include('layouts.header')
     	<div align="center">
-    		@yield('title')
+    		<h2>@yield('title')</h2>
     	</div>
     	<hr>
     	<div align="left">

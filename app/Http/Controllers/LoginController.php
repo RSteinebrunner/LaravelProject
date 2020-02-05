@@ -34,12 +34,16 @@ class LoginController extends Controller{
        //send username and password to service
        $result = $isUser->authenticate($username, $password);
         //check if user was found
+   
         
-        if($result == true){
-            return view('loginSuccess');
-        }else {
-           return view('loginFailure');
-        }
+       if($result=="true"){
+           return view('loginSuccess');
+       }
+       else {
+           return view('loginFailure')->with("result", $result);
+       }
+        
+        
         //if yes return success,
         //else failure              
     }

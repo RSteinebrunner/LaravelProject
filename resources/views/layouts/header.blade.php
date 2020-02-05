@@ -45,9 +45,10 @@
                  </li>
                @endif
                
+              @if(isset($_SESSION['Role'])==false)
                  	<li class="nav-item"><a class="nav-link" href='register'>Sign Up</a>
                  	<li class="nav-item"><a class="nav-link" href='login'>Login</a>      
-                 
+               @endif
                  
                </ul>
            </div> 

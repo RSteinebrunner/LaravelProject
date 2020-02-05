@@ -10,9 +10,8 @@ References: N/A
 
 @extends('layouts.appmaster')
 @section('head','Login Success')
-@section('title')
-<h2>You have logged in successfuly</h2>
-@endsection
+@section('title','You have logged in successfuly')
+
 
 @section('content')
 @php

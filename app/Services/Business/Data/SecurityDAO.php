@@ -33,13 +33,14 @@ class SecurityDAO{
                     {
                         $_SESSION['User'] = $user;
                         $_SESSION['Role'] = $row['role'];
-                        return true;
+                        return "true";
                     }
                     else{
-                        return false;
+                        return "Suspended";
                     }
                 }
             }
+            return "false";
         }        
     }
     

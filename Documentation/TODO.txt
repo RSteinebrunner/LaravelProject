@@ -1,5 +1,16 @@
 
 Roland:
+
+Roland changes:
+Add to git:
+	- SecurityDAO.php
+	- header.blade.php
+	- loginfailure.blade.php
+	- appmaster.blade.php
+Remove from git
+	- loginfailure.php
+
+Last to finish
 	finish converting to blade
 	Setup heroku database
 
@@ -17,3 +28,5 @@ Administration Module
 	4. suspend a user
 	5. delete a user
 	6. Cannot delete or suspend self.
+
+	Admin controller
