@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-@php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-@endphp
 <head>
 	<title>@yield('head')</title>
 	  <style type="text/css">

@@ -24,19 +24,25 @@ References: N/A
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::get('/loginSuccess',function () {
     return view('loginSuccess');
 });
+Route::get('/admin',function () {
+    return view('showAdmin');
+});
+Route::get('/userDetails',function () {
+     return view('showUserDetails');
+});
+        
 Route::get('/logout','LoginController@logoutUser');
 Route::get('/login','LoginController@showLogin');
 Route::get('/register','LoginController@showRegister');
-Route::get('/admin','AdminController@showAdmin');
-Route::get('/editUser','AdminController@showEditUser');
-Route::post('/doEditUser', 'AdminController@updateUser');
-Route::post('/doAdmin', 'AdminController@showAllUsers');
 Route::post('/doLogin', 'LoginController@authenticate');
 Route::post('/doRegister', 'LoginController@createUser');
+
+Route::get('/manageUsers', 'AdminController@showAllUsers')->name('manageUsers');
+Route::post('/suspendUser', 'AdminController@suspendUser');
+Route::post('/deleteUser', 'AdminController@deleteUser');
 
 
  

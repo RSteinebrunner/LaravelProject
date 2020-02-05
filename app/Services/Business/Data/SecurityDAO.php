@@ -15,6 +15,67 @@ use Illuminate\Support\Facades\Session;
 
 //securityDAO class that creates or findes user depending on which method is requested from SecurityService
 class SecurityDAO{
+        
+    //delete a user by id
+    public function deleteUser($id, $conn){
+        if ($conn->connect_error){
+            echo "Failed to get databse connection!";
+        }else{
+            $sql_statement = "DELETE FROM `user` WHERE `userId` = '$id'";
+            $result = mysqli_query($conn, $sql_statement);
+            if($result){
+                    return true;
+                }
+                return false;
+        }
+           
+    }
+    public function updateUserStatus($id,$conn,$status){
+        if ($conn->connect_error){
+            echo "Failed to get databse connection!";
+        }else{
+            if($status == "true"){
+                $sql_statement = "UPDATE `user` SET `isSuspended` = 'false' WHERE `userId` = '$id'";  
+            }
+            else{
+                $sql_statement = "UPDATE `user` SET `isSuspended` = 'true' WHERE `userId` = '$id'";  
+            }
+            $result = mysqli_query($conn, $sql_statement);
+            if($result){
+                return true;
+            }
+             return false;
+            
+        }
+        
+    }
+    
+    
+    //find all users in the database
+    public function findAllUsers($id, $conn){
+        
+        if ($conn->connect_error){
+            echo "Failed to get databse connection!";
+        }else{
+            // echo "Got databse connection!";
+            //search database credentials for user'
+            $sql_statement = "SELECT * FROM `user` WHERE `userId` <> '$id'";
+            $counter=0;
+            $result = mysqli_query($conn, $sql_statement);
+            if($result){
+                while($row = mysqli_fetch_assoc($result)){
+                    $user = new UserModel($row['userId'], $row['username'], $row['password'], $row['firstName'], $row['lastName'], $row['picture'], $row['age'], $row['gender'], $row['address'], $row['hometown'], $row['email'], $row['phoneNumber'], $row['role'], $row['isSuspended']);
+                    $array[$counter] = $user;
+                    $counter++;
+                }
+                return $array;
+            }
+            
+        }
+        
+    }
+    
+    
     
     //finds users in database and returns true if found
     public function findUser($username, $password,$conn){

@@ -29,6 +29,24 @@ class SecurityService{
         //return if found or not
         return $result;
     }
+    public function deleteUser($id){
+        //Set up connection
+        $conn = new mysqli("localhost","root","root","laraveldb");
+        //delete the user
+        $security = new SecurityDAO();
+        $result = $security->deleteUser($id, $conn);
+       //return if the user was deleted
+        return $result;
+    }
+    public function suspendUser($id,$status){
+        //Set up connection
+        $conn = new mysqli("localhost","root","root","laraveldb");
+        //update the user status
+        $security = new SecurityDAO();
+        $result = $security->updateUserStatus($id, $conn, $status);
+        //return if the user was updated
+        return $result;
+    }
     public function findAllUsers($id){
         session_start();
         $result = false;
@@ -36,7 +54,7 @@ class SecurityService{
         $conn = new mysqli("localhost","root","root","laraveldb");
         //check for user
         $security = new SecurityDAO();
-        $result = $security->findAllUsers($id);
+        $result = $security->findAllUsers($id, $conn);
         
         return $result;
         
