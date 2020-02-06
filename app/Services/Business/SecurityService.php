@@ -29,6 +29,17 @@ class SecurityService{
         //return if found or not
         return $result;
     }
+    public function findUserById($id){
+        //assume did not find
+        $result = false;
+        //Set up connection
+        $conn = new mysqli("localhost","root","root","laraveldb");
+        //check for user
+        $security = new SecurityDAO();
+        $result = $security->findUserById($id,$conn);
+        //return if found or not
+        return $result;
+    }
     public function deleteUser($id){
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
@@ -58,6 +69,16 @@ class SecurityService{
         
         return $result;
         
+    }
+    public function updateUser(UserModel $updatedUser){
+        $result = false;
+        //Database Connection
+        $conn = new mysqli("localhost","root","root","laraveldb");
+        //make new user in database using user model
+        $security = new SecurityDAO();
+        $result = $security->updateUser($updatedUser,$conn);
+        return $result;
+         
     }
     
     //create method takes user data inputed in registeration page and send information over to the DAO to add the user profile into the Database

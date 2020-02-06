@@ -30,9 +30,9 @@ Route::get('/loginSuccess',function () {
 Route::get('/admin',function () {
     return view('showAdmin');
 });
-Route::get('/userDetails',function () {
-     return view('showUserDetails');
-});
+Route::get('/profile',function () {
+    return view('myProfile');
+})->name('profile');
         
 Route::get('/logout','LoginController@logoutUser');
 Route::get('/login','LoginController@showLogin');
@@ -43,6 +43,11 @@ Route::post('/doRegister', 'LoginController@createUser');
 Route::get('/manageUsers', 'AdminController@showAllUsers')->name('manageUsers');
 Route::post('/suspendUser', 'AdminController@suspendUser');
 Route::post('/deleteUser', 'AdminController@deleteUser');
+Route::post('/userDetails', 'AdminController@userDetails');
+Route::post('/updateDetails', 'AdminController@updateUser');
+
+
+
 
 
  

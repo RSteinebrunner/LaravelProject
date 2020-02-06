@@ -48,6 +48,47 @@ class AdminController extends Controller{
         
         
     }
+    public function userDetails(Request $request){
+        $id = $request->input('id');
+        $users = new SecurityService();
+        $result = $users->findUserById($id);
+        if($result){
+            return view('showUserDetails')->with("result",$result);
+        }
+        else{
+            return view('managerError');
+        }
+        
+        
+    }
+    public function updateUser(Request $request){
+        //pull form data to make user
+        $id = $request->input('id');
+        $firstName = $request->input('firstName');
+        $lastName = $request->input('lastName');
+        $username = $request->input('username');
+        $password = $request->input('password');
+        $age = $request->input('age');
+        $email = $request->input('email');
+        $gender = $request->input('gender');
+        $address = $request->input('address');
+        $hometown = $request->input('hometown');
+        $phoneNumber = $request->input('phoneNumber');
+        $image = null;
+        $updatedUser = new UserModel($id,$username, $password, $firstName, $lastName, null, $age, $gender, $address, $hometown, $email, $phoneNumber, "user", "false");
+        //pass the person object to the security service
+        
+        $users = new SecurityService();
+        $result = $users->updateUser($updatedUser);
+        if($result == "true"){
+            return redirect()->route('profile');
+        }
+        else{
+            return view('managerError');
+        }
+        
+        
+    }
     
     
   

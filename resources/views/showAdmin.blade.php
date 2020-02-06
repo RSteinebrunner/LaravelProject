@@ -9,7 +9,7 @@ References: N/A
 -->
 
 @extends('layouts.appmaster')
-@section('head','Login')
+@section('head','Admin')
 
 @section('title')
     	<h2>Administration</h2>
@@ -55,7 +55,7 @@ References: N/A
         			</form>
         			</td>
         			<td>
-        			<form method="post" action="showUsers">
+        			<form method="post" action="userDetails">
         			<input type = "hidden" name = "id" value = "{{$user->getId()}}">
         			<input type="hidden" name="_token" value="{{ csrf_token()}}"/>
         			<button class="btn btn-primary" type="submit">Details</button>

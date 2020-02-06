@@ -68,7 +68,10 @@ class SecurityDAO{
                     $array[$counter] = $user;
                     $counter++;
                 }
-                return $array;
+                if(isset($array))
+                    return $array;
+                $empty=array();
+                return $empty;
             }
             
         }
@@ -104,6 +107,58 @@ class SecurityDAO{
             }
             return "false";
         }        
+    }
+    public function findUserById($id,$conn){
+        //establic connectionto the database(try to put this in the security service)
+        if ($conn->connect_error){
+            echo "Failed to get databse connection!";
+        }else{
+          
+            //search database credentials for user'
+            $sql_statement = "SELECT * FROM `user` WHERE `userId` = '$id' LIMIT 1";
+            $result = mysqli_query($conn, $sql_statement);
+            if ($result) {
+                if (mysqli_num_rows($result) == 1) {
+                    $row = mysqli_fetch_assoc($result);
+                    $user = new UserModel($row['userId'], $row['username'], $row['password'], $row['firstName'], $row['lastName'], $row['picture'], $row['age'], $row['gender'], $row['address'], $row['hometown'], $row['email'], $row['phoneNumber'], $row['role'], $row['isSuspended']);                    
+                }
+                return $user;
+            }
+            return "false";
+        }
+    }
+    //update the user
+    public function updateUser(UserModel $user, $conn){
+        //get all variables from user model
+        $firstName =$user->getFirstName();
+        $lastName = $user->getLastName();
+        $username = $user->getUsername();
+        $password = $user->getPassword();
+        $age = $user->getAge();
+        $email = $user->getEmail();
+        $picture = null;
+        $gender = $user->getGender();
+        $address = $user->getAddress();
+        $hometown = $user->getHometown();
+        $phoneNumber = $user->getPhoneNumber();
+        $role = $user->getRole();
+        $id=$user->getId();
+        
+        //connect to database
+        if ($conn->connect_error){
+            echo "Failed to get databse connection!";
+        }else{
+            //update user          
+            $sql_statement_user = "UPDATE `user` SET `username` = '$username', `password` = '$password', `firstName` = '$firstName', `lastName` = '$lastName', `gender` = '$gender', `hometown` = '$hometown', `email` = '$email' WHERE `userId` = $id";
+            if (mysqli_query($conn, $sql_statement_user)) {
+                //user updated successfully
+                Session::put('User',$user);
+                return true;
+            }else{
+                echo "Error: " . $sql_statement_user . "<br>" . mysqli_error($conn);
+            }
+        }
+        return false;
     }
     
     //creates user when requested from user registeration page
