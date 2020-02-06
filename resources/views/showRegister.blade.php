@@ -68,7 +68,7 @@ References: N/A
     </div>
 	
 	<div class="form-group">
-    	<label for="username"><b>Phone Number:</b></label>
+    	<label for="phoneNumber"><b>Phone Number:</b></label>
     	<input type="text" class = "form-control"placeholder="Enter your phone number" name="phoneNumber" required>
     </div>
 	

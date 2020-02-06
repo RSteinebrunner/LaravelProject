@@ -58,9 +58,17 @@ class SecurityService{
         //return if the user was updated
         return $result;
     }
+    public function changeRole($id,$role){
+        //Set up connection
+        $conn = new mysqli("localhost","root","root","laraveldb");
+        //update the user status
+        $security = new SecurityDAO();
+        $result = $security->changeRole($id, $conn, $role);
+        //return if the user was updated
+        return $result;
+    }
     public function findAllUsers($id){
-        session_start();
-        $result = false;
+
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //check for user
@@ -71,7 +79,6 @@ class SecurityService{
         
     }
     public function updateUser(UserModel $updatedUser){
-        $result = false;
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new user in database using user model
@@ -83,8 +90,6 @@ class SecurityService{
     
     //create method takes user data inputed in registeration page and send information over to the DAO to add the user profile into the Database
     public function create(UserModel $user){
-        //assume creation of user failse
-        $result = false;
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new user in database using user model

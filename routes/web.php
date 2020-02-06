@@ -35,7 +35,7 @@ Route::get('/profile',function () {
 })->name('profile');
         
 Route::get('/logout','LoginController@logoutUser');
-Route::get('/login','LoginController@showLogin');
+Route::get('/login','LoginController@showLogin')->name('login');
 Route::get('/register','LoginController@showRegister');
 Route::post('/doLogin', 'LoginController@authenticate');
 Route::post('/doRegister', 'LoginController@createUser');
@@ -45,6 +45,7 @@ Route::post('/suspendUser', 'AdminController@suspendUser');
 Route::post('/deleteUser', 'AdminController@deleteUser');
 Route::post('/userDetails', 'AdminController@userDetails');
 Route::post('/updateDetails', 'AdminController@updateUser');
+Route::post('/changeRole', 'AdminController@changeRole');
 
 
 

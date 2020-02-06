@@ -67,8 +67,22 @@ References: N/A
     </div>
 	
 	<div class="form-group">
-    	<label for="username"><b>Phone Number:</b></label>
+    	<label for="phoneNumber"><b>Phone Number:</b></label>
     	<input type="text" class = "form-control" value="{{$result->getPhoneNumber()}}" name="phoneNumber" readonly>
+    </div>
+    
+    <div class="form-group">
+    	<label for="role"><b>Role:</b></label>
+    	<input type="text" class = "form-control" value="{{$result->getRole()}}" name="phoneNumber" readonly>
+    </div>
+    
+	<div class="form-group">
+    	<label for="status"><b>Status:</b></label>
+    	@if($result->getStatus()=="true")
+    	<input type="text" class = "form-control" value="Suspended" name="phoneNumber" readonly>
+    	@else
+    	<input type="text" class = "form-control" value="Active" name="phoneNumber" readonly>
+    	@endif
     </div>
 	
     <hr>
@@ -91,6 +105,19 @@ References: N/A
         			<button class="btn btn-warning" type="submit">Suspend</button>
         			@else
         			<button class="btn btn-success" type="submit">Reinstate</button>
+        			@endif
+        			</form>
+        			</td>
+        			
+        			<td>
+        			<form method="post" action="changeRole">
+        			<input type = "hidden" name = "id" value = "{{$result->getId()}}">
+        			<input type = "hidden" name = "role" value = "{{$result->getRole()}}">
+        			<input type="hidden" name="_token" value="{{ csrf_token()}}"/>
+        			@if($result->getRole() == "user")
+        			<button class="btn btn-warning" type="submit">Make Admin</button>
+        			@else
+        			<button class="btn btn-success" type="submit">Make User</button>
         			@endif
         			</form>
         			</td>

@@ -64,15 +64,16 @@ class LoginController extends Controller{
         $newUser = new UserModel(null,$username, $password, $firstName, $lastName, null, $age, $gender, $address, $hometown, $email, $phoneNumber, "user", "false");        
         //pass the person object to the security service
         $makeUser = new SecurityService();
-        if($makeUser->create($newUser)==true){
+        $result = $makeUser->create($newUser);
+        if($result=="true"){
             return view('registerSuccess');
         }
-        return view('registerFailure');       
+        return view('registerFailure')->with("result",$result);       
     }
     
     public function logoutUser()
     {
         Session::flush();
-        return view('showLogin');
+        return redirect()->route('login');
     }
 }

@@ -8,12 +8,8 @@
         <div id="navbarNavDropdown" class="navbar-collapse collapse">
             <ul class="navbar-nav mr-auto">
               
-       		<li class="nav-item"><a class="nav-link" href="showProducts.php">Home</a></li> 
-       		<li class="nav-item"><a class="nav-link" href="showMain.php">Main</a></li> 
-       		<li class="nav-item"><a class="nav-link" href="showSecondary.php">Secondary</a></li>
-    	    <li class="nav-item"><a class="nav-link" href="showPeriphreal.php">Periphreal</a></li>
-	        <li class="nav-item"><a class="nav-link" href="showSearchProduct.php">Search</a></li>
-	        <li class="nav-item"><a class="nav-link" href="showCart.php">Cart</a></li>
+       		<li class="nav-item"><a class="nav-link" href="login">Home</a></li> 
+       		
 
             </ul>
             <ul class="navbar-nav">

@@ -49,6 +49,25 @@ class SecurityDAO{
         }
         
     }
+    public function changeRole($id,$conn,$role){
+        if ($conn->connect_error){
+            echo "Failed to get databse connection!";
+        }else{
+            if($role == "user"){
+                $sql_statement = "UPDATE `user` SET `role` = 'admin' WHERE `userId` = '$id'";
+            }
+            else{
+                $sql_statement = "UPDATE `user` SET `role` = 'user' WHERE `userId` = '$id'";
+            }
+            $result = mysqli_query($conn, $sql_statement);
+            if($result){
+                return true;
+            }
+            return false;
+            
+        }
+        
+    }
     
     
     //find all users in the database
@@ -183,16 +202,20 @@ class SecurityDAO{
          if ($conn->connect_error){
              echo "Failed to get databse connection!";
          }else{
+             $sql_statement = "SELECT * FROM `user` WHERE `username` = '$username' LIMIT 1";
+             $result = mysqli_query($conn, $sql_statement);
+             if ($result) {
+                 if (mysqli_num_rows($result) == 1) {
+                     return "Existing user found please choose a different username";
+                   }  
+             }
              //add user
              $sql_statement_user = "INSERT INTO `user` (`username`,`password`,`firstName`,`lastName`, `picture`, `age`, `gender`, `address`, `hometown`, `email`, `phoneNumber`, `role`, `isSuspended` ) VALUES ('$username', '$password', '$firstName', '$lastName', '$picture', '$age', '$gender', '$address', '$hometown', '$email', '$phoneNumber', '$role', '$suspended')"; 
              if (mysqli_query($conn, $sql_statement_user)) {
                  //echo "New user created successfully";
-                 return true;
-             }else{
-                 echo "Error: " . $sql_statement_user . "<br>" . mysqli_error($conn);
+                 return "true";
              }
          }
-        return false;
 
          
          

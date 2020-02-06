@@ -7,15 +7,12 @@ Synopsis: View page that shows when a user fails to register
 Version#: 1
 References: N/A
 -->
-
-
-<html>
-<head><title>Registration Failed</title></head>
-<body>
-<h2>You have failed successfuly at registering</h2>
-<p>
+@extends('layouts.appmaster')
+@section('head','Registration Failed')
+@section('title', 'There was an error registering your account')
+@section('content')
+@isset($result)
+	{{$result}}
+@endisset
 <p>Click <a href="register">here</a> to try again.</p>
-</body>
-
-
-</html>
+@endsection

@@ -43,6 +43,18 @@ References: N/A
         			</form>
         			</td>
         			<td>
+        			<form method="post" action="changeRole">
+        			<input type = "hidden" name = "id" value = "{{$user->getId()}}">
+        			<input type = "hidden" name = "role" value = "{{$user->getRole()}}">
+        			<input type="hidden" name="_token" value="{{ csrf_token()}}"/>
+        			@if($user->getRole() == "user")
+        			<button class="btn btn-warning" type="submit">Make Admin</button>
+        			@else
+        			<button class="btn btn-success" type="submit">Make User</button>
+        			@endif
+        			</form>
+        			</td>
+        			<td>
         			<form method="post" action="suspendUser">
         			<input type = "hidden" name = "id" value = "{{$user->getId()}}">
         			<input type = "hidden" name = "status" value = "{{$user->getStatus()}}">

@@ -22,6 +22,18 @@ class AdminController extends Controller{
         $result = $users->findAllUsers($id);
         return view('showAdmin')->with('result',$result);
     }
+    public function changeRole(Request $request){
+        $id = $request->input('id');
+        $role = $request->input('role');
+        $users = new SecurityService();
+        $result = $users->changeRole($id,$role);
+        if($result){
+            return redirect()->route('manageUsers');
+        }
+        else{
+            return view('managerError');
+        }
+    }
     
     public function deleteUser(Request $request){
         $id = $request->input('id');
