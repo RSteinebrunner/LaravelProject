@@ -51,6 +51,7 @@ Route::post('/deleteUser', 'AdminController@deleteUser');
 Route::post('/userDetails', 'AdminController@userDetails');
 Route::post('/updateDetails', 'AdminController@updateUser');
 Route::post('/changeRole', 'AdminController@changeRole');
+Route::post('/changeRole', 'AdminController@changeRole');
 
 
 
