@@ -1,20 +1,5 @@
 
 Roland:
-
-Roland changes:
-	finish converting to blade only a few more files
-	cannot double register users with the same username
-	Setup heroku database 
+Setup heroku database 
 
 
-Jack:
-Profile Module: User needs to be able to edit user profile
-add diagrams to design report
-
-Anthony:
-
-Administration Module
-	1. ManagerError View
-	2. Display user role and permissions
-	3. Display user profile
-	4. suspend a user

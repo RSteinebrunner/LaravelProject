@@ -24,6 +24,9 @@ References: N/A
 Route::get('/', function () {
     return view('welcome');
 });
+    Route::get('/', function () {
+        return view('welcome');
+    });
 Route::get('/loginSuccess',function () {
     return view('loginSuccess');
 });
