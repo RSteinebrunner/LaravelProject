@@ -1,5 +1,42 @@
+TODO
+	MODELS:
+		Job History
+			Company
+			position
+			Start Month/year
+			End Month/year
+			Description
 
-Roland:
-Setup heroku database 
+		Job Posting
+			Title
+			ID
+			Description
+			Company
+			pay
+			requirements
+			posting date
 
+		Skills
+			LIST<STRING> skills
 
+		Education - DONE
+			years attended
+			degree
+			school
+
+	VIEWS:
+		Skills
+			Dropdown to add premade skills to skill list
+			cant add duplicates
+
+	SERVICES
+		SECURITY SERVICE
+			split admin stuff into new service
+			add method checkfor duplicate
+
+		SECURITY DAO
+			split into admin dao
+			change makeuser to check for duplicate in controller
+				controller->checkForDuplicate
+				if found, return view telling no duplicates
+				otherwise make user with create in security service
