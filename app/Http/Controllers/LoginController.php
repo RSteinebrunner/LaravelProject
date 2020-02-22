@@ -24,7 +24,6 @@ class LoginController extends Controller{
     }
     
     public function authenticate(Request $request){
-        session_start();
         $result = false;
         //get form data
         $username = $request->input('username');

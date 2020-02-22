@@ -33,6 +33,11 @@ Route::get('/admin',function () {
 Route::get('/profile',function () {
     return view('myProfile');
 })->name('profile');
+
+
+Route::get('/portfolio', 'EducationController@showAllEducation')->name('showPortfolio');
+Route::post('/deleteEducation', 'EducationController@deleteEducation');
+Route::post('/addEducation', 'EducationController@addEducation');
         
 Route::get('/logout','LoginController@logoutUser');
 Route::get('/login','LoginController@showLogin')->name('login');

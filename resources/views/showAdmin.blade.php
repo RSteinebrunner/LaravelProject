@@ -60,7 +60,7 @@ References: N/A
         			<input type = "hidden" name = "status" value = "{{$user->getStatus()}}">
         			<input type="hidden" name="_token" value="{{ csrf_token()}}"/>
         			@if($user->getStatus() == "false")
-        			<button class="btn btn-warning" type="submit">Suspend</button>
+             		<button class="btn btn-warning" type="submit">Suspend</button>
         			@else
         			<button class="btn btn-success" type="submit">Reinstate</button>
         			@endif

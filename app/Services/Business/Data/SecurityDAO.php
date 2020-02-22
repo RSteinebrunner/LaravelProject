@@ -162,13 +162,14 @@ class SecurityDAO{
         $phoneNumber = $user->getPhoneNumber();
         $role = $user->getRole();
         $id=$user->getId();
+        $status = $user->getStatus();
         
         //connect to database
         if ($conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             //update user          
-            $sql_statement_user = "UPDATE `user` SET `username` = '$username', `password` = '$password', `firstName` = '$firstName', `lastName` = '$lastName', `gender` = '$gender', `hometown` = '$hometown', `email` = '$email' WHERE `userId` = $id";
+            $sql_statement_user = "UPDATE `user` SET `username` = '$username', `password` = '$password', `firstName` = '$firstName', `lastName` = '$lastName', `gender` = '$gender', `hometown` = '$hometown', `email` = '$email', `role` = '$role', `isSuspended` = '$status' WHERE `userId` = $id";
             if (mysqli_query($conn, $sql_statement_user)) {
                 //user updated successfully
                 Session::put('User',$user);
