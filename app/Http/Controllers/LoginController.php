@@ -63,6 +63,7 @@ class LoginController extends Controller{
         $newUser = new UserModel(null,$username, $password, $firstName, $lastName, null, $age, $gender, $address, $hometown, $email, $phoneNumber, "user", "false");        
         //pass the person object to the security service
         $makeUser = new SecurityService();
+        $result = $makeUser->findUserByUsername($username);
         $result = $makeUser->create($newUser);
         if($result=="true"){
             return view('registerSuccess');
