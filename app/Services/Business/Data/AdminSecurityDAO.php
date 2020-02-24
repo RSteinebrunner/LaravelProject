@@ -16,14 +16,19 @@ use Illuminate\Support\Facades\Session;
 //securityDAO class that creates or findes user depending on which method is requested from SecurityService
 class AdminSecurityDAO{
         
+    private $conn;
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
     //delete a user by id
-    public function deleteUser($id, $conn){
-        if ($conn->connect_error){
+    public function deleteUser($id){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }
         else{
             $sql_statement = "DELETE FROM `user` WHERE `userId` = '$id'";
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                     return true;
                 }
@@ -31,8 +36,8 @@ class AdminSecurityDAO{
         }           
     }
     
-    public function updateUserStatus($id,$conn,$status){
-        if ($conn->connect_error){
+    public function updateUserStatus($id,$status){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }
         else{
@@ -42,7 +47,7 @@ class AdminSecurityDAO{
             else{
                 $sql_statement = "UPDATE `user` SET `isSuspended` = 'true' WHERE `userId` = '$id'";  
             }
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                 return true;
             }
@@ -50,8 +55,8 @@ class AdminSecurityDAO{
         }        
     }
     
-    public function changeRole($id,$conn,$role){
-        if ($conn->connect_error){
+    public function changeRole($id,$role){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             if($role == "user"){
@@ -60,7 +65,7 @@ class AdminSecurityDAO{
             else{
                 $sql_statement = "UPDATE `user` SET `role` = 'user' WHERE `userId` = '$id'";
             }
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                 return true;
             }
@@ -69,15 +74,15 @@ class AdminSecurityDAO{
     }   
     
     //find all users in the database
-    public function findAllUsers($id, $conn){       
-        if ($conn->connect_error){
+    public function findAllUsers($id){       
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }
         else{
             //search database for all users except ID
             $sql_statement = "SELECT * FROM `user` WHERE `userId` <> '$id'";
             $counter=0;
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
                     $user = new UserModel($row['userId'], $row['username'], $row['password'], $row['firstName'], $row['lastName'], $row['picture'], $row['age'], $row['gender'], $row['address'], $row['hometown'], $row['email'], $row['phoneNumber'], $row['role'], $row['isSuspended']);
@@ -93,15 +98,15 @@ class AdminSecurityDAO{
     }      
     
     //finds users in database and returns true if found
-    public function findUser($username, $password,$conn){
+    public function findUser($username, $password){
         //establic connectionto the database(try to put this in the security service)
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }
         else{
             //search database credentials for user'
             $sql_statement = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password' LIMIT 1";
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             if ($result) {
                 if (mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_assoc($result);
@@ -120,15 +125,15 @@ class AdminSecurityDAO{
         }        
     }        
     
-    public function findUserById($id,$conn){
+    public function findUserById($id){
         //establic connectionto the database(try to put this in the security service)
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }
         else{        
             //search database credentials for user'
             $sql_statement = "SELECT * FROM `user` WHERE `userId` = '$id' LIMIT 1";
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             if ($result) {
                 if (mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_assoc($result);
@@ -141,7 +146,7 @@ class AdminSecurityDAO{
     }
     
     //update the user
-    public function updateUser(UserModel $user, $conn){
+    public function updateUser(UserModel $user){
         //get all variables from user model
         $firstName =$user->getFirstName();
         $lastName = $user->getLastName();
@@ -159,18 +164,18 @@ class AdminSecurityDAO{
         $status = $user->getStatus();
         
         //connect to database
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             //update user          
             $sql_statement_user = "UPDATE `user` SET `username` = '$username', `password` = '$password', `firstName` = '$firstName', `lastName` = '$lastName', `age` = '$age', `gender` = '$gender', `address` =  '$address', `hometown` = '$hometown', `email` = '$email', `phoneNumber` = '$phoneNumber', `role` = '$role', `isSuspended` = '$status' WHERE `userId` = $id";
-            if (mysqli_query($conn, $sql_statement_user)) {
+            if (mysqli_query($this->conn, $sql_statement_user)) {
                 //user updated successfully
                 Session::put('User',$user);
                 return true;
             }
             else{
-                echo "Error: " . $sql_statement_user . "<br>" . mysqli_error($conn);
+                echo "Error: " . $sql_statement_user . "<br>" . mysqli_error($this->conn);
             }
         }
         return false;

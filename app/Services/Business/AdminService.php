@@ -25,8 +25,8 @@ class AdminService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //check for user
-        $security = new AdminSecurityDAO();
-        $result = $security->findUser($username,$password,$conn);
+        $security = new AdminSecurityDAO($conn);
+        $result = $security->findUser($username,$password);
         //return if found or not
         return $result;
     }
@@ -37,8 +37,8 @@ class AdminService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //check for user
-        $security = new AdminSecurityDAO();
-        $result = $security->findUserById($id,$conn);
+        $security = new AdminSecurityDAO($conn);
+        $result = $security->findUserById($id);
         //return if found or not
         return $result;
     }
@@ -47,8 +47,8 @@ class AdminService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //delete the user
-        $security = new AdminSecurityDAO();
-        $result = $security->deleteUser($id, $conn);
+        $security = new AdminSecurityDAO($conn);
+        $result = $security->deleteUser($id);
        //return if the user was deleted
         return $result;
     }
@@ -57,8 +57,8 @@ class AdminService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //update the user status
-        $security = new AdminSecurityDAO();
-        $result = $security->updateUserStatus($id, $conn, $status);
+        $security = new AdminSecurityDAO($conn);
+        $result = $security->updateUserStatus($id, $status);
         //return if the user was updated
         return $result;
     }
@@ -67,8 +67,8 @@ class AdminService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //update the user status
-        $security = new AdminSecurityDAO();
-        $result = $security->changeRole($id, $conn, $role);
+        $security = new AdminSecurityDAO($conn);
+        $result = $security->changeRole($id, $role);
         //return if the user was updated
         return $result;
     }
@@ -78,8 +78,8 @@ class AdminService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //check for user | needs id as a parameter to keep from showing yourself
-        $security = new AdminSecurityDAO();
-        $result = $security->findAllUsers($id, $conn);
+        $security = new AdminSecurityDAO($conn);
+        $result = $security->findAllUsers($id);
         
         return $result;       
     }
@@ -88,8 +88,8 @@ class AdminService{
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new user in database using user model
-        $security = new AdminSecurityDAO();
-        $result = $security->updateUser($updatedUser,$conn);
+        $security = new AdminSecurityDAO($conn);
+        $result = $security->updateUser($updatedUser);
         return $result;        
     }
     
@@ -98,8 +98,8 @@ class AdminService{
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new user in database using user model
-        $security = new AdminSecurityDAO();
-        $result = $security->makeUser($user,$conn);
+        $security = new AdminSecurityDAO($conn);
+        $result = $security->makeUser($user);
         return $result;
     } 
     
