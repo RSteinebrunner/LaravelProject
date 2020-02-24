@@ -20,6 +20,7 @@ References: N/A
     <div class = "col-4">  
 	<form action="updateDetails" method="post">
 	<input type = "hidden" name = "id" value = "{{Session::get('User')->getId()}}">
+	<input type = "hidden" name = "role" value = "{{Session::get('User')->getRole()}}">
     <input type="hidden" name="_token" value="{{ csrf_token()}}"/>
     
     <div class="form-group">

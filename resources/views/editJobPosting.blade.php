@@ -33,11 +33,11 @@ References: N/A
     		</div>
     		<div class="form-group">
     			<label for="position">Position</label> 
-    			<input type="text" class="form-control"	value="{{$job->getPosition()}}" name="postion" required>
+    			<input type="text" class="form-control"	value="{{$job->getPosition()}}" name="position" required>
     		</div>
     		<div class="form-group">
     			<label for="description">Description</label> 
-    			<input type="text" class="form-control"	value="{{$job->getDescription()}}" required>
+    			<input type="text" class="form-control"	value="{{$job->getDescription()}}" name ="description" required>
     		</div>
     		<div class="form-group">
     			<label for="requirements">Requirements</label> 
@@ -49,7 +49,7 @@ References: N/A
     		</div>
     		<div class="form-group">
     			<label for="postingDate">Posting Date</label> 
-    			<input type="text" class="form-control"	value="{{$job->getPostingDate()}}" name="description" required>
+    			<input type="text" class="form-control"	value="{{$job->getPostingDate()}}" name="postingDate" required>
     		</div>
     		<button class="btn btn-primary" type="submit">Edit</button>
     	</form>
@@ -70,11 +70,11 @@ References: N/A
     		</div>
     		<div class="form-group">
     			<label for="position">Position</label> 
-    			<input type="text" class="form-control"	 name="postion" required>
+    			<input type="text" class="form-control"	 name="position" required>
     		</div>
     		<div class="form-group">
     			<label for="description">Description</label> 
-    			<input type="text" class="form-control"	 required>
+    			<input type="text" class="form-control"	 name="description" required>
     		</div>
     		<div class="form-group">
     			<label for="requirements">Requirements</label> 
@@ -86,7 +86,7 @@ References: N/A
     		</div>
     		<div class="form-group">
     			<label for="postingDate">Posting Date</label> 
-    			<input type="text" class="form-control"name="description" required>
+    			<input type="text" class="form-control"name="postingDate" required>
     		</div>
     		<button class="btn btn-success" type="submit">Add</button>
     	</form>

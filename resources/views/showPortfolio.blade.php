@@ -17,14 +17,26 @@ References: N/A
     <strong>Warning!</strong> Error adding education to the portfolio. Please try again.
    </div>	
 @endisset
-    	<h2>Education</h2>
+    	<h2>Portfolio</h2>
 @endsection
 
 @section('content')
 <!-- Education -->
     <div class = "container">   
     <div class= "row justify-content-center">
-    	<div class = "col">
+    <table class="table table-dark">
+     <tr><td>{{Session::get('User')->getFirstName()}}</td></tr>
+     <tr><td>{{Session::get('User')->getLastName()}}</td></tr>
+     <tr><td>{{Session::get('User')->getAge()}}</td></tr>
+     <tr><td>{{Session::get('User')->getEmail()}}</td></tr>
+     <tr><td>{{Session::get('User')->getPhoneNumber()}}</td></tr>
+    </table>
+    </div>
+    <div class= "row justify-content-center">
+    <div align="center">
+     <h2>Education</h2>
+     <hr>
+     </div>
     	<table class="table table-dark">
     	<tr><th scope="col">Years:</th>
     	<th scope="col">Degree</th>
@@ -48,14 +60,14 @@ References: N/A
         </table>
         </div>
      </div>
+
      
-     </div>
+     <div class="container">
+     <div class="row justify-content-center">
      <div align="center">
      <h2>Skills</h2>
      <hr>
      </div>
-     <div class="container">
-     <div class="row">
 	 <table class="table table-dark">
      	@foreach($result[1] as $skill)
      	<tr>
@@ -72,12 +84,13 @@ References: N/A
      </div>
      </div>
      
+     
+     <div class="container">
+     <div class="row justify-content-center">
          <div align="center">
      <h2>Job History</h2>
      <hr>
      </div>
-     <div class="container">
-     <div class="row">
 	 <table class="table table-dark">
 	 <tr><th scope="col">Company</th>
     	<th scope="col">Position</th>
