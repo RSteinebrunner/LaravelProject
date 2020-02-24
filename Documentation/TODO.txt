@@ -1,12 +1,22 @@
 TODO
-	SERVICES
-		SECURITY SERVICE
-			split admin stuff into new service
-			add method checkfor duplicate
+	Groups Milestone:
+		USER-> View all groups, join or leave the group
+			All users can make a group, they become the group admin
 
-		SECURITY DAO
-			split into admin dao
-			change makeuser to check for duplicate in controller
-				controller->checkForDuplicate
-				if found, return view telling no duplicates
-				otherwise make user with create in security service
+		Group table:
+			ID PK
+			Name
+			Description
+			key for the owner of the group  PK
+		Table that has all users to a particular group
+		Must be cloud hosted for this milestone and working.
+
+	When session becomes invalid, make it so it puts you to login instead of crashing
+	data validation on all forms
+	
+	Can you route to a page you shouldn't have access to?
+		if so we need to fix this
+
+	Change user in the database to have credentials and user.
+		check to make sure credentials are not the same
+		add acid transactions to register for this(you need to add )
