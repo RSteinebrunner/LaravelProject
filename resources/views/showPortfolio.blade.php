@@ -1,10 +1,10 @@
 <!--  
-Project name/Version: LaravelCLC Version: 1
-Module name: showLogin
-Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
-Date: 1/19/2020
+Project name/Version: LaravelCLC Version: 3
+Module name: Portfolio Module
+Authors: Roland Steinebrunner, Anthony Clayton
+Date: 2/23/2020
 Synopsis: View page that shows the login page when a user attempts to sign into their account
-Version#: 2
+Version#: 3
 References: N/A
 -->
 
@@ -12,6 +12,11 @@ References: N/A
 @section('head','Education')
 
 @section('title')
+@isset($error)
+  	<div class="alert alert-warning">
+    <strong>Warning!</strong> Error adding education to the portfolio. Please try again.
+   </div>	
+@endisset
     	<h2>Education and Skills</h2>
 @endsection
 

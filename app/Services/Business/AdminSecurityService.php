@@ -2,11 +2,11 @@
 namespace App\Services\Business;
 /*
 <!--  
-Project name/Version: LaravelCLC Version: 1
-Module name: SecurityService
+Project name/Version: LaravelCLC Version: 3
+Module name: Administration Module
 Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
-Date: 1/19/2020
-Synopsis: Module provides methods passes data to the securityDAO so it can recieve database information
+Date: 2/23/2020
+Synopsis: Passes proper data to the dao and handles all rules for administration tasks
 Version#: 1
 References: N/A
 -->

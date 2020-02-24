@@ -4,12 +4,12 @@ use App\Models\UserModel;
 use Illuminate\Support\Facades\Session;
 
 /*
- Project name/Version: LaravelCLC Version: 1
- Module name: DAO
+ Project name/Version: LaravelCLC Version: 3
+ Module name: Administration Module
  Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
- Date: 1/19/2020
- Synopsis: Module connects to the database and provides information to authenticate users and allow for user creation upon registering
- Version#: 1
+ Date: 2/23/2020
+ Synopsis: connects to the database to handle all administrationm->user functions
+ Version#: 2
  References: N/A
  */
 

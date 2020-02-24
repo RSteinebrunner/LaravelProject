@@ -1,10 +1,10 @@
 <!--  
-Project name/Version: LaravelCLC Version: 1
+Project name/Version: LaravelCLC Version: 3
 Module name: Routes
 Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
-Date: 1/19/2020
+Date: 2/23/2020
 Synopsis: Module provides all routing details for controllers and views
-Version#: 1
+Version#: 5
 References: N/A
 -->
 
@@ -24,26 +24,31 @@ References: N/A
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/loginSuccess',function () {
-    return view('loginSuccess');
-});
+
 Route::get('/admin',function () {
     return view('showAdmin');
 });
+
 Route::get('/profile',function () {
     return view('myProfile');
 })->name('profile');
 
+Route::get('/login',function () {
+    return view('showLogin');
+})->name('login');
 
-Route::get('/portfolio', 'EducationController@showAllEducation')->name('showPortfolio');
+Route::get('/register',function () {
+    return view('showRegister');
+});
+
+Route::get('/portfolio', 'PortfolioController@showPortfolio')->name('portfolio');
 Route::post('/deleteEducation', 'EducationController@deleteEducation');
 Route::post('/addEducation', 'EducationController@addEducation');
         
 Route::get('/logout','LoginController@logoutUser');
-Route::get('/login','LoginController@showLogin')->name('login');
-Route::get('/register','LoginController@showRegister');
 Route::post('/doLogin', 'LoginController@authenticate');
-Route::post('/doRegister', 'LoginController@createUser');
+
+Route::post('/doRegister', 'RegistrationController@createUser');
 
 Route::get('/manageUsers', 'AdminController@showAllUsers')->name('manageUsers');
 Route::post('/suspendUser', 'AdminController@suspendUser');

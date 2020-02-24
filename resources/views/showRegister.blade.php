@@ -12,10 +12,16 @@ References: N/A
 @section('head','Sign Up')
 
 @section('title')
+@isset($error)
+  	<div class="alert alert-warning">
+    <strong>Warning!</strong> This user is a duplicate. Please try again with another username.
+   </div>	
+@endisset
     <h1>Register</h1>
     <p>Please fill in this form to create an account.</p>
 @endsection
 @section('content')
+
     <div class = "container-fluid">
     <div class = "row justify-content-center">
     <div class = "col-4">  

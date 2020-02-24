@@ -12,6 +12,11 @@ References: N/A
 @section('head','Login')
 
 @section('title')
+@isset($error)
+  	<div class="alert alert-warning">
+    <strong>Warning!</strong> Error with user session, Please log in again.
+   </div>	
+@endisset
     	<h2>Login</h2>
 @endsection
 

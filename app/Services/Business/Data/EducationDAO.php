@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Session;
 use App\Models\EducationModel;
 
 /*
- Project name/Version: LaravelCLC Version: 1
- Module name: DAO
- Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
+ Project name/Version: LaravelCLC Version: 3
+ Module name: education Module
+ Authors:Anthony Clayton
  Date: 2/15/2020
  Synopsis: Module connects to the database and provides information for the education of the user
  Version#: 1
@@ -38,14 +38,14 @@ class EducationDAO{
         if ($conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
-            $sql_statement = "SELECT * FROM `education` WHERE `user_userId` = '$id'";
+            $sql_statement = "SELECT * FROM `education` WHERE `userId` = '$id'";
             $counter = 0;
             $result = mysqli_query($conn, $sql_statement);
             //run the statment
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
                     //create new model to send back
-                    $edu = new EducationModel($row['id'],$row['educationYears'], $row['degree'], $row['school']);
+                    $edu = new EducationModel($row['id'],$row['yearsAttended'], $row['degree'], $row['school']);
                     $array[$counter] = $edu;
                     $counter++;
                 }
@@ -70,10 +70,10 @@ class EducationDAO{
         
         //connect to database
         if ($conn->connect_error){
-            echo "Failed to get databse connection!";
+            return "connect";
         }else{
             //insert into db
-            $sql_statement = "INSERT INTO `education` (`id`, `educationYears`, `degree`, `school`, `user_userId`) VALUES (NULL, '$years', '$degree', '$school', '$id')";
+            $sql_statement = "INSERT INTO `education` (`id`, `yearsAttended`, `degree`, `school`, `userId`) VALUES (NULL, '$years', '$degree', '$school', '$id')";
             if (mysqli_query($conn, $sql_statement)) {
                 //echo "New user created successfully";
                 return "true";

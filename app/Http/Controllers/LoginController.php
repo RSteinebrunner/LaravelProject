@@ -10,26 +10,18 @@ namespace App\Http\Controllers;
  Version#: 1
  References: N/A
   */
-use App\Models\UserModel;
-use App\Services\Business\SecurityService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Services\Business\LoginService;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class LoginController extends Controller{
-    public function showLogin(){
-        return view('showLogin');
-    }
-    public function showRegister(){
-        return view('showRegister');
-    }
-    
     public function authenticate(Request $request){
         $result = false;
         //get form data
         $username = $request->input('username');
         $password = $request->input('password');
        //create security service
-       $isUser = new SecurityService();
+       $isUser = new LoginService();
        //send username and password to service
        $result = $isUser->authenticate($username, $password);
         //check if user was found
@@ -46,31 +38,7 @@ class LoginController extends Controller{
         //if yes return success,
         //else failure              
     }
-    
-    public function createUser(Request $request){
-        //pull form data to make user
-        $firstName = $request->input('firstName');
-        $lastName = $request->input('lastName');
-        $username = $request->input('username');
-        $password = $request->input('password');
-        $age = $request->input('age');
-        $email = $request->input('email');
-        $gender = $request->input('gender');
-        $address = $request->input('address');
-        $hometown = $request->input('hometown');
-        $phoneNumber = $request->input('phoneNumber');
-        //create new user object
-        $newUser = new UserModel(null,$username, $password, $firstName, $lastName, null, $age, $gender, $address, $hometown, $email, $phoneNumber, "user", "false");        
-        //pass the person object to the security service
-        $makeUser = new SecurityService();
-        $result = $makeUser->findUserByUsername($username);
-        $result = $makeUser->create($newUser);
-        if($result=="true"){
-            return view('registerSuccess');
-        }
-        return view('registerFailure')->with("result",$result);       
-    }
-    
+    //clears the session so the user logs out
     public function logoutUser()
     {
         Session::flush();

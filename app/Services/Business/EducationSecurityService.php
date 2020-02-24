@@ -2,9 +2,9 @@
 namespace App\Services\Business;
 /*
 <!--  
-Project name/Version: LaravelCLC Version: 1
-Module name: EducationSecurityService
-Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
+Project name/Version: LaravelCLC Version: 3
+Module name: Education Module
+Authors: Anthony Clayton
 Date: 2/17/2020
 Synopsis: Module provides methods passes data to the DAO so it can recieve database information
 Version#: 1
