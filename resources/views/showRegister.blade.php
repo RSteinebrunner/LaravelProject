@@ -30,54 +30,55 @@ References: N/A
     
     <div class="form-group">
 		<label for="firstName"><b>First Name:</b></label>
-    	<input type="text"class = "form-control" placeholder="Enter your first name" name="firstName" required>
+    	<input type="text"class = "form-control" placeholder="Enter your first name" name="firstName" >
     </div>
+    {{$errors->first('firstName')}}
     
     <div class="form-group">
     	<label for="lastName"><b>Last Name:</b></label>
-    	<input type="text"class = "form-control" placeholder="Enter your last name" name="lastName" required>
+    	<input type="text"class = "form-control" placeholder="Enter your last name" name="lastName" >
     </div>
-    
+    {{$errors->first('lastName')}}
     <div class="form-group">
     	<label for="username"><b>Username:</b></label>
-    	<input type="text" class = "form-control"placeholder="Enter your username" name="username" required>
+    	<input type="text" class = "form-control"placeholder="Enter your username" name="username" >
     </div>
-    
+    {{$errors->first('username')}}
     <div class="form-group">
    		<label for="password"><b>Password:</b></label>
-    	<input type="password"class = "form-control" placeholder="Enter your password" name="password" required>
+    	<input type="password"class = "form-control" placeholder="Enter your password" name="password" >
     </div>
-    
+    {{$errors->first('password')}}
     <div class="form-group">	
     	<label for="age"><b>Age:</b></label>
-    	<input type="number"class = "form-control" placeholder="Enter your age" name="age" min="13" required>
+    	<input type="number"class = "form-control" placeholder="Enter your age" name="age" min="13" >
 	</div>
-	
+	{{$errors->first('age')}}
     <div class="form-group">
     	<label for="email"><b>Email:</b></label>
-    	<input type="text"class = "form-control" placeholder="Enter your email" name="email" required>
+    	<input type="text"class = "form-control" placeholder="Enter your email" name="email" >
 	</div>
-	
+	{{$errors->first('email')}}
 	<div class="form-group">
     	<label for="gender"><b>Gender:</b></label>
-    	<input type="text" class = "form-control" placeholder="Enter your gender" name="gender" required>
+    	<input type="text" class = "form-control" placeholder="Enter your gender" name="gender" >
     </div>
-    
+    {{$errors->first('gender')}}
     <div class="form-group">
     	<label for="address"><b>Address:</b></label>
-    	<input type="text" class = "form-control"placeholder="Enter your address" name="address" required>
+    	<input type="text" class = "form-control"placeholder="Enter your address" name="address" >
     </div>
-    
+    {{$errors->first('address')}}
     <div class="form-group">
     	<label for="hometown"><b>Hometown:</b></label>
-    	<input type="text" class = "form-control" placeholder="Enter where you are from" name="hometown" required>
+    	<input type="text" class = "form-control" placeholder="Enter where you are from" name="hometown" >
     </div>
-	
+	{{$errors->first('hometown')}}
 	<div class="form-group">
     	<label for="phoneNumber"><b>Phone Number:</b></label>
-    	<input type="text" class = "form-control"placeholder="Enter your phone number" name="phoneNumber" required>
+    	<input type="text" class = "form-control"placeholder="Enter your phone number" name="phoneNumber" >
     </div>
-	
+	{{$errors->first('phoneNumber')}}
     <hr>
     <button type="submit" class="btn btn-primary">Register</button>
 </form>

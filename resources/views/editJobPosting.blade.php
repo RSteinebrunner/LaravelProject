@@ -3,7 +3,7 @@ Project name/Version: LaravelCLC Version: 3
 Module name: Portfolio Module
 Authors: Roland Steinebrunner, Anthony Clayton
 Date: 2/23/2020
-Synopsis: View page that shows the login page when a user attempts to sign into their account
+Synopsis: 
 Version#: 3
 References: N/A
 -->

@@ -74,7 +74,7 @@ class AdminSecurityDAO{
             echo "Failed to get databse connection!";
         }
         else{
-            //search database credentials for user'
+            //search database for all users except ID
             $sql_statement = "SELECT * FROM `user` WHERE `userId` <> '$id'";
             $counter=0;
             $result = mysqli_query($conn, $sql_statement);
@@ -163,7 +163,7 @@ class AdminSecurityDAO{
             echo "Failed to get databse connection!";
         }else{
             //update user          
-            $sql_statement_user = "UPDATE `user` SET `username` = '$username', `password` = '$password', `firstName` = '$firstName', `lastName` = '$lastName', `gender` = '$gender', `hometown` = '$hometown', `email` = '$email', `role` = '$role', `isSuspended` = '$status' WHERE `userId` = $id";
+            $sql_statement_user = "UPDATE `user` SET `username` = '$username', `password` = '$password', `firstName` = '$firstName', `lastName` = '$lastName', `age` = '$age', `gender` = '$gender', `address` =  '$address', `hometown` = '$hometown', `email` = '$email', `phoneNumber` = '$phoneNumber', `role` = '$role', `isSuspended` = '$status' WHERE `userId` = $id";
             if (mysqli_query($conn, $sql_statement_user)) {
                 //user updated successfully
                 Session::put('User',$user);

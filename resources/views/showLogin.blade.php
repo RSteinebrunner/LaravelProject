@@ -31,10 +31,12 @@ References: N/A
             <label for="username">Username:</label>
             <input type="text" class = "form-control" name="username" placeholder = "Enter Username" ></input>
         </div>
+        {{$errors->first('username')}}
         <div class= "form-group">
             <label for="login-password">Password:</label>
             <input type="password" class = "form-control" name="password" placeholder = "Enter Password"></input>
         </div>
+         {{$errors->first('password')}}
             <button class="btn btn-primary" type="submit" name="login" >Login</button>
         </form>
         </div>

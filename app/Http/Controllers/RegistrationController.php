@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class RegistrationController extends Controller{
     public function createUser(Request $request){
+        //Validate Form Data
+        $this->validateForm($request);
         //pull form data to make user
         $firstName = $request->input('firstName');
         $lastName = $request->input('lastName');
@@ -41,5 +43,21 @@ class RegistrationController extends Controller{
         }
         return view('registerFailure')->with("result",$result);       
     }
-
+    private function validateForm(Request $request)
+    {
+        // Setup Data Validation Rules for Login Form
+        $rules = ['firstName' => 'Required | Between:1,24',
+            'lastName' => 'Required | Between:1,24',
+            'username' => 'Required | Between:1,24',
+            'email' => 'Required | Between:1,24 | email',
+            'age' => 'Required | Between:1,3 | numeric',
+            'password' => 'Required | Between:1,24',
+            'gender' => 'Required | Between:1,24',
+            'address' => 'Required | Between:20,50',
+            'hometown' => 'Required | Between:5,24',
+            'phoneNumber' => 'Required | Between:10,10',];
+        
+        // Run Data Validation Rules
+        $this->validate($request, $rules);
+    }
 }

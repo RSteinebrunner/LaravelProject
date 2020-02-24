@@ -82,6 +82,7 @@ class JobPostingController extends Controller{
         }
     }
     
+    //shows postings to standard users
     public function showAllJobs(Request $request){
         //creat new service
         $users = new JobPostingService();
@@ -90,7 +91,13 @@ class JobPostingController extends Controller{
         //return the view with the data
         return view('showJobPosting')->with("result",$result);
     }
+    //show postings to admins
     public function adminAllJobs(Request $request){
+        
+        //if not a admin rereoute to login
+        if(Session::get('Role') != "admin"){
+            return redirect()->route('login');
+        }
         //creat new service
         $users = new JobPostingService();
         //get the result from the service

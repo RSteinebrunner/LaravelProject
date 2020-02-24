@@ -77,7 +77,7 @@ class AdminService{
 
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
-        //check for user
+        //check for user | needs id as a parameter to keep from showing yourself
         $security = new AdminSecurityDAO();
         $result = $security->findAllUsers($id, $conn);
         

@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
  Module name: Education Moduke
  Authors: Roland Steinebrunner, Anthony Clayton
  Date: 2/23/2020
- Synopsis: Module provides all methods needed for user education, and return views when requested
+ Synopsis: handles all features reagarding changing a user's education
  Version#: 1
  References: N/A
   */

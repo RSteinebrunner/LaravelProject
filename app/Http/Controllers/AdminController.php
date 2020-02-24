@@ -2,11 +2,11 @@
 namespace App\Http\Controllers;
 
 /*
- Project name/Version: LaravelCLC Version: 1
- Module name: Controller
+ Project name/Version: LaravelCLC Version: 3
+ Module name: Admin Controller
  Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
- Date: 1/19/2020
- Synopsis: Module provides all methods needed to update/delete users, and return views when requested
+ Date: 2/24/2020
+ Synopsis: Handles all features aministrators have over users
  Version#: 1
  References: N/A
   */
@@ -14,12 +14,17 @@ use App\Models\UserModel;
 use App\Services\Business\AdminService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-//controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class AdminController extends Controller{
     
+    //gets the user id from session, requests an array from the admin service
     public function showAllUsers(Request $request){
+        //if not a admin rereoute to login
+        if(Session::get('Role') != "admin"){
+            return redirect()->route('login');
+        }
         $id = Session::get('User')->getId();
         $users = new AdminService();
+        //result is data as an array of all user models
         $result = $users->findAllUsers($id);
         return view('showAdmin')->with('result',$result);
     }
@@ -75,6 +80,8 @@ class AdminController extends Controller{
     }
     
     public function updateUser(Request $request){
+        //Validate Form Data
+        $this->validateForm($request);
         //pull form data to make user
         $id = $request->input('id');
         $firstName = $request->input('firstName');
@@ -102,7 +109,23 @@ class AdminController extends Controller{
         }     
     }
     
-    
+    private function validateForm(Request $request)
+    {
+        // Setup Data Validation Rules for Login Form
+        $rules = ['firstName' => 'Required | Between:1,24',
+            'lastName' => 'Required | Between:1,24',
+            'username' => 'Required | Between:1,24',
+            'email' => 'Required | Between:1,24 | email',
+            'age' => 'Required | Between:1,3 | numeric',
+            'password' => 'Required | Between:1,24',
+            'gender' => 'Required | Between:1,24',
+            'address' => 'Required | Between:20,50',
+            'hometown' => 'Required | Between:5,24',
+            'phoneNumber' => 'Required | Between:10,10',];
+        
+        // Run Data Validation Rules
+        $this->validate($request, $rules);
+    }
     
   
 }
