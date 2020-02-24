@@ -40,11 +40,29 @@ Route::get('/login',function () {
 Route::get('/register',function () {
     return view('showRegister');
 });
+Route::get('/editPortfolio',function () {
+    return view('editPortfolio');
+});
 
+
+
+Route::get('/jobPosting', 'JobPostingController@showAllJobs')->name('jobPosting');
+Route::get('/adminJobPosting', 'JobPostingController@adminAllJobs')->name('adminPosting');
+Route::post('/editJobPosting', 'JobPostingController@editPost');
+Route::post('/deleteJobPosting', 'JobPostingController@deletePost');
+Route::post('/addJobPosting', 'JobPostingController@addPost');
+    
 Route::get('/portfolio', 'PortfolioController@showPortfolio')->name('portfolio');
+
 Route::post('/deleteEducation', 'EducationController@deleteEducation');
 Route::post('/addEducation', 'EducationController@addEducation');
-        
+
+Route::post('/deleteSkill', 'SkillsController@deleteSkills');
+Route::post('/addSkill', 'SkillsController@addSkill');
+
+Route::post('/addJobHistory', 'JobHistoryController@addJobHistory');
+Route::post('/deleteHistory', 'JobHistoryController@deleteJobHistory');
+
 Route::get('/logout','LoginController@logoutUser');
 Route::post('/doLogin', 'LoginController@authenticate');
 

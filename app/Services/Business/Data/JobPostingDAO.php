@@ -63,7 +63,7 @@ class JobPostingDAO{
         }
         
     }
-    //creates education when requested 
+    //creates post when requested 
     public function create(JobPostingModel $post,$conn){
         
         //get all variables from education model
@@ -80,7 +80,7 @@ class JobPostingDAO{
             return "please connect";
         }else{
             //insert into db
-            $sql_statement = "INSERT INTO `jobposting` (`id`, `company`, `position`, `description`, `requirements`, `pay`, `postingDate) VALUES (NULL, '$company', '$position', '$description', '$requirements', '$pay', '$postingDate')";
+            $sql_statement = "INSERT INTO `jobposting` (`id`, `company`, `position`, `description`, `requirements`, `pay`, `postingDate`) VALUES (NULL, '$company', '$position', '$description', '$requirements', '$pay', '$postingDate')";
             if (mysqli_query($conn, $sql_statement)) {
                 //echo "New user created successfully";
                 return "true";
@@ -91,7 +91,34 @@ class JobPostingDAO{
         
     }
     
-    
+    //modifies post when requested
+    public function edit(JobPostingModel $post,$conn){
+        
+        //get all variables from education model
+        $id = $post->getJobId();
+        $company = $post->getCompany();
+        $position = $post->getPosition();
+        $description = $post->getDescription();
+        $requirements = $post->getRequirements();
+        $pay = $post->getPay();
+        $postingDate = $post->getPostingDate();
+        
+        
+        //connect to database
+        if ($conn->connect_error){
+            return "please connect";
+        }else{
+            //insert into db
+            $sql_statement = "UPDATE `jobposting` SET `company` = '$company', `position` = '$position', `description` = '$description', `requirements` = '$requirements', `pay` = '$pay', `postingDate` = '$postingDate' WHERE `jobposting`.`id` = '$id';";
+            if (mysqli_query($conn, $sql_statement)) {
+                //echo "New user created successfully";
+                return "true";
+            }
+        }
+        
+        
+        
+    }
     
    
 

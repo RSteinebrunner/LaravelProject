@@ -8,13 +8,19 @@ Version#: 1
 References: N/A
 -->
 @extends('layouts.appmaster')
-@section('head','Login Failed')
-@section('title', 'Login Failed')
+@section('head','Profile Display Failed')
+@section('title', 'Profile Display Failed')
 @section('content')
 
 @isset($data)
 	@if($data == "educationInsert")
 	<p>Error Inserting Data to the education Table</p>
+	@endif
+	@if($data == "JobHistoryInsertion")
+	<p>Error Inserting Data to the job history Table</p>
+	@endif
+	@if($data == "connection")
+	<p>Error connecting to database</p>
 	@endif
 @endisset
 @endsection

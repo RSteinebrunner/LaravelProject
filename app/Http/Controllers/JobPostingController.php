@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Session;
 class JobPostingController extends Controller{
     
   
-    public function addPosting(Request $request){
+    public function addPost(Request $request){
         //pull form data to make a posting 
         //extract data to send to the service
         
@@ -31,13 +31,13 @@ class JobPostingController extends Controller{
         $postingDate = $request->input('postingDate');
         
         //create new object
-        $newPost = new JobPostingModel(NULL, $company, $position, $description, $requirements,$pay, $postingDate);
+        $newPost = new JobPostingModel(null, $company, $position, $description, $requirements,$pay, $postingDate);
         //pass the job object to the service
         $service = new JobPostingService();
         $result = $service->addPost($newPost);
         
         if($result == "true"){
-            return redirect()->route('portfolio');
+            return redirect()->route('adminPosting');
         }
         else{
             return view('profileDisplayError')->with("data", "jobPostingError");
@@ -48,12 +48,37 @@ class JobPostingController extends Controller{
         $id = $request->input('id');
         //create new service
         $service = new JobPostingService();
-        $result = $service->deleteEducation($id);
+        $result = $service->deletePost($id);
         if($result){
-            return redirect()->route('portfolio');
+            return redirect()->route('adminPosting');
         }
         else{
             return view('profileDisplayError')->with("data", "jobDeleteError");
+        }
+    }
+    public function editPost(Request $request){
+   
+        //pull form data to make a change
+        //extract data to send to the service
+        $id = $request->input('id');
+        $company = $request->input('company');
+        $position = $request->input('position');
+        $description = $request->input('description');
+        $requirements = $request->input('requirements');
+        $pay = $request->input('pay');
+        $postingDate = $request->input('postingDate');
+        
+        //create new object
+        $newPost = new JobPostingModel($id, $company, $position, $description, $requirements,$pay, $postingDate);
+        //pass the job object to the service
+        $service = new JobPostingService();
+        $result = $service->editPost($newPost);
+        
+        if($result == "true"){
+            return redirect()->route('adminPosting');
+        }
+        else{
+            return view('profileDisplayError')->with("data", "jobPostingError");
         }
     }
     
@@ -61,13 +86,21 @@ class JobPostingController extends Controller{
         //creat new service
         $users = new JobPostingService();
         //get the result from the service
-        $result = array("0" ,$users->findAllEducation());
+        $result = $users->findAllJobs();
         //return the view with the data
-        return view('portfolio')->with("result",$result);
+        return view('showJobPosting')->with("result",$result);
+    }
+    public function adminAllJobs(Request $request){
+        //creat new service
+        $users = new JobPostingService();
+        //get the result from the service
+        $result = $users->findAllJobs();
+        //return the view with the data
+        return view('editJobPosting')->with("result",$result);
     }
 }
     
     
     
   
-}
+

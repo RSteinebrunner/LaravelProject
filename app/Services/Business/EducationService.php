@@ -16,7 +16,7 @@ use App\Services\Business\Data\EducationDAO;
 use App\Models\EducationModel;
 
 //securityService class recieves the sent data from Educationcontroller and calls the appropriate method in DAO to access the database
-class EducationSecurityService{
+class EducationService{
    
     public function deleteEducation($id){
         //Set up connection

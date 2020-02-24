@@ -44,7 +44,7 @@ class SkillsDAO{
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
                     //create new model to send back
-                    $skill = new SkillsModel($row['id'],$row['skill']);
+                    $skill = new SkillsModel($row['id'],$row['userId'],$row['skill']);
                     $array[$counter] = $skill;
                     $counter++;
                 }
@@ -59,17 +59,17 @@ class SkillsDAO{
         
     }
     //creates skills when requested 
-    public function create(SkillsModel $skill,$conn, $id){
+    public function create(SkillsModel $skill,$conn){
         
         //get all variables from skills model
         $Skills =$skill->getSkill();        
-        
+        $userId = $skill->getUserID();
         //connect to database
         if ($conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             //insert into db
-            $sql_statement = "INSERT INTO `skills` (`id`, `userId`, `skill`) VALUES (NULL, '$id', '$Skills')";
+            $sql_statement = "INSERT INTO `skills` (`id`, `userId`, `skill`) VALUES (NULL, '$userId', '$Skills')";
             if (mysqli_query($conn, $sql_statement)) {
                 //echo "New skill created successfully";
                 return "true";

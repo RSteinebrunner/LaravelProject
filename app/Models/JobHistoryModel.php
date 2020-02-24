@@ -13,7 +13,7 @@ References: N/A
  */
 //JobHistory model class outlines all user data
 class JobHistoryModel{    
-    private $Id = null;
+    private $id = null;
     private $userID;
     private $company;
     private $position;
@@ -26,7 +26,7 @@ class JobHistoryModel{
      */
     public function getId()
     {
-        return $this->Id;
+        return $this->id;
     }
 
     /**

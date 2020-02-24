@@ -18,7 +18,7 @@ use App\Models\JobHistoryModel;
 //JobHistory Service class recieves the sent data from jobs controller and calls the appropriate method in DAO to access the database
 class JobHistoryService{
    
-    public function deleteSkills($id){
+    public function deleteJobHistory($id){
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //delete the JobHistory
@@ -39,12 +39,12 @@ class JobHistoryService{
         return $result;
         
     }
-    public function addJobHistory(JobHistoryModel $JobHistory, $id){
+    public function addJobHistory(JobHistoryModel $JobHistory){
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new JobHistory in database using JobHistory model
         $security = new JobHistoryDAO();
-        $result = $security->create($JobHistory,$conn,$id);
+        $result = $security->create($JobHistory,$conn);
         return $result;
     } 
     

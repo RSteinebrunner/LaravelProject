@@ -16,7 +16,7 @@ use mysqli;
 use App\Services\Business\Data\AdminSecurityDAO;
 
 //securityService class recieves the sent data from Logincontroller and calls the appropriate method in DAO to access the database
-class AdminSecurityService{
+class AdminService{
     
     //The user's username and password are used to authenicate if the use is found in the database and returns true if a match was found
     public function authenticate($username, $password){

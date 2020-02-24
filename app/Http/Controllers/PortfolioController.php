@@ -12,19 +12,23 @@ namespace App\Http\Controllers;
   */
 use App\Models\UserModel;
 use App\Models\EducationModel;
-use App\Services\Business\EducationSecurityService;
+use App\Services\Business\EducationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Services\Business\SkillsService;
+use App\Services\Business\JobHistoryService;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class PortfolioController extends Controller{
     public function showPortfolio(Request $request){
         //get the user id
         $id = Session::get('User')->getId();
-        //creat new service
-        $users = new EducationSecurityService();
+        //creat new services
+        $edu = new EducationService();
+        $skill = new SkillsService();
+        $jobs = new JobHistoryService();
         //get the result from the service
-        $result = array("0" ,$users->findAllEducation($id));
+        $result = array(0=>$edu->findAllEducation($id),$skill->findAllSkills($id),$jobs->findAllJobHistory($id));
         //return the view with the data
-        return view('portfolio')->with("result",$result);
+        return view('showPortfolio')->with("result",$result);
     }
 }

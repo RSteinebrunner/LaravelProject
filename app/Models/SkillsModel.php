@@ -39,29 +39,8 @@ class SkillsModel{
         return $this->skill;
     }
 
-/**
-     * @param mixed $skillId
-     */
-    public function setSkillId($skillId){
-        $this->skillId = $skillId;
-    }
-
-/**
-     * @param mixed $userID
-     */
-    public function setUserID($userID){
-        $this->userID = $userID;
-    }
-
-/**
-     * @param mixed $skill
-     */
-    public function setSkill($skill){
-        $this->skill = $skill;
-    }
-
     //constructor method
-    public function __construct($id, $skill, $userID){       
+    public function __construct($id, $userID,$skill){       
         $this->skillId = $id;
         $this->skill = $skill;
         $this->userID = $userID;

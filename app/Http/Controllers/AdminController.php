@@ -11,7 +11,7 @@ namespace App\Http\Controllers;
  References: N/A
   */
 use App\Models\UserModel;
-use App\Services\Business\AdminSecurityService;
+use App\Services\Business\AdminService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
@@ -19,7 +19,7 @@ class AdminController extends Controller{
     
     public function showAllUsers(Request $request){
         $id = Session::get('User')->getId();
-        $users = new AdminSecurityService();
+        $users = new AdminService();
         $result = $users->findAllUsers($id);
         return view('showAdmin')->with('result',$result);
     }
@@ -27,7 +27,7 @@ class AdminController extends Controller{
     public function changeRole(Request $request){
         $id = $request->input('id');
         $role = $request->input('role');
-        $users = new AdminSecurityService();
+        $users = new AdminService();
         $result = $users->changeRole($id,$role);
         if($result){
             return redirect()->route('manageUsers');
@@ -39,7 +39,7 @@ class AdminController extends Controller{
     
     public function deleteUser(Request $request){
         $id = $request->input('id');
-        $users = new AdminSecurityService();
+        $users = new AdminService();
         $result = $users->deleteUser($id);
         if($result){
             return redirect()->route('manageUsers');
@@ -52,7 +52,7 @@ class AdminController extends Controller{
     public function suspendUser(Request $request){
         $id = $request->input('id');
         $status = $request->input('status');
-        $users = new AdminSecurityService();
+        $users = new AdminService();
         $result = $users->suspendUser($id, $status);
         if($result){
             return redirect()->route('manageUsers');
@@ -64,7 +64,7 @@ class AdminController extends Controller{
     
     public function userDetails(Request $request){
         $id = $request->input('id');
-        $users = new AdminSecurityService();
+        $users = new AdminService();
         $result = $users->findUserById($id);
         if($result){
             return view('showUserDetails')->with("result",$result);
@@ -87,11 +87,12 @@ class AdminController extends Controller{
         $address = $request->input('address');
         $hometown = $request->input('hometown');
         $phoneNumber = $request->input('phoneNumber');
+        $role = $request->input('role');
         $image = null;
-        $updatedUser = new UserModel($id,$username, $password, $firstName, $lastName, null, $age, $gender, $address, $hometown, $email, $phoneNumber, "user", "false");
+        $updatedUser = new UserModel($id,$username, $password, $firstName, $lastName, null, $age, $gender, $address, $hometown, $email, $phoneNumber, $role, "false");
         //pass the person object to the security service
         
-        $users = new AdminSecurityService();
+        $users = new AdminService();
         $result = $users->updateUser($updatedUser);
         if($result == "true"){
             return redirect()->route('profile');

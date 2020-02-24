@@ -18,14 +18,14 @@ class JobHistoryDAO{
         
     public function delete($id, $conn){
         if ($conn->connect_error){
-            echo "Failed to get databse connection!";
+            return "false";        
         }else{
             $sql_statement = "DELETE FROM `jobhistory` WHERE `id` = '$id'";
             $result = mysqli_query($conn, $sql_statement);
             if($result){
-                return true;
+                return "true";
             }
-            return false;
+            return "false";
         }        
     }    
     
@@ -42,7 +42,7 @@ class JobHistoryDAO{
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
                     //create new JobHistory model to send back
-                    $skill = new JobHistoryModel($row['id'],$row['userId'],$row['Company'],$row['Position'],$row['StartDate'],$row['EndDate'],$row['Description']);
+                    $skill = new JobHistoryModel($row['id'],$row['userId'],$row['company'],$row['position'],$row['startDate'],$row['endDate'],$row['description']);
                     $array[$counter] = $skill;
                     $counter++;
                 }
@@ -58,8 +58,7 @@ class JobHistoryDAO{
     //creates JobHistory when requested 
     public function create(JobHistoryModel $JobHistory,$conn){
         
-        //get all variables from JobHistory model
-        $id =$JobHistory->getId();        
+        //get all variables from JobHistory model      
         $userId =$JobHistory->getUserID();
         $company =$JobHistory->getCompany();
         $position =$JobHistory->getPosition();
@@ -70,14 +69,15 @@ class JobHistoryDAO{
         //connect to database
         if ($conn->connect_error){
             echo "Failed to get databse connection!";
+            return "connection";
         }else{
             //insert into db
-            $sql_statement = "INSERT INTO `jobhistory` (`id`, `userId`, `Company`, `Position`, `StartDate`, `EndDate`, `Description`) VALUES (NULL, '$userId', '$company', '$position', '$startDate', '$endDate', '$description')";
+            $sql_statement = "INSERT INTO `jobhistory` (`id`, `userId`, `company`, `position`, `startDate`, `endDate`, `description`) VALUES (NULL, '$userId', '$company', '$position', '$startDate', '$endDate', '$description')";
             if (mysqli_query($conn, $sql_statement)) {
-                //echo "New JobHistory created successfully";
                 return "true";
             }
         }
+        return "false";
         
         
         

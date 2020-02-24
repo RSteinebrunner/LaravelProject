@@ -12,7 +12,7 @@ namespace App\Http\Controllers;
   */
 use App\Models\UserModel;
 use App\Models\EducationModel;
-use App\Services\Business\EducationSecurityService;
+use App\Services\Business\EducationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
@@ -22,10 +22,10 @@ class EducationController extends Controller{
         //get the id
         $id = $request->input('id');
         //create new service
-        $users = new EducationSecurityService();
+        $users = new EducationService();
         $result = $users->deleteEducation($id);
         if($result){
-            return redirect()->route('showPortfolio');
+            return redirect()->route('portfolio');
         }
         else{
             return view('managerError');
@@ -41,7 +41,7 @@ class EducationController extends Controller{
         //create new object
         $newEdu = new EducationModel(NULL, $years, $degree, $school);
         //pass the person object to the security service
-        $service = new EducationSecurityService();
+        $service = new EducationService();
         $result = $service->addEducation($newEdu, $id);
         $data = $service->findAllEducation($id);
         if($result == "true"){

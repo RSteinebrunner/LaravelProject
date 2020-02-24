@@ -17,18 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 //JobHistory controller hold basic methods to either route to other views or request JobHistoryservice for further user specific actions
 class JobHistoryController extends Controller{
-    
-    public function showAllSkills(Request $request){
-        //get the JobHistory id
-        $id = Session::get('User')->getId();
-        //creat new JobHistory service
-        $users = new JobHistoryService();
-        //get the result from the service
-        $result = $users->findAllJobHistory($id);
-        //return the view with the data
-        return view('showPortfolio')->with('result',$result);
-    }
-    
     //used to delete skills
     public function deleteJobHistory(Request $request){
         //get the id
@@ -36,18 +24,17 @@ class JobHistoryController extends Controller{
         //create new JobHistory service
         $users = new JobHistoryService();
         $result = $users->deleteJobHistory($id);
-        if($result){
+        if($result == "true"){
             return redirect()->route('portfolio');
         }
         else{
-            return view('managerError');
+            return view('profileDisplayError');
         }
     }
     
     public function addJobHistory(Request $request){
         //pull form data to make JobHistory
-        $id = $request->input('id');
-        $userId = $request->input('userID');
+        $userId = $request->input('userId');
         $company = $request->input('company');
         $position = $request->input('position');
         $startDate = $request->input('startDate');
@@ -59,11 +46,15 @@ class JobHistoryController extends Controller{
         //pass the JobHistory object to the JobHistory service
         $service = new JobHistoryService();
         $result = $service->addJobHistory($newJobHistory);
-        $data = $service->findJobHistory($userId);
         if($result == "true"){
-            return view('showPortfolio')->with("result",$data);
+            return redirect()->route('portfolio');
         }
+        else if($result=="connection"){
+            return view('profileDisplayError')->with("data","connection");
+        }
+        else{
         return view('profileDisplayError')->with("data","JobHistoryInsertion");
+        }
     }
     
     

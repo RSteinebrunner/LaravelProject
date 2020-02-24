@@ -73,7 +73,7 @@ References: N/A
     
     <div class="form-group">
     	<label for="role"><b>Role:</b></label>
-    	<input type="text" class = "form-control" value="{{$result->getRole()}}" name="phoneNumber" readonly>
+    	<input type="text" class = "form-control" value="{{$result->getRole()}}" name="role" readonly>
     </div>
     
 	<div class="form-group">

@@ -16,7 +16,7 @@ use App\Services\Business\Data\SkillsDAO;
 use App\Models\SkillsModel;
 
 //Skill securityService class recieves the sent data from Skills controller and calls the appropriate method in DAO to access the database
-class SkillsSecurityService{
+class SkillsService{
    
     public function deleteSkills($id){
         //Set up connection
@@ -39,12 +39,12 @@ class SkillsSecurityService{
         return $result;
         
     }
-    public function addSkill(SkillsModel $skill, $id){
+    public function addSkill(SkillsModel $skill){
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new skill in database using skills model
         $security = new SkillsDAO();
-        $result = $security->create($skill,$conn,$id);
+        $result = $security->create($skill,$conn);
         return $result;
     } 
     

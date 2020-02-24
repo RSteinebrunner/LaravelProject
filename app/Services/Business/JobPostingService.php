@@ -34,7 +34,7 @@ class JobPostingService{
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new dao
         $security = new JobPostingDAO();
-        $result = $security->findAllEducation($conn);
+        $result = $security->findAllJobs($conn);
         
         return $result;
         
@@ -45,6 +45,15 @@ class JobPostingService{
         //make new user in database using education model
         $security = new JobPostingDAO();
         $result = $security->create($post,$conn);
+        return $result;
+    } 
+    
+    public function editPost(JobPostingModel $post){
+        //Database Connection
+        $conn = new mysqli("localhost","root","root","laraveldb");
+        //make new user in database using education model
+        $security = new JobPostingDAO();
+        $result = $security->edit($post,$conn);
         return $result;
     } 
     

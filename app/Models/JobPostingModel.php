@@ -42,7 +42,7 @@ class JobPostingModel
      */
     public function getJobId()
     {
-        return $this->jobId;
+        return $this->id;
     }
 
 /**
