@@ -24,3 +24,5 @@ TODO
 	make sure UML matches code
 
 	prompt are you sure for delete user
+
+	Job Posting doesnt update on click

@@ -16,12 +16,18 @@ use App\Models\SkillsModel;
 //SkillsSecurityDAO class that creates or findes user depending on which method is requested from Skills SecurityService
 class SkillsDAO{
         
-    public function delete($id, $conn){
-        if ($conn->connect_error){
+    
+    private $conn;
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
+    public function delete($id){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             $sql_statement = "DELETE FROM `skills` WHERE `id` = '$id'";
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                 return true;
             }
@@ -32,14 +38,14 @@ class SkillsDAO{
     
     
     //find all skills in the database
-    public function findAllSkills($id, $conn){
+    public function findAllSkills($id){
         //see if the connection failed
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             $sql_statement = "SELECT * FROM `skills` WHERE `userId` = '$id'";
             $counter = 0;
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             //run the statment
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
@@ -59,18 +65,18 @@ class SkillsDAO{
         
     }
     //creates skills when requested 
-    public function create(SkillsModel $skill,$conn){
+    public function create(SkillsModel $skill){
         
         //get all variables from skills model
         $Skills =$skill->getSkill();        
         $userId = $skill->getUserID();
         //connect to database
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             //insert into db
             $sql_statement = "INSERT INTO `skills` (`id`, `userId`, `skill`) VALUES (NULL, '$userId', '$Skills')";
-            if (mysqli_query($conn, $sql_statement)) {
+            if (mysqli_query($this->conn, $sql_statement)) {
                 //echo "New skill created successfully";
                 return "true";
             }

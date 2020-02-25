@@ -15,13 +15,18 @@ use App\Models\EducationModel;
 
 //securityDAO class that creates or findes user depending on which method is requested from SecurityService
 class EducationDAO{
-        
-    public function delete($id, $conn){
-        if ($conn->connect_error){
+    
+    private $conn;
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
+    public function delete($id){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             $sql_statement = "DELETE FROM `education` WHERE `id` = '$id'";
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                 return true;
             }
@@ -33,14 +38,14 @@ class EducationDAO{
     
     
     //find all users in the database
-    public function findAllEducation($id, $conn){
+    public function findAllEducation($id){
         //see if the connection failed
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             $sql_statement = "SELECT * FROM `education` WHERE `userId` = '$id'";
             $counter = 0;
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             //run the statment
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
@@ -60,7 +65,7 @@ class EducationDAO{
         
     }
     //creates education when requested 
-    public function create(EducationModel $edu,$conn, $id){
+    public function create(EducationModel $edu, $id){
         
         //get all variables from education model
         $years =$edu->getEducationYears();
@@ -69,12 +74,12 @@ class EducationDAO{
         
         
         //connect to database
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             return "connect";
         }else{
             //insert into db
             $sql_statement = "INSERT INTO `education` (`id`, `yearsAttended`, `degree`, `school`, `userId`) VALUES (NULL, '$years', '$degree', '$school', '$id')";
-            if (mysqli_query($conn, $sql_statement)) {
+            if (mysqli_query($this->conn, $sql_statement)) {
                 //echo "New user created successfully";
                 return "true";
             }

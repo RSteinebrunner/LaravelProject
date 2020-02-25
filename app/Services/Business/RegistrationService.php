@@ -22,8 +22,8 @@ class RegistrationService{
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new user in database using user model
-        $security = new RegistrationDAO();
-        $result = $security->findByUsername($user->getUsername(), $conn);
+        $security = new RegistrationDAO($conn);
+        $result = $security->findByUsername($user->getUsername());
         //check if it is duplicate
         if($result == "true"){
             //return duplicate to controller if true
@@ -31,7 +31,7 @@ class RegistrationService{
         }
         else{
             //if no duplicate found make the user
-            $result = $security->makeUser($user, $conn);
+            $result = $security->makeUser($user);
             //relay if successfull to the controller
             if($result=="true")
                 return "true";

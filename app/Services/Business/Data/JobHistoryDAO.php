@@ -15,7 +15,12 @@ use App\Models\JobHistoryModel;
 
 //JobHistory DAO class that creates or findes user depending on which method is requested from JobHistory Service
 class JobHistoryDAO{
-        
+    
+    private $conn;
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
     public function delete($id, $conn){
         if ($conn->connect_error){
             return "false";        

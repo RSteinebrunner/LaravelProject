@@ -15,15 +15,22 @@ use Illuminate\Support\Facades\Session;
 
 //securityDAO class that creates or findes user depending on which method is requested from SecurityService
 class LoginDAO{
+    
+    private $conn;
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
+    
     //finds users in database and returns true if found
-    public function findUser($username, $password,$conn){
+    public function findUser($username, $password){
         //establic connectionto the database(try to put this in the security service)
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             //search database credentials for user'
             $sql_statement = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password' LIMIT 1";
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             if ($result) {
                 if (mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_assoc($result);

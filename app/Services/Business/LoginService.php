@@ -24,8 +24,8 @@ class LoginService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //check for user
-        $security = new LoginDAO();
-        $result = $security->findUser($username,$password,$conn);
+        $security = new LoginDAO($conn);
+        $result = $security->findUser($username,$password);
         //return if found or not
         return $result;
     }

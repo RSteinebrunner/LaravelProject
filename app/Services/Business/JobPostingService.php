@@ -22,8 +22,8 @@ class JobPostingService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //delete the user
-        $security = new JobPostingDAO();
-        $result = $security->delete($id, $conn);
+        $security = new JobPostingDAO($conn);
+        $result = $security->delete($id);
        //return if the user was deleted
         return $result;
     }
@@ -33,8 +33,8 @@ class JobPostingService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new dao
-        $security = new JobPostingDAO();
-        $result = $security->findAllJobs($conn);
+        $security = new JobPostingDAO($conn);
+        $result = $security->findAllJobs();
         
         return $result;
         
@@ -43,8 +43,8 @@ class JobPostingService{
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new user in database using education model
-        $security = new JobPostingDAO();
-        $result = $security->create($post,$conn);
+        $security = new JobPostingDAO($conn);
+        $result = $security->create($post);
         return $result;
     } 
     
@@ -52,8 +52,8 @@ class JobPostingService{
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new user in database using education model
-        $security = new JobPostingDAO();
-        $result = $security->edit($post,$conn);
+        $security = new JobPostingDAO($conn);
+        $result = $security->edit($post);
         return $result;
     } 
     

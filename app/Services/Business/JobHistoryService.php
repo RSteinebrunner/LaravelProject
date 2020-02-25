@@ -22,8 +22,8 @@ class JobHistoryService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //delete the JobHistory
-        $security = new JobHistoryDAO();
-        $result = $security->delete($id, $conn);
+        $security = new JobHistoryDAO($conn);
+        $result = $security->delete($id);
         //return if the JobHistory was deleted
         return $result;
     }
@@ -33,8 +33,8 @@ class JobHistoryService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //check for JobHistory
-        $security = new JobHistoryDAO();
-        $result = $security->findAllJobHistory($id, $conn);
+        $security = new JobHistoryDAO($conn);
+        $result = $security->findAllJobHistory($id);
         
         return $result;
         
@@ -43,8 +43,8 @@ class JobHistoryService{
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new JobHistory in database using JobHistory model
-        $security = new JobHistoryDAO();
-        $result = $security->create($JobHistory,$conn);
+        $security = new JobHistoryDAO($conn);
+        $result = $security->create($JobHistory);
         return $result;
     } 
     

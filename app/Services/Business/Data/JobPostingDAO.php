@@ -15,15 +15,21 @@ use App\Models\JobPostingModel;
 
 //JobPostingDAO class that creates or finds jobs depending on which method is requested from SecurityService
 class JobPostingDAO{
+    
+    private $conn;
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
         
-    public function delete($id, $conn){
-        if ($conn->connect_error){
+    public function delete($id){
+        if ($this->conn->connect_error){
             //check the connection
             echo "Failed to get databse connection!";
         }else{
             //running the statement
             $sql_statement = "DELETE FROM `jobposting` WHERE `id` = '$id'";
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                 //returning if the user was deleted
                 return "true";
@@ -35,14 +41,14 @@ class JobPostingDAO{
     
     
     //find all users in the database
-    public function findAllJobs($conn){
+    public function findAllJobs(){
         //see if the connection failed
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             $sql_statement = "SELECT * FROM `jobposting`";
             $counter = 0;
-            $result = mysqli_query($conn, $sql_statement);
+            $result = mysqli_query($this->conn, $sql_statement);
             //run the statment
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
@@ -64,7 +70,7 @@ class JobPostingDAO{
         
     }
     //creates post when requested 
-    public function create(JobPostingModel $post,$conn){
+    public function create(JobPostingModel $post){
         
         //get all variables from education model
         $company = $post->getCompany();
@@ -76,12 +82,12 @@ class JobPostingDAO{
         
         
         //connect to database
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             return "please connect";
         }else{
             //insert into db
             $sql_statement = "INSERT INTO `jobposting` (`id`, `company`, `position`, `description`, `requirements`, `pay`, `postingDate`) VALUES (NULL, '$company', '$position', '$description', '$requirements', '$pay', '$postingDate')";
-            if (mysqli_query($conn, $sql_statement)) {
+            if (mysqli_query($this->conn, $sql_statement)) {
                 //echo "New user created successfully";
                 return "true";
             }

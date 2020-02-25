@@ -22,8 +22,8 @@ class EducationService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //delete the user
-         $security = new EducationDAO();
-        $result = $security->delete($id, $conn);
+         $security = new EducationDAO($conn);
+        $result = $security->delete($id);
        //return if the user was deleted
         return $result;
     }
@@ -33,8 +33,8 @@ class EducationService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //check for user
-        $security = new EducationDAO();
-        $result = $security->findAllEducation($id, $conn);
+        $security = new EducationDAO($conn);
+        $result = $security->findAllEducation($id);
         
         return $result;
         
@@ -43,8 +43,8 @@ class EducationService{
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new user in database using education model
-        $security = new EducationDAO();
-        $result = $security->create($edu,$conn,$id);
+        $security = new EducationDAO($conn);
+        $result = $security->create($edu,$id);
         return $result;
     } 
     
