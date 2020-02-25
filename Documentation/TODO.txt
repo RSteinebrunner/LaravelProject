@@ -9,20 +9,29 @@ TODO
 			Description
 			key for the owner of the group  PK
 		Table that has all users to a particular group
-		Must be cloud hosted for this milestone and working.
+	Must be cloud hosted for this milestone and working.
 
-	Data Validation on all forms
-	
-	Change user in the database to have credentials and user.
-		check to make sure credentials are not the same
+	Change user in the database to have profile(everything else) and user(fn ln un pw).
+		check to make sure no double register
 		add acid transactions to register for this(you need to add )
-
-	add default constructor to dao, use that in services
-
-	make sure return paths are on sitemap
 
 	make sure UML matches code
 
 	prompt are you sure for delete user
+	Can this work with modals)
 
 	Job Posting doesnt update on click
+	Job posting needs better view(pages and cards?)
+
+	better education history functionality
+	login is not case sensitive
+
+	more comments throughout code
+
+	error handling in the controllers
+
+	What does he want for the install instructions?
+
+	our wireframes cannot be implemented properly according to REHA, fix for a better design and make sure it all matches what we are doing.
+	
+
