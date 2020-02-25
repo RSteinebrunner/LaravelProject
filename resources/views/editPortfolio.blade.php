@@ -23,16 +23,19 @@ References: N/A
 				placeholder="Enter the number of years attended" name="years"
 				required>
 		</div>
+		{{$errors->first('years')}}
 		<div class="form-group">
 			<label for="degree">Degree Earned:</label> <input type="text"
 				class="form-control" placeholder="Enter the degree earned"
 				name="degree" required>
 		</div>
+		{{$errors->first('degree')}}
 		<div class="form-group">
 			<label for="school">School Attended:</label> <input
 				type="text" class="form-control"
 				placeholder="Enter the school attended" name="school" required>
 		</div>
+		{{$errors->first('school')}}
 		<input type="hidden" name="id"
 			value="{{Session::get('User')->getId()}}"> <input type="hidden"
 			name="_token" value="{{ csrf_token()}}" />
@@ -67,22 +70,27 @@ References: N/A
 			<label for="company">Company</label> 
 			<input type="text" class="form-control"	placeholder="Enter the company name" name="company" required>
 		</div>
+		{{$errors->first('company')}}
 		<div class="form-group">
 			<label for="position">Position</label> 
 			<input type="text" class="form-control"	placeholder="Enter your position at the company" name="postion" required>
 		</div>
+		{{$errors->first('position')}}
 		<div class="form-group">
 			<label for="startDate">Starting Date</label> 
-			<input type="text" class="form-control"	placeholder="MM/YYYY" name="startDate" required>
+			<input type="text" class="form-control"	placeholder="MM/DD/YYYY" name="startDate" required>
 		</div>
+		{{$errors->first('startDate')}}
 		<div class="form-group">
 			<label for="endDate">End Date</label> 
-			<input type="text" class="form-control"	placeholder="MM/YYYY" name="endDate" required>
+			<input type="text" class="form-control"	placeholder="MM/DD/YYYY" name="endDate" required>
 		</div>
+		{{$errors->first('endDate')}}
 		<div class="form-group">
 			<label for="description">Description</label> 
 			<input type="text" class="form-control"	placeholder="Please enter a brief description of your role" name="description" required>
 		</div>
+		{{$errors->first('description')}}
 		<button class="btn btn-success" type="submit">Add</button>
 	</form>
 

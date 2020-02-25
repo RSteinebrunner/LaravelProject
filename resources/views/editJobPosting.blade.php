@@ -31,26 +31,33 @@ References: N/A
     			<label for="company">Company</label> 
     			<input type="text" class="form-control"	value="{{$job->getCompany()}}" name="company" required>
     		</div>
+    		{{$errors->first('company')}}
     		<div class="form-group">
     			<label for="position">Position</label> 
     			<input type="text" class="form-control"	value="{{$job->getPosition()}}" name="position" required>
     		</div>
+    		{{$errors->first('position')}}
     		<div class="form-group">
     			<label for="description">Description</label> 
     			<input type="text" class="form-control"	value="{{$job->getDescription()}}" name ="description" required>
     		</div>
+    		{{$errors->first('description')}}
     		<div class="form-group">
     			<label for="requirements">Requirements</label> 
     			<input type="text" class="form-control"	value="{{$job->getRequirements()}}" name="requirements" required>
     		</div>
+    		{{$errors->first('requirements')}}
     		<div class="form-group">
     			<label for="pay">Pay</label> 
     			<input type="text" class="form-control"	value="{{$job->getPay()}}" name="pay" required>
     		</div>
+    		{{$errors->first('pay')}}
+    		
     		<div class="form-group">
     			<label for="postingDate">Posting Date</label> 
     			<input type="text" class="form-control"	value="{{$job->getPostingDate()}}" name="postingDate" required>
     		</div>
+    		{{$errors->first('postingDate')}}
     		<button class="btn btn-primary" type="submit">Edit</button>
     	</form>
     	<form method="post" action="deleteJobPosting">
@@ -68,26 +75,32 @@ References: N/A
     			<label for="company">Company</label> 
     			<input type="text" class="form-control" name="company" required>
     		</div>
+    		{{$errors->first('company')}}
     		<div class="form-group">
     			<label for="position">Position</label> 
     			<input type="text" class="form-control"	 name="position" required>
     		</div>
+    		{{$errors->first('position')}}
     		<div class="form-group">
     			<label for="description">Description</label> 
     			<input type="text" class="form-control"	 name="description" required>
     		</div>
+    		{{$errors->first('description')}}
     		<div class="form-group">
     			<label for="requirements">Requirements</label> 
     			<input type="text" class="form-control"	name="requirements" required>
     		</div>
+    		{{$errors->first('requirements')}}
     		<div class="form-group">
     			<label for="pay">Pay</label> 
     			<input type="text" class="form-control"	 name="pay" required>
     		</div>
+    		{{$errors->first('pay')}}
     		<div class="form-group">
     			<label for="postingDate">Posting Date</label> 
     			<input type="text" class="form-control"name="postingDate" required>
     		</div>
+    		{{$errors->first('postingDate')}}
     		<button class="btn btn-success" type="submit">Add</button>
     	</form>
         </div>
