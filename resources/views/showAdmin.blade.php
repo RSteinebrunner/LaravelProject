@@ -36,11 +36,8 @@ References: N/A
         			<td>{{$user->getAge()}}</td>
         			<td>{{$user->getEmail()}}</td>
         			<td>
-        			<form method="post" action="deleteUser">
-        			<input type = "hidden" name = "id" value = "{{$user->getId()}}">
-        			<input type="hidden" name="_token" value="{{ csrf_token()}}"/>
-        			<button class="btn btn-danger" type="submit">Delete</button>
-        			</form>
+        			<button type="button" class="btn btn-danger" data-toggle="modal"
+							data-target="#deleteUser{{$user->getId()}}">Delete</button>
         			</td>
         			<td>
         			<form method="post" action="changeRole">
@@ -71,9 +68,34 @@ References: N/A
         			<input type = "hidden" name = "id" value = "{{$user->getId()}}">
         			<input type="hidden" name="_token" value="{{ csrf_token()}}"/>
         			<button class="btn btn-primary" type="submit">Details</button>
-        			</form>
+        			    </form>    		
+        		<!-- The Modal -->
+				<div class="modal fade" id="deleteUser{{$user->getId()}}">
+					<div class="modal-dialog modal-dialog-centered modal-sm">
+						<div class="modal-content">
+
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title"  style="color:black">Delete This User?</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<!-- Modal body -->
+							<div class="modal-body" >
+								<form method="post" action="deleteUser">
+        							<input type = "hidden" name = "id" value = "{{$user->getId()}}">
+        							<input type="hidden" name="_token" value="{{ csrf_token()}}"/>
+        							<button class="btn btn-danger" type="submit">Delete</button>
+        						</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+        			
         			</td>
         		</tr>
+
         		@endforeach
         </table>
        	</div>

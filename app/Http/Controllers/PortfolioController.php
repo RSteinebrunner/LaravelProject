@@ -26,6 +26,7 @@ class PortfolioController extends Controller{
         $edu = new EducationService();
         $skill = new SkillsService();
         $jobs = new JobHistoryService();
+
         //get the result from the service
         $result = array(0=>$edu->findAllEducation($id),$skill->findAllSkills($id),$jobs->findAllJobHistory($id));
         //return the view with the data

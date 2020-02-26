@@ -1,15 +1,15 @@
 <?php
 namespace App\Services\Business\Data;
-use Illuminate\Support\Facades\Session;
 use App\Models\EducationModel;
+use Illuminate\Support\Facades\Log;
 
 /*
- Project name/Version: LaravelCLC Version: 3
+ Project name/Version: LaravelCLC Version: 4
  Module name: education Module
- Authors:Anthony Clayton
- Date: 2/15/2020
+ Authors:Anthony Clayton, Roland Steinebrunner
+ Date: 2/25/2020
  Synopsis: Module connects to the database and provides information for the education of the user
- Version#: 1
+ Version#: 2
  References: N/A
  */
 
@@ -40,23 +40,56 @@ class EducationDAO{
     //find all users in the database
     public function findAllEducation($id){
         //see if the connection failed
+        Log::info("Entering EducationDAO.findAllEducation()");
         if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             $sql_statement = "SELECT * FROM `education` WHERE `userId` = '$id'";
-            $counter = 0;
             $result = mysqli_query($this->conn, $sql_statement);
+            $counter = 0;
+            $counter2 = 0;
             //run the statment
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
-                    //create new model to send back
-                    $edu = new EducationModel($row['id'],$row['yearsAttended'], $row['degree'], $row['school']);
-                    $array[$counter] = $edu;
-                    $counter++;
+                    //check to see  how many educations are in the array
+                    
+                    //if the array reaches 4 elements, add the array to the final returned array
+                    if($counter==4){
+                        //add array of educations to submitted array
+                        $array[$counter2]=$edus;
+                        //reset the educations array
+                        $edus = array();
+                        //reset counters
+                        $counter = 0;
+                        $counter2++;
+                    }
+                    //take each entry and add it to an array for up to 4 entries
+                    if($counter<4)
+                    {
+                        //new model is made
+                        $edu = new EducationModel($row['id'],$row['yearsAttended'], $row['degree'], $row['school'],$row['gpa']);
+                        Log::info($edu->toString());
+                        //add new model to proper place in array
+                        $edus[$counter] = $edu;
+                        $counter++;
+                    }
+               
+                    Log::info(" Values", array("counter" => $counter));
                 }
-                if(isset($array))
+                //when there is no more rows, if the counter is not at 4 it will not add the remaining rows to the array, so this must be done outside the loop
+                if($counter>0)
+                {
+                    $array[]=$edus;
+
+                }
+
+                
+                //return the final array
+                if(isset($array)){
+                    Log::info("Final Array ", $array);
                     return $array;
-                //return if empty
+                }
+                //return empty array if there was no data
                 $empty=array();
                 return $empty;
             }
@@ -71,6 +104,7 @@ class EducationDAO{
         $years =$edu->getEducationYears();
         $degree = $edu->getDegree();
         $school = $edu->getSchool();
+        $gpa = $edu->getGPA();
         
         
         //connect to database
@@ -78,7 +112,7 @@ class EducationDAO{
             return "connect";
         }else{
             //insert into db
-            $sql_statement = "INSERT INTO `education` (`id`, `yearsAttended`, `degree`, `school`, `userId`) VALUES (NULL, '$years', '$degree', '$school', '$id')";
+            $sql_statement = "INSERT INTO `education` (`id`, `yearsAttended`, `degree`, `school`, `userId`, `gpa`) VALUES (NULL, '$years', '$degree', '$school', '$id','$gpa')";
             if (mysqli_query($this->conn, $sql_statement)) {
                 //echo "New user created successfully";
                 return "true";

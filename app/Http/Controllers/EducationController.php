@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 /*
- Project name/Version: LaravelCLC Version: 3
+ Project name/Version: LaravelCLC Version: 4
  Module name: Education Moduke
  Authors: Roland Steinebrunner, Anthony Clayton
  Date: 2/23/2020
@@ -39,9 +39,10 @@ class EducationController extends Controller{
         $years = $request->input('years');
         $degree = $request->input('degree');
         $school = $request->input('school');
+        $gpa = $request->input('gpa');
         
         //create new object
-        $newEdu = new EducationModel(NULL, $years, $degree, $school);
+        $newEdu = new EducationModel(NULL, $years, $degree, $school,$gpa);
         //pass the person object to the security service
         $service = new EducationService();
         $result = $service->addEducation($newEdu, $id);
@@ -56,9 +57,10 @@ class EducationController extends Controller{
     private function validateForm(Request $request)
     {
         // Setup Data Validation Rules for Login Form
-        $rules = ['years' => 'Required | Between:4,5',
-            'degree' => 'Required | Between:1,30',
-            'school' => 'Required | Between:1,30'
+        $rules = ['years' => 'Required | numeric',
+            'degree' => 'Required | Between: 20,60',
+            'school' => 'Required | Between: 10,60',
+            'gpa' => 'Required | Between:1,4'
            ];
         
         // Run Data Validation Rules

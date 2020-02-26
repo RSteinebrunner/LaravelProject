@@ -1,15 +1,16 @@
 <?php
 namespace App\Services\Business\Data;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Models\SkillsModel;
 
 /*
- Project name/Version: LaravelCLC Version: 3
+ Project name/Version: LaravelCLC Version: 4
  Module name: Skill Module
  Authors: Roland Steinebrunner, Jack Sidrak
- Date: 2/23/2020
+ Date: 2/25/2020
  Synopsis: Module connects to the database and provides information for the skills of the user
- Version#: 1
+ Version#: 2
  References: N/A
  */
 
@@ -40,22 +41,45 @@ class SkillsDAO{
     //find all skills in the database
     public function findAllSkills($id){
         //see if the connection failed
+        Log::info("Entering SkillsDAO.findAllSkills()");
+        
         if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
         }else{
             $sql_statement = "SELECT * FROM `skills` WHERE `userId` = '$id'";
-            $counter = 0;
             $result = mysqli_query($this->conn, $sql_statement);
+            $counter = 0;
+            $counter2 = 0;
             //run the statment
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
-                    //create new model to send back
-                    $skill = new SkillsModel($row['id'],$row['userId'],$row['skill']);
-                    $array[$counter] = $skill;
-                    $counter++;
+                    //if the array reaches 5 elements, add the array to the final returned array
+                    if($counter==5){
+                        //add array of educations to submitted array
+                        $array[$counter2]=$skills;
+                        //reset the educations array
+                        $skills = array();
+                        //reset counters
+                        $counter = 0;
+                        $counter2++;
+                    }
+                    if($counter<5)
+                    {
+                        //new model is made
+                        $skill = new SkillsModel($row['id'],$row['userId'],$row['skill']);
+                        $skills[$counter] = $skill;
+                        $counter++;
+                    }
                 }
-                if(isset($array))
+                if($counter>0)
+                {
+                    $array[]=$skills;
+                    
+                }
+                if(isset($array)){
+                    Log::info("Exiting SkillsDAO.findAllSkills with Final Array ", $array);
                     return $array;
+                }
                 //return if empty
                 $empty=array();
                 return $empty;

@@ -17,14 +17,8 @@ TODO
 
 	make sure UML matches code
 
-	prompt are you sure for delete user
-	Can this work with modals)
-
 	Job Posting doesnt update on click
 	Job posting needs better view(pages and cards?)
-
-	better education history functionality
-	login is not case sensitive
 
 	more comments throughout code
 

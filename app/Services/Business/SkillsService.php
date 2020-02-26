@@ -22,8 +22,8 @@ class SkillsService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //delete the skill
-        $security = new SkillsDAO();
-        $result = $security->delete($id, $conn);
+        $security = new SkillsDAO($conn);
+        $result = $security->delete($id);
        //return if the skill was deleted
         return $result;
     }
@@ -33,8 +33,8 @@ class SkillsService{
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //check for skill
-        $security = new SkillsDAO();
-        $result = $security->findAllSkills($id, $conn);
+        $security = new SkillsDAO($conn);
+        $result = $security->findAllSkills($id);
         
         return $result;
         
@@ -43,8 +43,8 @@ class SkillsService{
         //Database Connection
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new skill in database using skills model
-        $security = new SkillsDAO();
-        $result = $security->create($skill,$conn);
+        $security = new SkillsDAO($conn);
+        $result = $security->create($skill);
         return $result;
     } 
     

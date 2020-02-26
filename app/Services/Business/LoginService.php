@@ -14,6 +14,8 @@ References: N/A
 use App\Models\UserModel;
 use mysqli;
 use App\Services\Business\Data\LoginDAO;
+use Illuminate\Support\Facades\Session;
+
 
 //securityService class recieves the sent data from Logincontroller and calls the appropriate method in DAO to access the database
 class LoginService{
@@ -25,9 +27,15 @@ class LoginService{
         $conn = new mysqli("localhost","root","root","laraveldb");
         //check for user
         $security = new LoginDAO($conn);
-        $result = $security->findUser($username,$password);
-        //return if found or not
-        return $result;
+        $user= $security->findUser($username,$password);
+        if($user->getUsername() == $username && $user->getPassword() == $password){
+            Session::put('User',$user);
+            Session::put('Role', $user->getRole());
+            return "true";
+        }
+        else{
+            return "false";
+        }
     }
   
 }

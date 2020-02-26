@@ -2,7 +2,7 @@
 namespace App\Models;
 /*
  * <!--
- Project name/Version: LaravelCLC Version: 1
+ Project name/Version: LaravelCLC Version: 4
  Module name: EducationModel
  Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
  Date: 2/15/2020
@@ -18,6 +18,7 @@ class EducationModel
    private $educationYears;
    private $degree;
    private $school;
+   private $gpa;
 /**
      * @return mixed
      */
@@ -49,14 +50,21 @@ class EducationModel
     {
         return $this->school;
     }
-
+    public function getGPA()
+    {
+        return $this->gpa;
+    }
+    public function toString(){
+        return "School: ".$this->school." years: ".$this->educationYears." degree: ".$this->degree." Id: ".$this->educationId;
+    }
     //constructor method
-    public function __construct($id, $years, $degree, $school){
+    public function __construct($id, $years, $degree, $school,$gpa){
         
         $this->educationId = $id;
         $this->educationYears = $years;
         $this->degree = $degree;
         $this->school= $school;
+        $this->gpa=$gpa;
         
     }
 

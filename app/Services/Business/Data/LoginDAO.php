@@ -1,7 +1,6 @@
 <?php
 namespace App\Services\Business\Data;
 use App\Models\UserModel;
-use Illuminate\Support\Facades\Session;
 
 /*
  Project name/Version: LaravelCLC Version: 3
@@ -35,17 +34,9 @@ class LoginDAO{
                 if (mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_assoc($result);
                     $user = new UserModel($row['userId'], $row['username'], $row['password'], $row['firstName'], $row['lastName'], $row['picture'], $row['age'], $row['gender'], $row['address'], $row['hometown'], $row['email'], $row['phoneNumber'], $row['role'], $row['isSuspended']);
-                    if($row['isSuspended'] == "false"){
-                        Session::put('User',$user);
-                        Session::put('Role', $row['role']);
-                        return "true";
-                    }
-                    else{
-                        return "Suspended";
-                    }
+                    return $user;
                 }
             }
-            return "false";
         }        
     }
 
