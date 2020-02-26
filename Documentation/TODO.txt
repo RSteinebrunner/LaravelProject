@@ -18,7 +18,11 @@ TODO
 	make sure UML matches code
 
 	Job Posting doesnt update on click
-	Job posting needs better view(pages and cards?)
+	Job posting change to cards
+	if admin have edit and delete button on cards
+	(delete prompt needed)
+		edit will take you to the edit page with only one form
+	need add new that will take you to the form but blank
 
 	more comments throughout code
 
