@@ -24,7 +24,8 @@ class SkillsController extends Controller{
         $users = new SkillsService();
         $result = $users->deleteSkills($id);
         if($result){
-            return redirect()->route('portfolio');
+            $portfolio = new PortfolioController();
+            return $portfolio->showPortfolio();
         }
         else{
             return view('managerError');
@@ -43,7 +44,8 @@ class SkillsController extends Controller{
         $result = $service->addSkill($newSkill);
         $data = $service->findAllSkills($userId);
         if($result == "true"){
-            return redirect()->route('portfolio');
+            $portfolio = new PortfolioController();
+            return $portfolio->showPortfolio();
         }
         return view('registerFailure')->with("result",$result);
     }

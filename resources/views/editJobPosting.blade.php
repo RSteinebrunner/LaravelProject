@@ -58,7 +58,7 @@ References: N/A
     			<input type="text" class="form-control"	value="{{$job->getPostingDate()}}" name="postingDate" required>
     		</div>
     		{{$errors->first('postingDate')}}
-    		<button class="btn btn-primary" type="submit">Edit</button>
+    		<button class="btn btn-primary" type="submit">Save Changes</button>
     	</form>
     	<form method="post" action="deleteJobPosting">
     		<input type="hidden" name="_token" value="{{csrf_token()}}" />

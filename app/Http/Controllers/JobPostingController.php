@@ -37,7 +37,7 @@ class JobPostingController extends Controller{
         $result = $service->addPost($newPost);
         
         if($result == "true"){
-            return redirect()->route('adminPosting');
+            return $this->adminAllJobs();
         }
         else{
             return view('profileDisplayError')->with("data", "jobPostingError");
@@ -50,7 +50,7 @@ class JobPostingController extends Controller{
         $service = new JobPostingService();
         $result = $service->deletePost($id);
         if($result){
-            return redirect()->route('adminPosting');
+            return $this->adminAllJobs();
         }
         else{
             return view('profileDisplayError')->with("data", "jobDeleteError");
@@ -76,7 +76,7 @@ class JobPostingController extends Controller{
         $result = $service->editPost($newPost);
         
         if($result == "true"){
-            return redirect()->route('adminPosting');
+            return $this->adminAllJobs();
         }
         else{
             return view('profileDisplayError')->with("data", "jobPostingError");
@@ -93,7 +93,7 @@ class JobPostingController extends Controller{
         return view('showJobPosting')->with("result",$result);
     }
     //show postings to admins
-    public function adminAllJobs(Request $request){
+    public function adminAllJobs(){
         
         //if not a admin rereoute to login
         if(Session::get('Role') != "admin"){

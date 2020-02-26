@@ -25,7 +25,8 @@ class JobHistoryController extends Controller{
         $users = new JobHistoryService();
         $result = $users->deleteJobHistory($id);
         if($result == "true"){
-            return redirect()->route('portfolio');
+            $portfolio = new PortfolioController();
+            return $portfolio->showPortfolio();
         }
         else{
             return view('profileDisplayError');
@@ -48,7 +49,8 @@ class JobHistoryController extends Controller{
         $service = new JobHistoryService();
         $result = $service->addJobHistory($newJobHistory);
         if($result == "true"){
-            return redirect()->route('portfolio');
+            $portfolio = new PortfolioController();
+            return $portfolio->showPortfolio();
         }
         else if($result=="connection"){
             return view('profileDisplayError')->with("data","connection");

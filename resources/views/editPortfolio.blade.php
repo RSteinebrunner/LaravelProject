@@ -81,7 +81,7 @@ References: N/A
 		{{$errors->first('company')}}
 		<div class="form-group">
 			<label for="position">Position</label> 
-			<input type="text" class="form-control"	placeholder="Enter your position at the company" name="postion" required>
+			<input type="text" class="form-control"	placeholder="Enter your position at the company" name="position" required>
 		</div>
 		{{$errors->first('position')}}
 		<div class="form-group">

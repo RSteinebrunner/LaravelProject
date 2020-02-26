@@ -35,7 +35,11 @@ class AdminController extends Controller{
         $users = new AdminService();
         $result = $users->changeRole($id,$role);
         if($result){
-            return redirect()->route('manageUsers');
+            $id = Session::get('User')->getId();
+            $users = new AdminService();
+            //result is data as an array of all user models
+            $result = $users->findAllUsers($id);
+            return view('showAdmin')->with('result',$result);
         }
         else{
             return view('managerError');
@@ -47,7 +51,11 @@ class AdminController extends Controller{
         $users = new AdminService();
         $result = $users->deleteUser($id);
         if($result){
-            return redirect()->route('manageUsers');
+            $id = Session::get('User')->getId();
+            $users = new AdminService();
+            //result is data as an array of all user models
+            $result = $users->findAllUsers($id);
+            return view('showAdmin')->with('result',$result);
         }
         else{
             return view('managerError');
@@ -60,7 +68,11 @@ class AdminController extends Controller{
         $users = new AdminService();
         $result = $users->suspendUser($id, $status);
         if($result){
-            return redirect()->route('manageUsers');
+            $id = Session::get('User')->getId();
+            $users = new AdminService();
+            //result is data as an array of all user models
+            $result = $users->findAllUsers($id);
+            return view('showAdmin')->with('result',$result);
         }
         else{
             return view('managerError');
@@ -102,7 +114,7 @@ class AdminController extends Controller{
         $users = new AdminService();
         $result = $users->updateUser($updatedUser);
         if($result == "true"){
-            return redirect()->route('profile');
+            return view('myProfile');
         }
         else{
             return view('managerError');

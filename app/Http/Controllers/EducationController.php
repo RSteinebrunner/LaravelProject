@@ -25,7 +25,8 @@ class EducationController extends Controller{
         $users = new EducationService();
         $result = $users->deleteEducation($id);
         if($result){
-            return redirect()->route('portfolio');
+            $portfolio = new PortfolioController();
+            return $portfolio->showPortfolio();
         }
         else{
             return view('managerError');
@@ -48,7 +49,8 @@ class EducationController extends Controller{
         $result = $service->addEducation($newEdu, $id);
         $data = $service->findAllEducation($id);
         if($result == "true"){
-            return redirect()->route('portfolio');
+            $portfolio = new PortfolioController();
+            return $portfolio->showPortfolio();
         }
         else {
             return view('profileDisplayError')->with("data","educationInsert");

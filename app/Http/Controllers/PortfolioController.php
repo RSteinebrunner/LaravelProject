@@ -19,7 +19,7 @@ use App\Services\Business\SkillsService;
 use App\Services\Business\JobHistoryService;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class PortfolioController extends Controller{
-    public function showPortfolio(Request $request){
+    public function showPortfolio(){
         //get the user id
         $id = Session::get('User')->getId();
         //creat new services
