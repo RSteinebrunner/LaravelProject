@@ -45,6 +45,8 @@ Route::get('/editPortfolio',function () {
 });
 
 
+Route::get('/groups', 'GroupController@showAllGroups')->name('groups');
+
 
 Route::get('/jobPosting', 'JobPostingController@showAllJobs')->name('jobPosting');
 Route::get('/adminJobPosting', 'JobPostingController@adminAllJobs')->name('adminPosting');
