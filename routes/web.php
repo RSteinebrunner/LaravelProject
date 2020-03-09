@@ -49,25 +49,29 @@ Route::get('/showHome',function () {
 Route::get('/addGroups',function () {
     return view('addGroups');
 });
+
 Route::get('/createJob',function () {
     return view('addJobPosting');
 });
 
-Route::get('/groups', 'GroupController@showAllGroups')->name('groups');
+Route::get('/groups', 'GroupController@showAllGroups');
+Route::get('/myGroups', 'GroupController@showMyGroups');
 
-Route::post('/editGroup', 'GroupController@editGroup')->name('groups');
-Route::post('/editGroupPosting', 'GroupController@editPost')->name('groups');
-Route::post('/deleteGroupPosting', 'GroupController@deleteGroup')->name('groups');
+Route::post('/editGroup', 'GroupController@editGroup');
+Route::post('/editGroupPosting', 'GroupController@editPost');
+Route::post('/deleteGroupPosting', 'GroupController@deleteGroup');
 
-Route::post('/addGroupPosting', 'GroupController@addGroup')->name('addGroupPosting');
+Route::post('/joinGroup', 'GroupController@joinGroup');
+Route::post('/leaveGroup', 'GroupController@leaveGroup');
+Route::post('/addGroupPosting', 'GroupController@addGroup');
 
-Route::get('/jobPosting', 'JobPostingController@showAllJobs')->name('jobPosting');
+Route::get('/jobPosting', 'JobPostingController@showAllJobs');
 Route::get('/adminJobPosting', 'JobPostingController@findJob');
 Route::post('/editJobPosting', 'JobPostingController@editPost');
 Route::post('/deleteJobPosting', 'JobPostingController@deletePost');
 Route::post('/addJobPosting', 'JobPostingController@addPost');
     
-Route::get('/portfolio', 'PortfolioController@showPortfolio')->name('portfolio');
+Route::get('/portfolio', 'PortfolioController@showPortfolio');
 
 Route::post('/deleteEducation', 'EducationController@deleteEducation');
 Route::post('/addEducation', 'EducationController@addEducation');
@@ -83,7 +87,7 @@ Route::post('/doLogin', 'LoginController@authenticate');
 
 Route::post('/doRegister', 'RegistrationController@createUser');
 
-Route::get('/manageUsers', 'AdminController@showAllUsers')->name('manageUsers');
+Route::get('/manageUsers', 'AdminController@showAllUsers');
 Route::post('/suspendUser', 'AdminController@suspendUser');
 Route::post('/deleteUser', 'AdminController@deleteUser');
 Route::post('/userDetails', 'AdminController@userDetails');

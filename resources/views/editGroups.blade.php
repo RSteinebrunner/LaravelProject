@@ -43,13 +43,32 @@ References: N/A
     		
     		<button class="btn btn-primary" type="submit">Save Changes</button>   		
     	</form>
+    	<button type="button" class="btn btn-danger" data-toggle="modal"
+							data-target="#delete{{$group->getGroupId()}}">Delete</button>
     	
-    	<form action="deleteGroupPosting" method="post">
-      		<input type="hidden" name="id" value="{{$group->getGroupId()}}" />
-      		<input type="hidden" name="_token" value="{{csrf_token()}}" />        			         					      					
-      		<button class="btn btn-danger" type="submit">Delete</button>
-      	</form>
-      				
+      			
+      			<!-- The Modal -->
+				<div class="modal fade" id="delete{{$group->getGroupId()}}">
+					<div class="modal-dialog modal-dialog-centered modal-sm">
+						<div class="modal-content">
+
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title text-center">Delete Group?</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<!-- Modal body -->
+							<div class="modal-body" >
+								<form action="deleteGroupPosting" method="post">
+      								<input type="hidden" name="id" value="{{$group->getGroupId()}}" />
+      								<input type="hidden" name="_token" value="{{csrf_token()}}" />        			         					      					
+      								<button class="btn btn-danger" type="submit">Delete</button>
+      							</form>	
+							</div>
+						</div>
+					</div>
+				</div>    	
 		@endforeach		
 
         </div>

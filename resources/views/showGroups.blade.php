@@ -27,35 +27,62 @@ References: N/A
         	<th scope="col">Owner</th>
         	
         	<th scope="col">Interested?</th>
-        	
-        	<th scope="col">*Actions*</th>    	    	
+        	@if(Session::get('Role') == "admin")
+    		<th scope="col">*Actions*</th>    	
+    		@endif 	    	
     	</tr>
         		@foreach($result as $group)
         		
         		<tr>
         			<td>{{$group->getName()}}</td>
         			<td>{{$group->getDescription()}}</td>
-        			<td>{{$group->getUserId()}}</td> 
+        			<td>Owner ID: {{$group->getUserId()}}</td> 
 
         			<td>
-    					<button class="btn btn-success" type="submit">Apply</button>
+        			<form action="joinGroup" method="post">
+        			    <input type="hidden" name="groupID" value="{{$group->getGroupId()}}" /> 
+        			    <input type="hidden" name="userID" value="{{$group->getUserId()}}" /> 
+        			    <input type="hidden" name="_token" value="{{csrf_token()}}" />        			    
+        			    <button class="btn btn-success" type="submit" >Join</button>
+        			</form>
         			</td>
+        			
         			<td>
-        				      	
+        			@if(Session::get('Role') == "admin")   	
         			<form action="editGroup" method="post">
         			    <input type="hidden" name="id" value="{{$group->getGroupId()}}" /> 
         			    <input type="hidden" name="_token" value="{{csrf_token()}}" />        			    
         			    <button class="btn btn-warning" type="submit" >Edit</button>
         			</form>
-      					
-      				<form action="deleteGroupPosting" method="post">
-      					<input type="hidden" name="id" value="{{$group->getGroupId()}}" />
-      					<input type="hidden" name="_token" value="{{csrf_token()}}" />        			         					      					
-      					<button class="btn btn-danger" type="submit">Delete</button>
-      				</form>
+      					<button type="button" class="btn btn-danger" data-toggle="modal"
+							data-target="#delete{{$group->getGroupId()}}">Delete</button>
+      				
     					
-        			</td>		
-        		</tr>        		
+        			</td>	
+        			@endif
+        		</tr>    
+        		<!-- The Modal -->
+				<div class="modal fade" id="delete{{$group->getGroupId()}}">
+					<div class="modal-dialog modal-dialog-centered modal-sm">
+						<div class="modal-content">
+
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title text-center">Delete Group?</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<!-- Modal body -->
+							<div class="modal-body" >
+								<form action="deleteGroupPosting" method="post">
+      								<input type="hidden" name="id" value="{{$group->getGroupId()}}" />
+      								<input type="hidden" name="_token" value="{{csrf_token()}}" />        			         					      					
+      								<button class="btn btn-danger" type="submit">Delete</button>
+      							</form>	
+							</div>
+						</div>
+					</div>
+				</div>    		
         		@endforeach
         </table>
         
