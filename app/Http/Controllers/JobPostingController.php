@@ -36,7 +36,7 @@ class JobPostingController extends Controller{
         $result = $service->addPost($newPost);
         
         if($result == "true"){
-            return $this->showAllJobs();
+            return $this->adminAllJobs();
         }
         else{
             return view('profileDisplayError')->with("data", "jobPostingError");
@@ -49,7 +49,7 @@ class JobPostingController extends Controller{
         $service = new JobPostingService();
         $result = $service->deletePost($id);
         if($result){
-            return $this->showAllJobs();
+            return $this->adminAllJobs();
         }
         else{
             return view('profileDisplayError')->with("data", "jobDeleteError");
@@ -75,7 +75,7 @@ class JobPostingController extends Controller{
         $result = $service->editPost($newPost);
         
         if($result == "true"){
-            return $this->showAllJobs();
+            return $this->adminAllJobs();
         }
         else{
             return view('profileDisplayError')->with("data", "jobPostingError");
@@ -83,7 +83,7 @@ class JobPostingController extends Controller{
     }
     
     //shows postings to standard users
-    public function showAllJobs(){
+    public function showAllJobs(Request $request){
         //creat new service
         $users = new JobPostingService();
         //get the result from the service
@@ -91,22 +91,24 @@ class JobPostingController extends Controller{
         //return the view with the data
         return view('showJobPosting')->with("result",$result);
     }
-    
-    //finds job posting by id
-    public function findJob(Request $request){
-        //get id
-        $id = $request->input('id');
+    //show postings to admins
+    public function adminAllJobs(){
+        
+        //if not a admin rereoute to login
+        if(Session::get('Role') != "admin"){
+            return redirect()->route('login');
+        }
         //creat new service
-        $job = new JobPostingService();
+        $users = new JobPostingService();
         //get the result from the service
-        $result = $job->findJobById($id);
+        $result = $users->findAllJobs();
         //return the view with the data
-        return view('editJobPosting')->with("job",$result);
+        return view('editJobPosting')->with("result",$result);
     }
     private function validateForm(Request $request)
     {
         // Setup Data Validation Rules for Login Form
-        $rules = ['company' => 'Required | Between:1,50',
+        $rules = ['comapany' => 'Required | Between:1,50',
             'position' => 'Required | Between:1,50',
             'description' => 'Required | Between:1,200',
             'requirements' => 'Required | Between:1,200',

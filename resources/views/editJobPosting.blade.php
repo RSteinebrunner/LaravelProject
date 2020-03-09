@@ -22,6 +22,7 @@ References: N/A
     	<div class = "col">
     		
     	<h3>Job Posts</h3>
+    	@foreach($result as $job)
     	<form method="post" action="editJobPosting">
     		<b>Edit Job Post</b>
     		<input type="hidden" name="_token" value="{{csrf_token()}}" />
@@ -59,31 +60,51 @@ References: N/A
     		{{$errors->first('postingDate')}}
     		<button class="btn btn-primary" type="submit">Save Changes</button>
     	</form>
-    	<button type="button" class="btn btn-danger" data-toggle="modal"
-							data-target="#delete{{$job->getJobId()}}">Delete</button>
-    	
-    	
-		<!-- The Modal -->
-				<div class="modal fade" id="delete{{$job->getJobId()}}">
-					<div class="modal-dialog modal-dialog-centered modal-sm">
-						<div class="modal-content">
-
-							<!-- Modal Header -->
-							<div class="modal-header">
-								<h4 class="modal-title text-center">Delete Job Posting?</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-
-							<!-- Modal body -->
-							<div class="modal-body" >
-								<form method="post" action="deleteJobPosting">
-    								<input type="hidden" name="_token" value="{{csrf_token()}}" />
-    								<input type="hidden" name="id" value="{{$job->getJobId()}}"> 
-    								<button class="btn btn-danger" type="submit">Delete</button>
-    							</form>
-							</div>
-						</div>
-					</div>
-				</div>
-	
+    	<form method="post" action="deleteJobPosting">
+    		<input type="hidden" name="_token" value="{{csrf_token()}}" />
+    		<input type="hidden" name="id" value="{{$job->getJobId()}}"> 
+    		<button class="btn btn-danger" type="submit">Delete</button>
+    	</form>
+		@endforeach
+		
+		
+		<form method="post" action="addJobPosting">
+    		<b>Add Job Post</b>
+    		<input type="hidden" name="_token" value="{{csrf_token()}}" />
+    		<div class="form-group">
+    			<label for="company">Company</label> 
+    			<input type="text" class="form-control" name="company" required>
+    		</div>
+    		{{$errors->first('company')}}
+    		<div class="form-group">
+    			<label for="position">Position</label> 
+    			<input type="text" class="form-control"	 name="position" required>
+    		</div>
+    		{{$errors->first('position')}}
+    		<div class="form-group">
+    			<label for="description">Description</label> 
+    			<input type="text" class="form-control"	 name="description" required>
+    		</div>
+    		{{$errors->first('description')}}
+    		<div class="form-group">
+    			<label for="requirements">Requirements</label> 
+    			<input type="text" class="form-control"	name="requirements" required>
+    		</div>
+    		{{$errors->first('requirements')}}
+    		<div class="form-group">
+    			<label for="pay">Pay</label> 
+    			<input type="text" class="form-control"	 name="pay" required>
+    		</div>
+    		{{$errors->first('pay')}}
+    		<div class="form-group">
+    			<label for="postingDate">Posting Date</label> 
+    			<input type="text" class="form-control"name="postingDate" required>
+    		</div>
+    		{{$errors->first('postingDate')}}
+    		<button class="btn btn-success" type="submit">Add</button>
+    	</form>
+        </div>
+     </div>
+     </div>
+     
 @endsection
