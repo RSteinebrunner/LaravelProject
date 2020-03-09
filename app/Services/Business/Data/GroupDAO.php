@@ -35,7 +35,39 @@ class GroupDAO{
             } 
         }
         
-    }    
+    } 
+    public function leaveGroup($groupID, $userID){
+        if ($this->conn->connect_error){
+            //check the connection
+            return "Failed to get databse connection!";
+        }else{
+            //running the statement
+            $sql_statement = "DELETE FROM `groupmembers` WHERE `groupId` = '$groupID' AND `userID` = '$userID'";
+            $result = mysqli_query($this->conn, $sql_statement);
+            if($result){
+                //returning if the group was left
+                return "true";
+            }
+        }
+        
+    } 
+    public function joinGroup($groupID,$userID){
+        if ($this->conn->connect_error){
+            //check the connection
+            return "Failed to get databse connection!";
+        }else{
+            //running the statement
+            $sql_statement = "INSERT INTO `groupmembers` (`userId`, `groupId`) VALUES ('$userID', '$groupID')";
+            $result = mysqli_query($this->conn, $sql_statement);
+            if($result){
+                //returning if the user was added
+                return "true";
+            }
+            else 
+                return "failed to add";
+        }
+        
+    } 
     
     //find all groups in the database
     public function findAllGroups(){
@@ -61,6 +93,70 @@ class GroupDAO{
                 //return if empty
                 $empty=array();
                 return $empty;
+            }
+            
+        }
+        
+    }
+    //find all groups the user is a part of in the database
+    public function findAllParticipation($id){
+        //see if the connection failed
+        if ($this->conn->connect_error){
+            echo "Failed to get databse connection!";
+        }else{
+            $sql_statement = "SELECT groups.groupId, groupName, description, groupmembers.userId FROM groups 
+                JOIN groupmembers
+                ON groups.groupId = groupmembers.groupId
+                WHERE groupmembers.userId = '$id'";
+            $counter = 0;
+            $result = mysqli_query($this->conn, $sql_statement);
+            //run the statment
+            if($result){
+                while($row = mysqli_fetch_assoc($result)){
+                    //create new model to send back
+                    $group = new GroupModel($row['groupId'],$row['groupName'], $row['description'],$row['userId']);
+                    //add the new models to an array to return
+                    $array[$counter] = $group;
+                    $counter++;
+                }
+                if(isset($array))
+                    //if something is in the array return it
+                    return $array;
+                    //return if empty
+                    $empty=array();
+                    return $empty;
+            }
+            
+        }
+        
+    }
+    //finds all the users that are a part of a group
+    public function findAllMembers($groupID){
+        //see if the connection failed
+        if ($this->conn->connect_error){
+            echo "Failed to get databse connection!";
+        }else{
+            $sql_statement = "SELECT groups.groupId, groupName, description, groupmembers.userId FROM groups
+                JOIN groupmembers
+                ON groups.groupId = groupmembers.groupId
+                WHERE groupmembers.groupId = '$groupID'";
+            $counter = 0;
+            $result = mysqli_query($this->conn, $sql_statement);
+            //run the statment
+            if($result){
+                while($row = mysqli_fetch_assoc($result)){
+                    //create new model to send back
+                    $group = new GroupModel($row['groupId'],$row['groupName'], $row['description'],$row['userId']);
+                    //add the new models to an array to return
+                    $array[$counter] = $group;
+                    $counter++;
+                }
+                if(isset($array))
+                    //if something is in the array return it
+                    return $array;
+                    //return if empty
+                    $empty=array();
+                    return $empty;
             }
             
         }
@@ -175,13 +271,13 @@ class GroupDAO{
     }
     
     //modifies post when requested
-    public function edit(GroupModel $post){
+    public function update(GroupModel $group){
         
         //get all variables from education model
-        $groupId = $post->getGroupId();
-        $groupName = $post->getName();
-        $description = $post->getDescription();
-        $ownerId = $post->getUserId();
+        $groupId = $group->getGroupId();
+        $groupName = $group->getName();
+        $description = $group->getDescription();
+        $ownerId = $group->getUserId();
         
         //connect to database
         if ($this->conn->connect_error){
@@ -190,9 +286,9 @@ class GroupDAO{
             //insert into db
             $sql_statement = "UPDATE `groups` SET `groupId` = '$groupId', `groupName` = '$groupName', `description` = '$description', `userId` = '$ownerId'";
             if (mysqli_query($this->conn, $sql_statement)) {
-                //echo "New user created successfully";
                 return "true";
             }
+            return "failed to insert";
         }
     }
     

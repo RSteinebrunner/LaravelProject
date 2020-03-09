@@ -13,6 +13,7 @@ namespace App\Http\Controllers;
 use App\Models\GroupModel;
 use App\Services\Business\GroupService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class GroupController extends Controller{
     
@@ -72,9 +73,24 @@ class GroupController extends Controller{
             return view('profileDisplayError')->with("data", "groupCreateError");
         }
     }
+    public function joinGroup(Request $request){
+        //extract data to send to the service
+        $groupID = $request->input('groupID');
+        $userId = $request->input('userID');
+        //pass the job object to the service
+        $service = new GroupService();
+        $result = $service->joinGroup($groupID, $userId);
+        
+        if($result == "true"){
+            return $this->showAllGroups();
+        }
+        else{
+            return view('profileDisplayError')->with("data", "groupCreateError");
+        }
+    }
     
     //method will save you changes after editing a group posting
-    public function editPost(Request $request){
+    public function editGroupPosting(Request $request){
         
         $this->validateForm($request);
         //pull form data to make a change
@@ -85,16 +101,16 @@ class GroupController extends Controller{
         $ownerId = $request->input('ownerId');
         
         //create new object
-        $newPost = new GroupModel($groupId, $groupName, $description, $ownerId);
-        //pass the job object to the service
+        $newGroup = new GroupModel($groupId, $groupName, $description, $ownerId);
+        //pass the group object to the service
         $service = new GroupService();
-        $result = $service->editPost($newPost);
+        $result = $service->editGroup($newGroup);
         
         if($result == "true"){
             return $this->showAllGroups();
         }
         else{
-            return view('profileDisplayError')->with("data", "jobPostingError");
+            return view('profileDisplayError')->with("data", $result);
         }
     }
     
@@ -114,6 +130,21 @@ class GroupController extends Controller{
         }
         else{
             return view('profileDisplayError')->with("data", "groupDeleteError");
+        }
+    }
+    public function leaveGroup(Request $request){
+        //get the id
+        $userId = $request->input('userID');
+        //get the group id
+        $groupId = $request->input('groupID');
+        //create new service
+        $service = new GroupService();
+        $result = $service->leaveGroup($groupId, $userId);
+        if($result){
+            return $this->showAllGroups();
+        }
+        else{
+            return view('profileDisplayError')->with("data", "groupLeaveError");
         }
     }
   
@@ -158,6 +189,26 @@ class GroupController extends Controller{
         $result = $groups->findGroup($id);
         //return the view with the data
         return view('editGroups')->with("result",$result);
+    }
+
+    public function showAllMembers(Request $request){
+        //gets group id
+        $groupID = $request->input('groupID');
+        //creat new service
+        $groups = new GroupService();
+        //get the result from the service
+        $result = $groups->findAllMembers($groupID);
+        //return the view
+        return $this->showMyGroups();
+    }
+    public function showMyGroups(){
+        //get the user id
+        $id = Session::get('User')->getId();
+        //creat new services
+        $service = new GroupService();
+        //get the result from the service
+        $result = array(0=>$service->findAllOwnerGroups($id), $service->findAllParticipation($id));
+        return view('showMyGroups')->with("result", $result);
     }
     
     /**

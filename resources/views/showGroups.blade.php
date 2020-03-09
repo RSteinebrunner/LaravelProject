@@ -41,7 +41,7 @@ References: N/A
         			<td>
         			<form action="joinGroup" method="post">
         			    <input type="hidden" name="groupID" value="{{$group->getGroupId()}}" /> 
-        			    <input type="hidden" name="userID" value="{{$group->getUserId()}}" /> 
+        			    <input type="hidden" name="userID" value="{{Session::get('User')->getId()}}" /> 
         			    <input type="hidden" name="_token" value="{{csrf_token()}}" />        			    
         			    <button class="btn btn-success" type="submit" >Join</button>
         			</form>

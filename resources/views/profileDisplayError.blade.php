@@ -11,16 +11,12 @@ References: N/A
 @section('head','Profile Display Failed')
 @section('title', 'Profile Display Failed')
 @section('content')
-
-@isset($data)
-	@if($data == "educationInsert")
-	<p>Error Inserting Data to the education Table</p>
-	@endif
-	@if($data == "JobHistoryInsertion")
-	<p>Error Inserting Data to the job history Table</p>
-	@endif
-	@if($data == "connection")
-	<p>Error connecting to database</p>
-	@endif
-@endisset
+@php
+	if(isset($data)){
+	echo "data: ".$data;
+	}
+	else{
+	echo "no data";
+	}
+@endphp
 @endsection

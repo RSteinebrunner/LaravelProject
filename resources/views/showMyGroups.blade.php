@@ -79,7 +79,8 @@ References: N/A
         			<td>
         			
         			<form action="leaveGroup" method="post">
-        			    <input type="hidden" name="id" value="{{$group->getGroupId()}}" /> 
+        			    <input type="hidden" name="userID" value="{{$group->getUserId()}}" /> 
+        			    <input type="hidden" name="groupID" value="{{$group->getGroupId()}}" />
         			    <input type="hidden" name="_token" value="{{csrf_token()}}" />        			    
         			    <button class="btn btn-danger" type="submit" >Leave</button>
         			</form>

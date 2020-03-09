@@ -42,6 +42,30 @@ class GroupService{
        //return if the group was deleted
         return $result;
     }
+    public function leaveGroup($groupID,$userID){
+        //Set up connection
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
+        //leave the group
+        $security = new GroupDAO($conn);
+        $result = $security->leaveGroup($groupID, $userID);
+        //return if the group was left
+        return $result;
+    }
+    /**
+     * 
+     * @param  $groupID
+     * @param  $userID
+     * @return string
+     */
+    public function joinGroup($groupID,$userID){
+        //Set up connection
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
+        //join the group
+        $security = new GroupDAO($conn);
+        $result = $security->joinGroup($groupID,$userID);
+        //return if the member was added
+        return $result;
+    }
    /**
     * 
     * @return array|\App\Models\GroupModel
@@ -72,6 +96,28 @@ class GroupService{
      *
      * @return array|\App\Models\GroupModel
      */
+    public function findAllParticipation($id){
+        //Set up connection
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
+        //make new dao
+        $security = new GroupDAO($conn);
+        //return all groups participated in by the current logged in user
+        $result = $security->findAllParticipation($id);
+        return $result;
+    }
+    public function findAllMembers($groupid){
+        //Set up connection
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
+        //make new dao
+        $security = new GroupDAO($conn);
+        //return all group members
+        $result = $security->findAllMembers($groupid);
+        return $result;
+    }
+    /**
+     *
+     * @return array|\App\Models\GroupModel
+     */
     public function findGroup($search){
         //Set up connection
         $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
@@ -83,12 +129,12 @@ class GroupService{
     }
     
     //funtion to pass edited group posting to DAO to completet save
-    public function editPost(GroupModel $group){
+    public function editGroup(GroupModel $group){
         //Database Connection
         $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new user in database using group model
         $security = new GroupDAO($conn);
-        $result = $security->edit($group);
+        $result = $security->update($group);
         return $result;
     } 
     /**

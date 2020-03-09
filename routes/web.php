@@ -58,7 +58,7 @@ Route::get('/groups', 'GroupController@showAllGroups');
 Route::get('/myGroups', 'GroupController@showMyGroups');
 
 Route::post('/editGroup', 'GroupController@editGroup');
-Route::post('/editGroupPosting', 'GroupController@editPost');
+Route::post('/editGroupPosting', 'GroupController@editGroupPosting');
 Route::post('/deleteGroupPosting', 'GroupController@deleteGroup');
 
 Route::post('/joinGroup', 'GroupController@joinGroup');

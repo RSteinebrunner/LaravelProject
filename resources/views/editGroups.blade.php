@@ -41,8 +41,10 @@ References: N/A
     		</div>  		
     		{{$errors->first('description')}}
     		
-    		<button class="btn btn-primary" type="submit">Save Changes</button>   		
+    		<button class="btn btn-primary" type="submit">Save Changes</button>  
+    		 		
     	</form>
+    	
     	<button type="button" class="btn btn-danger" data-toggle="modal"
 							data-target="#delete{{$group->getGroupId()}}">Delete</button>
     	
