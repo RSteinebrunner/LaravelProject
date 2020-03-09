@@ -8,19 +8,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema laraveldb
+-- Schema heroku_99500d1c89b2e4b
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema laraveldb
+-- Schema heroku_99500d1c89b2e4b
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `laraveldb` DEFAULT CHARACTER SET latin1 ;
-USE `laraveldb` ;
+CREATE SCHEMA IF NOT EXISTS `heroku_99500d1c89b2e4b` DEFAULT CHARACTER SET latin1 ;
+USE `heroku_99500d1c89b2e4b` ;
 
 -- -----------------------------------------------------
--- Table `laraveldb`.`user`
+-- Table `heroku_99500d1c89b2e4b`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laraveldb`.`user` (
+CREATE TABLE IF NOT EXISTS `heroku_99500d1c89b2e4b`.`user` (
   `userId` INT(11) NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NULL DEFAULT NULL,
   `password` VARCHAR(45) NULL DEFAULT NULL,
@@ -42,9 +42,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `laraveldb`.`education`
+-- Table `heroku_99500d1c89b2e4b`.`education`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laraveldb`.`education` (
+CREATE TABLE IF NOT EXISTS `heroku_99500d1c89b2e4b`.`education` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `yearsAttended` INT(11) NOT NULL,
   `degree` VARCHAR(150) NOT NULL,
@@ -55,16 +55,16 @@ CREATE TABLE IF NOT EXISTS `laraveldb`.`education` (
   INDEX `userId` (`userId` ASC),
   CONSTRAINT `education_ibfk_1`
     FOREIGN KEY (`userId`)
-    REFERENCES `laraveldb`.`user` (`userId`))
+    REFERENCES `heroku_99500d1c89b2e4b`.`user` (`userId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `laraveldb`.`groups`
+-- Table `heroku_99500d1c89b2e4b`.`groups`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laraveldb`.`groups` (
+CREATE TABLE IF NOT EXISTS `heroku_99500d1c89b2e4b`.`groups` (
   `groupId` INT(11) NOT NULL AUTO_INCREMENT,
   `groupName` VARCHAR(45) NOT NULL,
   `description` VARCHAR(120) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `laraveldb`.`groups` (
   INDEX `fk_groups_user1_idx` (`userId` ASC),
   CONSTRAINT `fk_groups_user1`
     FOREIGN KEY (`userId`)
-    REFERENCES `laraveldb`.`user` (`userId`)
+    REFERENCES `heroku_99500d1c89b2e4b`.`user` (`userId`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -82,9 +82,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `laraveldb`.`jobhistory`
+-- Table `heroku_99500d1c89b2e4b`.`jobhistory`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laraveldb`.`jobhistory` (
+CREATE TABLE IF NOT EXISTS `heroku_99500d1c89b2e4b`.`jobhistory` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `userId` INT(11) NOT NULL,
   `company` VARCHAR(100) NOT NULL,
@@ -96,16 +96,16 @@ CREATE TABLE IF NOT EXISTS `laraveldb`.`jobhistory` (
   INDEX `userId` (`userId` ASC),
   CONSTRAINT `jobhistory_ibfk_1`
     FOREIGN KEY (`userId`)
-    REFERENCES `laraveldb`.`user` (`userId`))
+    REFERENCES `heroku_99500d1c89b2e4b`.`user` (`userId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `laraveldb`.`jobposting`
+-- Table `heroku_99500d1c89b2e4b`.`jobposting`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laraveldb`.`jobposting` (
+CREATE TABLE IF NOT EXISTS `heroku_99500d1c89b2e4b`.`jobposting` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `company` VARCHAR(100) NOT NULL,
   `position` VARCHAR(100) NOT NULL,
@@ -120,9 +120,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `laraveldb`.`skills`
+-- Table `heroku_99500d1c89b2e4b`.`skills`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laraveldb`.`skills` (
+CREATE TABLE IF NOT EXISTS `heroku_99500d1c89b2e4b`.`skills` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `userId` INT(11) NOT NULL,
   `skill` VARCHAR(50) NOT NULL,
@@ -130,28 +130,28 @@ CREATE TABLE IF NOT EXISTS `laraveldb`.`skills` (
   INDEX `userId` (`userId` ASC),
   CONSTRAINT `skills_ibfk_1`
     FOREIGN KEY (`userId`)
-    REFERENCES `laraveldb`.`user` (`userId`))
+    REFERENCES `heroku_99500d1c89b2e4b`.`user` (`userId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 24
 DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `laraveldb`.`groupmembers`
+-- Table `heroku_99500d1c89b2e4b`.`groupmembers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laraveldb`.`groupmembers` (
+CREATE TABLE IF NOT EXISTS `heroku_99500d1c89b2e4b`.`groupmembers` (
   `userId` INT(11) NOT NULL,
   `groupId` INT(11) NOT NULL,
   INDEX `fk_user_has_groups_groups1_idx` (`groupId` ASC),
   INDEX `fk_user_has_groups_user1_idx` (`userId` ASC),
   CONSTRAINT `fk_user_has_groups_user1`
     FOREIGN KEY (`userId`)
-    REFERENCES `laraveldb`.`user` (`userId`)
+    REFERENCES `heroku_99500d1c89b2e4b`.`user` (`userId`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_user_has_groups_groups1`
     FOREIGN KEY (`groupId`)
-    REFERENCES `laraveldb`.`groups` (`groupId`)
+    REFERENCES `heroku_99500d1c89b2e4b`.`groups` (`groupId`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -161,3 +161,4 @@ DEFAULT CHARACTER SET = latin1;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+user
