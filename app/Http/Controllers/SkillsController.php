@@ -12,7 +12,6 @@ namespace App\Http\Controllers;
   */
 use App\Models\SkillsModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use App\Services\Business\SkillsService;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class SkillsController extends Controller{
@@ -42,7 +41,6 @@ class SkillsController extends Controller{
         //pass the person object to the security service
         $service = new SkillsService();
         $result = $service->addSkill($newSkill);
-        $data = $service->findAllSkills($userId);
         if($result == "true"){
             $portfolio = new PortfolioController();
             return $portfolio->showPortfolio();

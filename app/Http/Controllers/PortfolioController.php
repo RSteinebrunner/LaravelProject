@@ -10,13 +10,10 @@ namespace App\Http\Controllers;
  Version#: 1
  References: N/A
   */
-use App\Models\UserModel;
-use App\Models\EducationModel;
 use App\Services\Business\EducationService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use App\Services\Business\SkillsService;
 use App\Services\Business\JobHistoryService;
+use App\Services\Business\SkillsService;
+use Illuminate\Support\Facades\Session;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class PortfolioController extends Controller{
     public function showPortfolio(){

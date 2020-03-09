@@ -14,7 +14,6 @@ namespace App\Http\Controllers;
 use App\Models\JobHistoryModel;
 use App\Services\Business\JobHistoryService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 //JobHistory controller hold basic methods to either route to other views or request JobHistoryservice for further user specific actions
 class JobHistoryController extends Controller{
     //used to delete skills
@@ -63,11 +62,11 @@ class JobHistoryController extends Controller{
     private function validateForm(Request $request)
     {
         // Setup Data Validation Rules for Login Form
-        $rules = ['company' => 'Required | Between:1,24',
-            'position' => 'Required | Between:1,24',
+        $rules = ['company' => 'Required | Between:1,50',
+            'position' => 'Required | Between:1,50',
             'startDate' => 'Required | Between:8,10',
             'endDate' => 'Required | Between:8,10',
-            'description' => 'Required | Between:1,75 '];
+            'description' => 'Required | Between:1,200 '];
         
         // Run Data Validation Rules
         $this->validate($request, $rules);

@@ -12,7 +12,7 @@ References: N/A
 -->
 */
 use mysqli;
-use App\Services\Business\Data\JobPostingDAO;
+use App\Services\Business\Data\JobPostingDAO; 
 use App\Models\JobPostingModel;
 
 //securityService class recieves the sent data from Educationcontroller and calls the appropriate method in DAO to access the database
@@ -45,6 +45,16 @@ class JobPostingService{
         //make new user in database using education model
         $security = new JobPostingDAO($conn);
         $result = $security->create($post);
+        return $result;
+    } 
+    
+    //locate a job in the database by id and retrieve the information
+    public function findJobById($id){
+        //Database Connection
+        $conn = new mysqli("localhost","root","root","laraveldb");
+        //make new user in database using education model
+        $security = new JobPostingDAO($conn);
+        $result = $security->findJobById($id);
         return $result;
     } 
     

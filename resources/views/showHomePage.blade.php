@@ -9,11 +9,11 @@ References: N/A
 -->
 
 @extends('layouts.appmaster')
-@section('head','Login Success')
-@section('title','You have logged in successfuly')
+@section('head','HomePage')
+@section('title','Home Page')
 
 @section('content')
     @php
-        echo Session::get('User')->toString();
+        echo "Weclome back, " . Session::get('User')->getUsername();
     @endphp
 @endsection

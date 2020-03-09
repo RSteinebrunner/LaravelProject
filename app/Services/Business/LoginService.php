@@ -11,7 +11,6 @@ Version#: 1
 References: N/A
 -->
 */
-use App\Models\UserModel;
 use mysqli;
 use App\Services\Business\Data\LoginDAO;
 use Illuminate\Support\Facades\Session;
@@ -28,7 +27,7 @@ class LoginService{
         //check for user
         $security = new LoginDAO($conn);
         $user= $security->findUser($username,$password);
-        if($user->getUsername() == $username && $user->getPassword() == $password){
+        if($user != null && $user->getUsername() == $username && $user->getPassword() == $password){
             Session::put('User',$user);
             Session::put('Role', $user->getRole());
             return "true";

@@ -22,7 +22,7 @@ References: N/A
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('showLogin');
 });
 
 Route::get('/admin',function () {
@@ -43,11 +43,26 @@ Route::get('/register',function () {
 Route::get('/editPortfolio',function () {
     return view('editPortfolio');
 });
+Route::get('/showHome',function () {
+    return view('showHomePage');
+});
+Route::get('/addGroups',function () {
+    return view('addGroups');
+});
+Route::get('/createJob',function () {
+    return view('addJobPosting');
+});
 
+Route::get('/groups', 'GroupController@showAllGroups')->name('groups');
 
+Route::post('/editGroup', 'GroupController@editGroup')->name('groups');
+Route::post('/editGroupPosting', 'GroupController@editPost')->name('groups');
+Route::post('/deleteGroupPosting', 'GroupController@deleteGroup')->name('groups');
+
+Route::post('/addGroupPosting', 'GroupController@addGroup')->name('addGroupPosting');
 
 Route::get('/jobPosting', 'JobPostingController@showAllJobs')->name('jobPosting');
-Route::get('/adminJobPosting', 'JobPostingController@adminAllJobs')->name('adminPosting');
+Route::get('/adminJobPosting', 'JobPostingController@findJob');
 Route::post('/editJobPosting', 'JobPostingController@editPost');
 Route::post('/deleteJobPosting', 'JobPostingController@deletePost');
 Route::post('/addJobPosting', 'JobPostingController@addPost');

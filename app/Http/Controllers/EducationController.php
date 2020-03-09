@@ -10,11 +10,9 @@ namespace App\Http\Controllers;
  Version#: 1
  References: N/A
   */
-use App\Models\UserModel;
 use App\Models\EducationModel;
 use App\Services\Business\EducationService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class EducationController extends Controller{
     
@@ -47,7 +45,6 @@ class EducationController extends Controller{
         //pass the person object to the security service
         $service = new EducationService();
         $result = $service->addEducation($newEdu, $id);
-        $data = $service->findAllEducation($id);
         if($result == "true"){
             $portfolio = new PortfolioController();
             return $portfolio->showPortfolio();
@@ -60,8 +57,8 @@ class EducationController extends Controller{
     {
         // Setup Data Validation Rules for Login Form
         $rules = ['years' => 'Required | numeric',
-            'degree' => 'Required | Between: 20,60',
-            'school' => 'Required | Between: 10,60',
+            'degree' => 'Required | Between: 5,60',
+            'school' => 'Required | Between: 1,60',
             'gpa' => 'Required | Between:1,4'
            ];
         
