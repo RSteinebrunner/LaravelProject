@@ -69,6 +69,30 @@ class JobPostingDAO{
         }
         
     }
+    
+    //find a single job in the database
+    public function findJobById($id){
+        //see if the connection failed
+        if ($this->conn->connect_error){
+            echo "Failed to get databse connection!";
+        }else{
+            $sql_statement =  "SELECT * FROM `jobposting` WHERE `id` = '$id'";
+
+            $result = mysqli_query($this->conn, $sql_statement);
+            //run the statment
+            if($result){
+                while($row = mysqli_fetch_assoc($result)){
+                    //create new model to send back
+                    $post = new JobPostingModel($row['id'],$row['company'], $row['position'], $row['description'], $row['requirements'], $row['pay'], $row['postingDate']);
+                    //return this new model
+                    return $post;
+                }
+            }
+            //return empty job posting if nothing is returned
+            return new JobPostingModel(null, null, null, null,null, null, null);
+        }
+        
+    }
     //creates post when requested 
     public function create(JobPostingModel $post){
         
@@ -98,7 +122,7 @@ class JobPostingDAO{
     }
     
     //modifies post when requested
-    public function edit(JobPostingModel $post,$conn){
+    public function edit(JobPostingModel $post){
         
         //get all variables from education model
         $id = $post->getJobId();
@@ -111,12 +135,12 @@ class JobPostingDAO{
         
         
         //connect to database
-        if ($conn->connect_error){
+        if ($this->conn->connect_error){
             return "please connect";
         }else{
             //insert into db
             $sql_statement = "UPDATE `jobposting` SET `company` = '$company', `position` = '$position', `description` = '$description', `requirements` = '$requirements', `pay` = '$pay', `postingDate` = '$postingDate' WHERE `jobposting`.`id` = '$id';";
-            if (mysqli_query($conn, $sql_statement)) {
+            if (mysqli_query($this->conn, $sql_statement)) {
                 //echo "New user created successfully";
                 return "true";
             }
