@@ -190,16 +190,20 @@ class GroupController extends Controller{
         //return the view with the data
         return view('editGroups')->with("result",$result);
     }
-
+    /**
+     * 
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function showAllMembers(Request $request){
         //gets group id
-        $groupID = $request->input('groupID');
+        $groupID = $request->input('id');
         //creat new service
         $groups = new GroupService();
         //get the result from the service
         $result = $groups->findAllMembers($groupID);
-        //return the view
-        return $this->showMyGroups();
+        //returns array of groupmodels
+        return view('showMembers')->with("result",$result);
     }
     public function showMyGroups(){
         //get the user id

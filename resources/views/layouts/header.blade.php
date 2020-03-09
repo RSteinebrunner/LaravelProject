@@ -31,10 +31,9 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item"  href='manageUsers'>Manage Users</a>
                         <a class="dropdown-item"  href='createJob'>Create Job Posting</a>
-                        <a class="dropdown-item"  href='createJob'>Create Job Posting</a>
                         <a class="dropdown-item"  href='portfolio'>My Portfolio</a>
                         <a class="dropdown-item"  href='myGroups'>My Groups</a>
-                        <a class="dropdown-item"  href='profile'>Settings</a>
+                        <a class="dropdown-item"  href='profile'>My Information</a>
                         <a class="dropdown-item"  href='logout'>Logout</a>
                     </div>   
                  </li>
@@ -50,7 +49,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     	<a class="dropdown-item"  href='portfolio'>My Portfolio</a>
                     	<a class="dropdown-item"  href='myGroups'>My Groups</a>
-                    	<a class="dropdown-item"  href='profile'>Settings</a>
+                    	<a class="dropdown-item"  href='profile'>My Information</a>
                         <a class="dropdown-item"  href='logout'>Logout</a>
                     </div>
              

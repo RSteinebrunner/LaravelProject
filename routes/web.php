@@ -57,6 +57,7 @@ Route::get('/createJob',function () {
 Route::get('/groups', 'GroupController@showAllGroups');
 Route::get('/myGroups', 'GroupController@showMyGroups');
 
+Route::post('/showMembers','GroupController@showAllMembers');
 Route::post('/editGroup', 'GroupController@editGroup');
 Route::post('/editGroupPosting', 'GroupController@editGroupPosting');
 Route::post('/deleteGroupPosting', 'GroupController@deleteGroup');

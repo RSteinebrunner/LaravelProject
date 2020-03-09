@@ -56,6 +56,13 @@ class GroupDAO{
             //check the connection
             return "Failed to get databse connection!";
         }else{
+            $sql_search = "SELECT * FROM `groupmembers` WHERE `userId` = '$userID' AND `groupId` = '$groupID' LIMIT 1";
+            $result = mysqli_query($this->conn, $sql_search);
+            if ($result) {
+                if (mysqli_num_rows($result) == 1) {
+                    return "true";
+                }
+            }
             //running the statement
             $sql_statement = "INSERT INTO `groupmembers` (`userId`, `groupId`) VALUES ('$userID', '$groupID')";
             $result = mysqli_query($this->conn, $sql_statement);
@@ -81,6 +88,7 @@ class GroupDAO{
             //run the statment
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
+                    
                     //create new model to send back
                     $post = new GroupModel($row['groupId'],$row['groupName'], $row['description'],$row['userId']);
                     //add the new models to an array to return
@@ -277,14 +285,13 @@ class GroupDAO{
         $groupId = $group->getGroupId();
         $groupName = $group->getName();
         $description = $group->getDescription();
-        $ownerId = $group->getUserId();
         
         //connect to database
         if ($this->conn->connect_error){
             return "please connect";
         }else{
             //insert into db
-            $sql_statement = "UPDATE `groups` SET `groupId` = '$groupId', `groupName` = '$groupName', `description` = '$description', `userId` = '$ownerId'";
+            $sql_statement = "UPDATE `groups` SET `groupName` = '$groupName', `description` = '$description' WHERE `groups`.`groupId` = $groupId;";
             if (mysqli_query($this->conn, $sql_statement)) {
                 return "true";
             }
