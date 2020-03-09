@@ -48,7 +48,7 @@ class GroupService{
     */
     public function findAllGroups(){
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new dao
         $security = new GroupDAO($conn);
         //return all groups found
@@ -61,7 +61,7 @@ class GroupService{
      */
     public function findAllOwnerGroups($id){
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new dao
         $security = new GroupDAO($conn);
         //return all groups owned by the current logged in user
@@ -74,7 +74,7 @@ class GroupService{
      */
     public function findGroup($search){
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new dao
         $security = new GroupDAO($conn);
         //return groups matching search pararmeter 
@@ -85,7 +85,7 @@ class GroupService{
     //funtion to pass edited group posting to DAO to completet save
     public function editPost(GroupModel $group){
         //Database Connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new user in database using group model
         $security = new GroupDAO($conn);
         $result = $security->edit($group);
@@ -97,7 +97,7 @@ class GroupService{
      */
     public function addGroup(GroupModel $group){
         //Database Connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new user in database using group model
         $security = new GroupDAO($conn);
         //create a new group 
