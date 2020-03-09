@@ -62,11 +62,11 @@ class JobHistoryController extends Controller{
     private function validateForm(Request $request)
     {
         // Setup Data Validation Rules for Login Form
-        $rules = ['company' => 'Required | Between:1,50',
-            'position' => 'Required | Between:1,50',
+        $rules = ['company' => 'Required | Between:1,24',
+            'position' => 'Required | Between:1,24',
             'startDate' => 'Required | Between:8,10',
             'endDate' => 'Required | Between:8,10',
-            'description' => 'Required | Between:1,200 '];
+            'description' => 'Required | Between:1,75 '];
         
         // Run Data Validation Rules
         $this->validate($request, $rules);

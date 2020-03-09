@@ -108,10 +108,10 @@ class JobPostingController extends Controller{
     private function validateForm(Request $request)
     {
         // Setup Data Validation Rules for Login Form
-        $rules = ['comapany' => 'Required | Between:1,50',
-            'position' => 'Required | Between:1,50',
-            'description' => 'Required | Between:1,200',
-            'requirements' => 'Required | Between:1,200',
+        $rules = ['comapany' => 'Required | Between:1,24',
+            'position' => 'Required | Between:1,24',
+            'description' => 'Required | Between:1,24',
+            'requirements' => 'Required | Between:1,24',
             'pay' => 'Required | Between:1,12 ',
             'postingDate' => 'Required | Between: 8,10'
             ];

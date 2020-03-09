@@ -15,7 +15,7 @@ use App\Models\GroupModel;
 use App\Services\Business\Data\GroupDAO;
 use mysqli;
 
-//Service class recieves the sent data from Groupcontroller and calls the appropriate method in DAO to access the database
+//securityService class recieves the sent data from Educationcontroller and calls the appropriate method in DAO to access the database
 class GroupService{
    /**
     * deltes a group
@@ -25,10 +25,10 @@ class GroupService{
     public function deleteGroup($id){
         //Set up connection
         $conn = new mysqli("localhost","root","root","laraveldb");
-        //delete the group
+        //delete the user
         $security = new GroupDAO($conn);
         $result = $security->delete($id);
-       //return if the group was deleted
+       //return if the user was deleted
         return $result;
     }
    /**
@@ -40,7 +40,6 @@ class GroupService{
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new dao
         $security = new GroupDAO($conn);
-        //return all groups found
         $result = $security->findAllGroups();
           return $result;
     }
@@ -53,7 +52,6 @@ class GroupService{
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new dao
         $security = new GroupDAO($conn);
-        //return all groups owned by the current logged in user
         $result = $security->findAllOwnerGroups($id);
         return $result;
     }
@@ -66,7 +64,6 @@ class GroupService{
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new dao
         $security = new GroupDAO($conn);
-        //return groups matching search pararmeter 
         $result = $security->findGroup($search);
         return $result;
     }
@@ -79,7 +76,6 @@ class GroupService{
         $conn = new mysqli("localhost","root","root","laraveldb");
         //make new user in database using group model
         $security = new GroupDAO($conn);
-        //create a new group 
         $result = $security->create($group);
         return $result;
     } 

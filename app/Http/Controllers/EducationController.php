@@ -57,8 +57,8 @@ class EducationController extends Controller{
     {
         // Setup Data Validation Rules for Login Form
         $rules = ['years' => 'Required | numeric',
-            'degree' => 'Required | Between: 5,60',
-            'school' => 'Required | Between: 1,60',
+            'degree' => 'Required | Between: 20,60',
+            'school' => 'Required | Between: 10,60',
             'gpa' => 'Required | Between:1,4'
            ];
         

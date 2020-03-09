@@ -126,12 +126,12 @@ class AdminController extends Controller{
         $rules = ['firstName' => 'Required | Between:1,24',
             'lastName' => 'Required | Between:1,24',
             'username' => 'Required | Between:1,24',
-            'email' => 'Required | Between:1,30 | email',
+            'email' => 'Required | Between:1,24 | email',
             'age' => 'Required | Between:1,3 | numeric',
             'password' => 'Required | Between:1,24',
             'gender' => 'Required | Between:1,24',
-            'address' => 'Required | Between:10,80',
-            'hometown' => 'Required | Between:5,30',
+            'address' => 'Required | Between:10,50',
+            'hometown' => 'Required | Between:5,24',
             'phoneNumber' => 'Required | Between:10,10',];
         
         // Run Data Validation Rules

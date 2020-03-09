@@ -12,8 +12,11 @@ References: N/A
 @section('head','Login Success')
 @section('title','You have logged in successfuly')
 
+
 @section('content')
-    @php
-        echo Session::get('User')->toString();
-    @endphp
+@php
+    echo "ROLE: ". Session::get('Role');
+    echo "USER: ". Session::get('User')->toString();
+@endphp
+<p>Click <a href="login">here</a> to return to the login page.</p>
 @endsection

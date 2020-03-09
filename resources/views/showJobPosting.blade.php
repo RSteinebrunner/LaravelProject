@@ -9,7 +9,7 @@ References: N/A
 -->
 
 @extends('layouts.appmaster')
-@section('head','Job Posting')
+@section('head','Education')
 
 @section('title')
     	<h2>Job Postings</h2>
@@ -27,9 +27,6 @@ References: N/A
     	<th scope="col">Requirements</th>
     	<th scope="col">Pay</th>
     	<th scope="col">Posting Date</th>
-    	<th scope="col">Interested?</th>
-    	<th scope="col">*Actions*</th>    	
-    	
     	</tr>
         		@foreach($result as $job)
         		<tr>
@@ -38,14 +35,7 @@ References: N/A
         			<td>{{$job->getDescription()}}</td> 
         			<td>{{$job->getRequirements()}}</td>
         			<td>{{$job->getPay()}}</td>
-        			<td>{{$job->getPostingDate()}}</td> 
-        			<td>
-    					<button class="btn btn-success" type="submit">Apply</button>
-        			</td>
-        			<td>
-        			    <button class="btn btn-warning" type="submit">  Edit  </button>       			
-    					<button class="btn btn-danger" type="submit">Delete</button>
-        			</td>		
+        			<td>{{$job->getPostingDate()}}</td> 		
         		</tr>
         		
         		@endforeach
