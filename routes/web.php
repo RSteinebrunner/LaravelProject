@@ -50,11 +50,8 @@ Route::get('/addGroups',function () {
     return view('addGroups');
 });
 
-<<<<<<< HEAD
 Route::get('/groups', 'GroupController@showAllGroups')->name('groups');
 Route::get('/addGroupPosting', 'GroupController@addGroup')->name('addGroupPosting');
-=======
->>>>>>> parent of 80d1fd4... Affinity Groups
 
 Route::get('/jobPosting', 'JobPostingController@showAllJobs')->name('jobPosting');
 Route::get('/adminJobPosting', 'JobPostingController@adminAllJobs')->name('adminPosting');
