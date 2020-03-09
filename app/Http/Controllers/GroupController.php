@@ -14,7 +14,7 @@ use App\Models\GroupModel;
 use App\Services\Business\GroupService;
 use Illuminate\Http\Request;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
-class JobPostingController extends Controller{
+class GroupController extends Controller{
     
   /**
    * 
@@ -126,9 +126,8 @@ class JobPostingController extends Controller{
     private function validateForm(Request $request)
     {
         // Setup Data Validation Rules for Group Creat Form
-        $rules = ['groupName' => 'Required | Between:1,24',
-            'description' => 'Required | Between:1,120',
-            ];
+        $rules = ['groupName' => 'Required | Between:1,50',
+            'description' => 'Required | Between:1,150'];
         
         // Run Data Validation Rules
         $this->validate($request, $rules);

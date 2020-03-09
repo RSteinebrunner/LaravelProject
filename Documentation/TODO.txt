@@ -14,8 +14,8 @@ TODO
 				
 		jack
 			make sure UML matches code
-			error handling in the controllers
-			our wireframes cannot be implemented properly according to REHA, fix for a better design and make sure it all matches what we are doing.
-			views for group pages
+			error handling in the controllers (done...I think)
+			our wireframes cannot be implemented  properly according to REHA, fix for a better design and make sure it all matches what we are doing.
+			views for group pages   (doing)   ******FIX ROUTES AND CALL CORRECT STUFF AFTER ROUTING******
 
 	What does he want for the install instructions?

@@ -43,10 +43,15 @@ Route::get('/register',function () {
 Route::get('/editPortfolio',function () {
     return view('editPortfolio');
 });
-
+Route::get('/showHome',function () {
+    return view('showHomePage');
+});
+Route::get('/addGroups',function () {
+    return view('addGroups');
+});
 
 Route::get('/groups', 'GroupController@showAllGroups')->name('groups');
-
+Route::get('/addGroupPosting', 'GroupController@addGroup')->name('addGroupPosting');
 
 Route::get('/jobPosting', 'JobPostingController@showAllJobs')->name('jobPosting');
 Route::get('/adminJobPosting', 'JobPostingController@adminAllJobs')->name('adminPosting');

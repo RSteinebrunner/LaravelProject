@@ -35,9 +35,7 @@ class GroupDAO{
             } 
         }
         
-    }
-  
-    
+    }    
     
     //find all groups in the database
     public function findAllGroups(){

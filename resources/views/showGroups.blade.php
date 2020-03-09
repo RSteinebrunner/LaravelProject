@@ -9,47 +9,47 @@ References: N/A
 -->
 
 @extends('layouts.appmaster')
-@section('head','Job Posting')
+@section('head','Groups')
 
 @section('title')
-    	<h2>Job Postings</h2>
+    	<h2>Group Postings</h2>
 @endsection
 
 @section('content')
-<!-- Education -->
+<!-- Groups -->
     <div class = "container">   
     <div class= "row justify-content-center">
     	<div class = "col">
     	<table class="table table-dark">
-    	<tr><th scope="col">Company</th>
-    	<th scope="col">Position</th>
-    	<th scope="col">Description</th>
-    	<th scope="col">Requirements</th>
-    	<th scope="col">Pay</th>
-    	<th scope="col">Posting Date</th>
-    	<th scope="col">Interested?</th>
-    	<th scope="col">*Actions*</th>    	
-    	
+    	<tr>
+        	<th scope="col">Group Name</th>
+        	<th scope="col">Description</th>
+        	<th scope="col">Owner</th>
+        	
+        	<th scope="col">Interested?</th>
+        	
+        	<th scope="col">*Actions*</th>    	    	
     	</tr>
-        		@foreach($result as $job)
+        		@foreach($result as $group)
         		<tr>
-        			<td>{{$job->getCompany()}}</td>
-        			<td>{{$job->getPosition()}}</td>
-        			<td>{{$job->getDescription()}}</td> 
-        			<td>{{$job->getRequirements()}}</td>
-        			<td>{{$job->getPay()}}</td>
-        			<td>{{$job->getPostingDate()}}</td> 
+        			<td>{{$group->getName()}}</td>
+        			<td>{{$group->getDescription()}}</td>
+        			<td>{{$group->getUserId()}}</td> 
+
         			<td>
     					<button class="btn btn-success" type="submit">Apply</button>
         			</td>
         			<td>
-        			    <button class="btn btn-warning" type="submit">  Edit  </button>       			
+        				<input type = "hidden" name = "id" value = "{{$group->getGroupId()}}">        	
+        			    <button class="btn btn-warning" type="submit" >  Edit  </button>       			
     					<button class="btn btn-danger" type="submit">Delete</button>
         			</td>		
-        		</tr>
-        		
+        		</tr>        		
         		@endforeach
         </table>
+        
+		<a href="addGroups" class="btn btn-success">Create your own Group</a>
+        
         </div>
      </div>
      
