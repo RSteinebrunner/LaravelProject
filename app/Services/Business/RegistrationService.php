@@ -17,10 +17,21 @@ use mysqli;
  */
 class RegistrationService{
     //Method to add a new user
+    private $servername;
+    private $username;
+    private $password;
+    private $dbname;
+    
+    public function __construct(){
+        $this->servername = config("database.connections.mysql.host");
+        $this->username = config("database.connections.mysql.username");
+        $this->password = config("database.connections.mysql.password");
+        $this->dbname = config("database.connections.mysql.database");
+    }
     //create method takes user data inputed in registeration page and send information over to the DAO to add the user profile into the Database
     public function create(UserModel $user){
         //Database Connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new user in database using user model
         $security = new RegistrationDAO($conn);
         $result = $security->findByUsername($user->getUsername());

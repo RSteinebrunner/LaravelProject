@@ -17,10 +17,20 @@ use App\Models\SkillsModel;
 
 //Skill securityService class recieves the sent data from Skills controller and calls the appropriate method in DAO to access the database
 class SkillsService{
-   
+    private $servername;
+    private $username;
+    private $password;
+    private $dbname;
+    
+    public function __construct(){
+        $this->servername = config("database.connections.mysql.host");
+        $this->username = config("database.connections.mysql.username");
+        $this->password = config("database.connections.mysql.password");
+        $this->dbname = config("database.connections.mysql.database");
+    }
     public function deleteSkills($id){
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //delete the skill
         $security = new SkillsDAO($conn);
         $result = $security->delete($id);
@@ -31,7 +41,7 @@ class SkillsService{
     public function findAllSkills($id){
 
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //check for skill
         $security = new SkillsDAO($conn);
         $result = $security->findAllSkills($id);
@@ -41,7 +51,7 @@ class SkillsService{
     }
     public function addSkill(SkillsModel $skill){
         //Database Connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new skill in database using skills model
         $security = new SkillsDAO($conn);
         $result = $security->create($skill);

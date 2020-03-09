@@ -18,9 +18,20 @@ use App\Models\EducationModel;
 //securityService class recieves the sent data from Educationcontroller and calls the appropriate method in DAO to access the database
 class EducationService{
    
+    private $servername;
+    private $username;
+    private $password;
+    private $dbname;
+    
+    public function __construct(){
+        $this->servername = config("database.connections.mysql.host");
+        $this->username = config("database.connections.mysql.username");
+        $this->password = config("database.connections.mysql.password");
+        $this->dbname = config("database.connections.mysql.database");
+    }
     public function deleteEducation($id){
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //delete the user
          $security = new EducationDAO($conn);
         $result = $security->delete($id);
@@ -31,7 +42,7 @@ class EducationService{
     public function findAllEducation($id){
 
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //check for user
         $security = new EducationDAO($conn);
         $result = $security->findAllEducation($id);
@@ -41,7 +52,7 @@ class EducationService{
     }
     public function addEducation(EducationModel $edu, $id){
         //Database Connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new user in database using education model
         $security = new EducationDAO($conn);
         $result = $security->create($edu,$id);

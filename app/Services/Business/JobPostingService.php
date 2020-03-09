@@ -18,9 +18,20 @@ use App\Models\JobPostingModel;
 //securityService class recieves the sent data from Educationcontroller and calls the appropriate method in DAO to access the database
 class JobPostingService{
    
+    private $servername;
+    private $username;
+    private $password;
+    private $dbname;
+    
+    public function __construct(){
+        $this->servername = config("database.connections.mysql.host");
+        $this->username = config("database.connections.mysql.username");
+        $this->password = config("database.connections.mysql.password");
+        $this->dbname = config("database.connections.mysql.database");
+    }
     public function deletePost($id){
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //delete the user
         $security = new JobPostingDAO($conn);
         $result = $security->delete($id);
@@ -31,7 +42,7 @@ class JobPostingService{
     public function findAllJobs(){
 
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new dao
         $security = new JobPostingDAO($conn);
         $result = $security->findAllJobs();
@@ -41,7 +52,7 @@ class JobPostingService{
     }
     public function addPost(JobPostingModel $post){
         //Database Connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new user in database using education model
         $security = new JobPostingDAO($conn);
         $result = $security->create($post);
@@ -51,7 +62,7 @@ class JobPostingService{
     //locate a job in the database by id and retrieve the information
     public function findJobById($id){
         //Database Connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new user in database using education model
         $security = new JobPostingDAO($conn);
         $result = $security->findJobById($id);
@@ -60,7 +71,7 @@ class JobPostingService{
     
     public function editPost(JobPostingModel $post){
         //Database Connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new user in database using education model
         $security = new JobPostingDAO($conn);
         $result = $security->edit($post);

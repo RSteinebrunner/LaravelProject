@@ -50,15 +50,55 @@ CREATE TABLE IF NOT EXISTS `laraveldb`.`education` (
   `degree` VARCHAR(150) NOT NULL,
   `school` VARCHAR(100) NOT NULL,
   `userId` INT(11) NOT NULL,
+  `gpa` VARCHAR(4) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `userId` (`userId` ASC),
   CONSTRAINT `education_ibfk_1`
+    FOREIGN KEY (`userId`)
+    REFERENCES `laraveldb`.`user` (`userId`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 13
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `laraveldb`.`groups`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `laraveldb`.`groups` (
+  `groupId` INT(11) NOT NULL AUTO_INCREMENT,
+  `groupName` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(120) NOT NULL,
+  `userId` INT(11) NOT NULL,
+  PRIMARY KEY (`groupId`),
+  INDEX `fk_groups_user1_idx` (`userId` ASC),
+  CONSTRAINT `fk_groups_user1`
     FOREIGN KEY (`userId`)
     REFERENCES `laraveldb`.`user` (`userId`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 6
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `laraveldb`.`groupmembers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `laraveldb`.`groupmembers` (
+  `userId` INT(11) NOT NULL,
+  `groupId` INT(11) NOT NULL,
+  PRIMARY KEY (`userId`),
+  INDEX `fk_groupMembers_groups1_idx` (`groupId` ASC),
+  CONSTRAINT `fk_groupMembers_groups1`
+    FOREIGN KEY (`groupId`)
+    REFERENCES `laraveldb`.`groups` (`groupId`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_groupMembrs_userId`
+    FOREIGN KEY (`userId`)
+    REFERENCES `laraveldb`.`groups` (`userId`)
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -77,9 +117,7 @@ CREATE TABLE IF NOT EXISTS `laraveldb`.`jobhistory` (
   INDEX `userId` (`userId` ASC),
   CONSTRAINT `jobhistory_ibfk_1`
     FOREIGN KEY (`userId`)
-    REFERENCES `laraveldb`.`user` (`userId`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    REFERENCES `laraveldb`.`user` (`userId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = latin1;
@@ -98,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `laraveldb`.`jobposting` (
   `postingDate` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 8
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -113,11 +151,9 @@ CREATE TABLE IF NOT EXISTS `laraveldb`.`skills` (
   INDEX `userId` (`userId` ASC),
   CONSTRAINT `skills_ibfk_1`
     FOREIGN KEY (`userId`)
-    REFERENCES `laraveldb`.`user` (`userId`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    REFERENCES `laraveldb`.`user` (`userId`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 11
+AUTO_INCREMENT = 24
 DEFAULT CHARACTER SET = latin1;
 
 

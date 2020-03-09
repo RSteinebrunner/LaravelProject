@@ -18,12 +18,23 @@ use Illuminate\Support\Facades\Session;
 
 //securityService class recieves the sent data from Logincontroller and calls the appropriate method in DAO to access the database
 class LoginService{
+    private $servername;
+    private $username;
+    private $password;
+    private $dbname;
+    
+    public function __construct(){
+        $this->servername = config("database.connections.mysql.host");
+        $this->username = config("database.connections.mysql.username");
+        $this->password = config("database.connections.mysql.password");
+        $this->dbname = config("database.connections.mysql.database");
+    }
     //The user's username and password are used to authenicate if the use is found in the database and returns true if a match was found
     public function authenticate($username, $password){
         //assume did not find
         $result = false;
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //check for user
         $security = new LoginDAO($conn);
         $user= $security->findUser($username,$password);

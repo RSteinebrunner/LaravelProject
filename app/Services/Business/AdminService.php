@@ -17,13 +17,23 @@ use App\Services\Business\Data\AdminSecurityDAO;
 
 //securityService class recieves the sent data from Logincontroller and calls the appropriate method in DAO to access the database
 class AdminService{
+    private $servername;
+    private $username;
+    private $password;
+    private $dbname;
     
+    public function __construct(){
+        $this->servername = config("database.connections.mysql.host");
+        $this->username = config("database.connections.mysql.username");
+        $this->password = config("database.connections.mysql.password");
+        $this->dbname = config("database.connections.mysql.database");
+    }
     //The user's username and password are used to authenicate if the use is found in the database and returns true if a match was found
     public function authenticate($username, $password){
         //assume did not find
         $result = false;
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //check for user
         $security = new AdminSecurityDAO($conn);
         $result = $security->findUser($username,$password);
@@ -35,7 +45,7 @@ class AdminService{
         //assume did not find
         $result = false;
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //check for user
         $security = new AdminSecurityDAO($conn);
         $result = $security->findUserById($id);
@@ -45,7 +55,7 @@ class AdminService{
     
     public function deleteUser($id){
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //delete the user
         $security = new AdminSecurityDAO($conn);
         $result = $security->deleteUser($id);
@@ -55,7 +65,7 @@ class AdminService{
     
     public function suspendUser($id,$status){
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //update the user status
         $security = new AdminSecurityDAO($conn);
         $result = $security->updateUserStatus($id, $status);
@@ -65,7 +75,7 @@ class AdminService{
     
     public function changeRole($id,$role){
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //update the user status
         $security = new AdminSecurityDAO($conn);
         $result = $security->changeRole($id, $role);
@@ -76,7 +86,7 @@ class AdminService{
     public function findAllUsers($id){
 
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //check for user | needs id as a parameter to keep from showing yourself
         $security = new AdminSecurityDAO($conn);
         $result = $security->findAllUsers($id);
@@ -86,7 +96,7 @@ class AdminService{
        
     public function updateUser(UserModel $updatedUser){
         //Database Connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new user in database using user model
         $security = new AdminSecurityDAO($conn);
         $result = $security->updateUser($updatedUser);
@@ -96,7 +106,7 @@ class AdminService{
     //create method takes user data inputed in registeration page and send information over to the DAO to add the user profile into the Database
     public function create(UserModel $user){
         //Database Connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //make new user in database using user model
         $security = new AdminSecurityDAO($conn);
         $result = $security->makeUser($user);

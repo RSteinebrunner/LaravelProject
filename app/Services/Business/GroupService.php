@@ -17,14 +17,25 @@ use mysqli;
 
 //Service class recieves the sent data from Groupcontroller and calls the appropriate method in DAO to access the database
 class GroupService{
-   /**
+   
+    private $servername;
+    private $username;
+    private $password;
+    private $dbname;
+
+    public function __construct(){
+        $this->servername = config("database.connections.mysql.host");
+        $this->username = config("database.connections.mysql.username");
+        $this->password = config("database.connections.mysql.password");
+        $this->dbname = config("database.connections.mysql.database");
+    }/**
     * deltes a group
     * @param $id
     * @return string
     */
     public function deleteGroup($id){
         //Set up connection
-        $conn = new mysqli("localhost","root","root","laraveldb");
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         //delete the group
         $security = new GroupDAO($conn);
         $result = $security->deleteGroup($id);
