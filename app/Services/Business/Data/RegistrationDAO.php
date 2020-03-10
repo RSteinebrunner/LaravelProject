@@ -46,7 +46,7 @@ class RegistrationDAO{
             $sql_statement_user = "INSERT INTO `user` (`username`,`password`,`firstName`,`lastName`, `picture`, `age`, `gender`, `address`, `hometown`, `email`, `phoneNumber`, `role`, `isSuspended` ) VALUES ('$username', '$password', '$firstName', '$lastName', '$picture', '$age', '$gender', '$address', '$hometown', '$email', '$phoneNumber', '$role', '$suspended')";
             if (mysqli_query($this->conn, $sql_statement_user)) {
                 //echo "New user created successfully";
-                return "true";
+                return true;
             }
         }
     }
@@ -61,10 +61,10 @@ class RegistrationDAO{
             $result = mysqli_query($this->conn, $sql_statement);
             if ($result) {
                 if (mysqli_num_rows($result) == 1) {
-                    return "true";
+                    return true;
                 }
             }
-            return "false";
+            return false;
         }
     } 
 }

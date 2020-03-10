@@ -1,8 +1,8 @@
 <!--  
-Project name/Version: LaravelCLC Version: 1
+Project name/Version: LaravelCLC Version: 5
 Module name: loginSuccess
 Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
-Date: 1/19/2020
+Date: 3/9/2020
 Synopsis: View page that shows when a user successfully logs in
 Version#: 1
 References: N/A

@@ -1,5 +1,5 @@
 <!--  
-Project name/Version: LaravelCLC Version: 1
+Project name/Version: LaravelCLC Version: 5
 Module name: loginFailure
 Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
 Date: 1/19/2020

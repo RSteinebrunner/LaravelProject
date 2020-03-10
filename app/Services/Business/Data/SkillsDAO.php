@@ -102,7 +102,7 @@ class SkillsDAO{
             $sql_statement = "INSERT INTO `skills` (`id`, `userId`, `skill`) VALUES (NULL, '$userId', '$Skills')";
             if (mysqli_query($this->conn, $sql_statement)) {
                 //echo "New skill created successfully";
-                return "true";
+                return true;
             }
         }
         

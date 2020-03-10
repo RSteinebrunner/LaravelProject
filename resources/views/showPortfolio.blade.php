@@ -1,9 +1,9 @@
 <!--  
-Project name/Version: LaravelCLC Version: 4
+Project name/Version: LaravelCLC Version: 5
 Module name: Portfolio Module
 Authors: Roland Steinebrunner, Anthony Clayton
-Date: 2/25/2020
-Synopsis: View page that shows the login page when a user attempts to sign into their account
+Date: 3/9/2020
+Synopsis: show all the information from the portfolio to the user, including skills, education and job history
 Version#: 4
 References: N/A
 -->
@@ -97,7 +97,7 @@ References: N/A
 	<div class="row">
 		<div class="col">
 			<button class="btn btn-success"
-				onclick="window.location.href = 'editPortfolio';">Add New</button>
+				onclick="window.location.href = 'addEducation';">Add New</button>
 		</div>
 	</div>
 </div>
@@ -156,7 +156,7 @@ References: N/A
 	<div class="row">
 		<div class="col">
 			<button class="btn btn-success"
-				onclick="window.location.href = 'editPortfolio';">Add New</button>
+				onclick="window.location.href = 'addSkills';">Add New</button>
 		</div>
 	</div>
 </div>
@@ -220,7 +220,7 @@ References: N/A
 	<div class="row">
 		<div class="col">
 			<button class="btn btn-success"
-				onclick="window.location.href = 'editPortfolio';">Add New</button>
+				onclick="window.location.href = 'addJobHistory';">Add New</button>
 		</div>
 	</div>
 </div>

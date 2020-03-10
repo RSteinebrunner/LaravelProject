@@ -21,6 +21,11 @@ class EducationDAO{
     {
         $this->conn = $conn;
     }
+    /**
+     * delete the education model in the database
+     * @param int $id
+     * @return boolean
+     */
     public function delete($id){
         if ($this->conn->connect_error){
             echo "Failed to get databse connection!";
@@ -37,7 +42,11 @@ class EducationDAO{
   
     
     
-    //find all users in the database
+    /**
+     * Find all the education for the  user id provided
+     * @param int $id
+     * @return \App\Models\EducationModel[]|array
+     */
     public function findAllEducation($id){
         //see if the connection failed
         Log::info("Entering EducationDAO.findAllEducation()");
@@ -97,7 +106,12 @@ class EducationDAO{
         }
         
     }
-    //creates education when requested 
+    /**
+     * Create a new education entry to the database
+     * @param EducationModel $edu
+     * @param int $id
+     * @return string
+     */
     public function create(EducationModel $edu, $id){
         
         //get all variables from education model
@@ -114,8 +128,8 @@ class EducationDAO{
             //insert into db
             $sql_statement = "INSERT INTO `education` (`id`, `yearsAttended`, `degree`, `school`, `userId`, `gpa`) VALUES (NULL, '$years', '$degree', '$school', '$id','$gpa')";
             if (mysqli_query($this->conn, $sql_statement)) {
-                //echo "New user created successfully";
-                return "true";
+                //echo "New education created successfully";
+                return true;
             }
         }
         

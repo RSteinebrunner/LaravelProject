@@ -5,7 +5,7 @@ use App\Models\GroupModel;
 /*
  Project name/Version: LaravelCLC Version: 4
  Module name: Group Module
- Authors: Anthony Clayton
+ Authors: Anthony Clayton, Roland Steinebrunner
  Date: 3/2/2020
  Synopsis: Module connects to the database and provides information for the groups
  Version#: 1
@@ -20,7 +20,12 @@ class GroupDAO{
     {
         $this->conn = $conn;
     }
-        
+    
+    /**
+     * Delete the group with the given Id
+     * @param int $id
+     * @return string|boolean
+     */
     public function deleteGroup($id){
         if ($this->conn->connect_error){
             //check the connection
@@ -31,11 +36,17 @@ class GroupDAO{
             $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                 //returning if the user was deleted
-                return "true";
+                return true;
             } 
         }
         
     } 
+    /**
+     * remove the user from the group with the given params
+     * @param int $groupID
+     * @param int $userID
+     * @return string|boolean
+     */
     public function leaveGroup($groupID, $userID){
         if ($this->conn->connect_error){
             //check the connection
@@ -46,29 +57,36 @@ class GroupDAO{
             $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                 //returning if the group was left
-                return "true";
+                return true;
             }
         }
         
     } 
+    /**
+     * Join the group with the given params
+     * @param int $groupID
+     * @param int $userID
+     * @return string|boolean
+     */
     public function joinGroup($groupID,$userID){
         if ($this->conn->connect_error){
             //check the connection
             return "Failed to get databse connection!";
         }else{
+            //if duplicate is found do nothing
             $sql_search = "SELECT * FROM `groupmembers` WHERE `userId` = '$userID' AND `groupId` = '$groupID' LIMIT 1";
             $result = mysqli_query($this->conn, $sql_search);
             if ($result) {
                 if (mysqli_num_rows($result) == 1) {
-                    return "true";
+                    return true;
                 }
             }
-            //running the statement
+            //otherwise add to the database
             $sql_statement = "INSERT INTO `groupmembers` (`userId`, `groupId`) VALUES ('$userID', '$groupID')";
             $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                 //returning if the user was added
-                return "true";
+                return true;
             }
             else 
                 return "failed to add";
@@ -76,7 +94,10 @@ class GroupDAO{
         
     } 
     
-    //find all groups in the database
+    /**
+     * Show all groups in the database
+     * @return \App\Models\GroupModel|array
+     */
     public function findAllGroups(){
         //see if the connection failed
         if ($this->conn->connect_error){
@@ -273,7 +294,7 @@ class GroupDAO{
             $sql_statement = "INSERT INTO `groups` (`groupId`, `groupName`, `description`, `userId`) VALUES (NULL, '$name', '$description', '$userId')";
             if (mysqli_query($this->conn, $sql_statement)) {
                 //echo "New group created successfully";
-                return "true";
+                return true;
             }
         }      
     }
@@ -293,7 +314,7 @@ class GroupDAO{
             //insert into db
             $sql_statement = "UPDATE `groups` SET `groupName` = '$groupName', `description` = '$description' WHERE `groups`.`groupId` = $groupId;";
             if (mysqli_query($this->conn, $sql_statement)) {
-                return "true";
+                return true;
             }
             return "failed to insert";
         }

@@ -1,10 +1,10 @@
 <!--  
-Project name/Version: LaravelCLC Version: 3
+Project name/Version: LaravelCLC Version: 5
 Module name: Portfolio Module
 Authors: Roland Steinebrunner, Anthony Clayton
-Date: 2/23/2020
-Synopsis: 
-Version#: 3
+Date: 3/9/2020
+Synopsis: shows the form to add a new group to the afinity groups list
+Version#: 1
 References: N/A
 -->
 

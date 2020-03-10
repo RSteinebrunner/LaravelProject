@@ -1,8 +1,8 @@
 <!--  
-Project name/Version: LaravelCLC Version: 1
+Project name/Version: LaravelCLC Version: 5
 Module name: showUserDetails
 Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
-Date: 1/19/2020
+Date: 3/9/2020
 Synopsis: View page that shows the user info page when viewing an account
 Version#: 1
 References: N/A

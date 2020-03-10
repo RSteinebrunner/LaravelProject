@@ -1,9 +1,9 @@
 <!--  
-Project name/Version: LaravelCLC Version: 3
+Project name/Version: LaravelCLC Version: 5
 Module name: Group Module
 Authors: Jack Setrak, Roland Steinebrunner
-Date: 2/23/2020
-Synopsis: 
+Date: 3/9/2020
+Synopsis: shows the form completed with data to edit an existing group
 Version#: 3
 References: N/A
 -->

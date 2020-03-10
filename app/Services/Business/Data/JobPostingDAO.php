@@ -32,7 +32,7 @@ class JobPostingDAO{
             $result = mysqli_query($this->conn, $sql_statement);
             if($result){
                 //returning if the user was deleted
-                return "true";
+                return true;
             } 
         }
         
@@ -113,7 +113,7 @@ class JobPostingDAO{
             $sql_statement = "INSERT INTO `jobposting` (`id`, `company`, `position`, `description`, `requirements`, `pay`, `postingDate`) VALUES (NULL, '$company', '$position', '$description', '$requirements', '$pay', '$postingDate')";
             if (mysqli_query($this->conn, $sql_statement)) {
                 //echo "New user created successfully";
-                return "true";
+                return true;
             }
         }
         
@@ -142,7 +142,7 @@ class JobPostingDAO{
             $sql_statement = "UPDATE `jobposting` SET `company` = '$company', `position` = '$position', `description` = '$description', `requirements` = '$requirements', `pay` = '$pay', `postingDate` = '$postingDate' WHERE `jobposting`.`id` = '$id';";
             if (mysqli_query($this->conn, $sql_statement)) {
                 //echo "New user created successfully";
-                return "true";
+                return true;
             }
         }
         

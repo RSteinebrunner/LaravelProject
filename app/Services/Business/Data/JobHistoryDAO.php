@@ -28,9 +28,9 @@ class JobHistoryDAO{
             $sql_statement = "DELETE FROM `jobhistory` WHERE `id` = '$id'";
             $result = mysqli_query($this->conn, $sql_statement);
             if($result){
-                return "true";
+                return true;
             }
-            return "false";
+            return false;
         }        
     }    
     
@@ -101,10 +101,10 @@ class JobHistoryDAO{
             //insert into db
             $sql_statement = "INSERT INTO `jobhistory` (`id`, `userId`, `company`, `position`, `startDate`, `endDate`, `description`) VALUES (NULL, '$userId', '$company', '$position', '$startDate', '$endDate', '$description')";
             if (mysqli_query($this->conn, $sql_statement)) {
-                return "true";
+                return true;
             }
         }
-        return "false";
+        return false;
         
         
         
