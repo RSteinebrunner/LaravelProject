@@ -2,23 +2,27 @@
 namespace App\Http\Controllers;
 
 /*
- Project name/Version: LaravelCLC Version: 3
+ Project name/Version: LaravelCLC Version: 5
  Module name: Login Module
- Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
- Date: 2/24/2020
+ Authors: Roland Steinebrunner, Jack Setrak, Anthony Clayton
+ Date: 03/09/2020
  Synopsis: Controlls login and logout processes
- Version#: 2
+ Version#: 3
  References: N/A
   */
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Services\Business\LoginService;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
-class LoginController extends Controller
-{
-
-    public function authenticate(Request $request)
-    {
+class LoginController extends Controller{
+    
+    
+    /**
+     * Function to authenicate that a user can use this account to login into the site 
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function authenticate(Request $request){
         //Validate Form Data
         $this->validateForm($request);
         // get form data
@@ -29,23 +33,28 @@ class LoginController extends Controller
         // send username and password to service
         $result = $isUser->authenticate($username, $password);
         // check if user was found
-
-        if ($result == "true") {
+        if ($result) {
             return view('loginSuccess');
         } else {
+            //if no user is found then return the user to login failed view with result
             return view('loginFailure')->with("result", $result);
-       }
-        
-        
-        //if yes return success,
-        //else failure              
+       }         
     }
-    //clears the session so the user logs out
+    
+    /**
+     * Clears the session so the user logs out
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logoutUser()
     {
         Session::flush();
         return redirect()->route('login');
     }
+    
+    /**
+     * Function that will vaildate form data to confirm the user inputed useable information
+     * @param Request $request
+     */
     private function validateForm(Request $request)
     {
         // Setup Data Validation Rules for Login Form

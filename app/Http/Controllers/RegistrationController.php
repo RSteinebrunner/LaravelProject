@@ -2,12 +2,12 @@
 namespace App\Http\Controllers;
 
 /*
- Project name/Version: LaravelCLC Version: 1
- Module name: Controller
- Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
- Date: 1/19/2020
+ Project name/Version: LaravelCLC Version: 5
+ Module name: Register Module
+ Authors: Roland Steinebrunner, Jack Setrak, Anthony Clayton
+ Date: 03/09/2020
  Synopsis: Module provides all methods needed to authenticate/ create users, and return views when requested
- Version#: 1
+ Version#: 2
  References: N/A
   */
 use App\Models\UserModel;
@@ -15,6 +15,11 @@ use App\Services\Business\RegistrationService;
 use Illuminate\Http\Request;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class RegistrationController extends Controller{
+    /**
+     * Function that will create user with the form data they filled out
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function createUser(Request $request){
         //Validate Form Data
         $this->validateForm($request);
@@ -31,21 +36,30 @@ class RegistrationController extends Controller{
         $phoneNumber = $request->input('phoneNumber');
         //create new user object
         $newUser = new UserModel(null,$username, $password, $firstName, $lastName, null, $age, $gender, $address, $hometown, $email, $phoneNumber, "user", "false");        
-        //pass the person object to the security service
+        //pass the person object to the registeration service
         $makeUser = new RegistrationService();
+        //result will return the output of create method within the registeration service
         $result = $makeUser->create($newUser);
-        if($result=="true"){
+        if($result){
+            //if result is true then take user to the register success view
             return view('registerSuccess');
         }
+        //if duplicate user was found then return user to register page with error 
         elseif ($result == "duplicate")
         {
             return view('showRegister')->with("error","Error");
         }
+        //otherwise take user to register failur incase the register process failed to proceed
         return view('registerFailure')->with("result",$result);       
     }
+    
+    /**
+     * Function that will vaildate form data to confirm the user inputed useable information
+     * @param Request $request
+     */
     private function validateForm(Request $request)
     {
-        // Setup Data Validation Rules for Login Form
+        // Setup Data Validation Rules for Register Form
         $rules = ['firstName' => 'Required | Between:1,24',
             'lastName' => 'Required | Between:1,24',
             'username' => 'Required | Between:1,24',

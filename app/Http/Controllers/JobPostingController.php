@@ -2,22 +2,26 @@
 namespace App\Http\Controllers;
 
 /*
- Project name/Version: LaravelCLC Version: 3
+ Project name/Version: LaravelCLC Version: 5
  Module name: Education Moduke
- Authors: Anthony Clayton
- Date: 2/23/2020
+ Authors: Anthony Clayton, Jack Setrak
+ Date: 03/09/2020
  Synopsis: Module provides all methods needed for job posting, and return views when requested
- Version#: 1
+ Version#: 2
  References: N/A
   */
 use App\Models\JobPostingModel;
 use App\Services\Business\JobPostingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-//controller hold basic methods to either route to other views or request securityservice for further user specific actions
+//controller hold basic methods to either route to other views or request securityservice for further admin specific actions
 class JobPostingController extends Controller{
     
-  
+  /**
+   * Function that will add a job posting
+   * @param Request $request
+   * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+   */
     public function addPost(Request $request){
         //pull form data to make a posting 
         //extract data to send to the service
@@ -33,28 +37,46 @@ class JobPostingController extends Controller{
         $newPost = new JobPostingModel(null, $company, $position, $description, $requirements,$pay, $postingDate);
         //pass the job object to the service
         $service = new JobPostingService();
+        //call addPost method in job service passing the new job model 
         $result = $service->addPost($newPost);
         
-        if($result == "true"){
+        if($result){
+            //if result comes back as true then reutrn user to show all jobs view to see the new posting
             return $this->showAllJobs();
         }
         else{
+            //otherwise take user to error page with error message
             return view('profileDisplayError')->with("data", "jobPostingError");
         }
     }
+    
+    /**
+     * Function to delete a job posting
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function deletePost(Request $request){
         //get the id
         $id = $request->input('id');
         //create new service
         $service = new JobPostingService();
+        //call the delete job post using the passed Id
         $result = $service->deletePost($id);
         if($result){
+            //if result is true then call showAllJobs method which will take aadmin back to the showAllJobs view to see newly added post 
             return $this->showAllJobs();
         }
         else{
+            //otherwise take user to error page with error message
             return view('profileDisplayError')->with("data", "jobDeleteError");
         }
     }
+    
+    /**
+     * Function will update the information a admin will change on a job posting 
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function editPost(Request $request){
    
         $this->validateForm($request);
@@ -82,7 +104,10 @@ class JobPostingController extends Controller{
         }
     }
     
-    //shows postings to standard users
+    /**
+     * Shows postings to standard users
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function showAllJobs(){
         //creat new service
         $users = new JobPostingService();
@@ -92,7 +117,11 @@ class JobPostingController extends Controller{
         return view('showJobPosting')->with("result",$result);
     }
     
-    //finds job posting by id
+    /**
+     * Finds job posting by id
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function findJob(Request $request){
         //get id
         $id = $request->input('id');
@@ -103,9 +132,14 @@ class JobPostingController extends Controller{
         //return the view with the data
         return view('editJobPosting')->with("job",$result);
     }
+    
+    /**
+     * Function that will validate information recieved from form
+     * @param Request $request
+     */
     private function validateForm(Request $request)
     {
-        // Setup Data Validation Rules for Login Form
+        // Setup Data Validation Rules for job posting Form
         $rules = ['company' => 'Required | Between:1,50',
             'position' => 'Required | Between:1,50',
             'description' => 'Required | Between:1,200',

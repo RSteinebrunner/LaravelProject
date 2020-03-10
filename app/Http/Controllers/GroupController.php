@@ -2,12 +2,12 @@
 namespace App\Http\Controllers;
 
 /*
- Project name/Version: LaravelCLC Version: 4
+ Project name/Version: LaravelCLC Version: 5
  Module name: Group Module
- Authors: Anthony Clayton
- Date: 3/2/2020
+ Authors: Anthony Clayton, Jack Setrak
+ Date: 03/09/2020
  Synopsis: Module provides all methods needed for groups, and return views when requested
- Version#: 1
+ Version#: 2
  References: N/A
   */
 use App\Models\GroupModel;
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Session;
 class GroupController extends Controller{
     
   /**
-   * 
+   * Function that a user can use to search for a group
    * @param Request $request
    * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
    */
@@ -33,7 +33,7 @@ class GroupController extends Controller{
     }
     
     /**
-     *
+     *Function that will be used to show group memebers of a group
      * @param Request $request
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
@@ -48,7 +48,7 @@ class GroupController extends Controller{
     }
     
     /**
-     * 
+     * Function that will allow a user or an admin to create a group
      * @param Request $request
      * @return |\Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
@@ -73,6 +73,12 @@ class GroupController extends Controller{
             return view('profileDisplayError')->with("data", "groupCreateError");
         }
     }
+    
+    /**
+     * Function used to allow a user to join a group
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function joinGroup(Request $request){
         //extract data to send to the service
         $groupID = $request->input('groupID');
@@ -82,14 +88,20 @@ class GroupController extends Controller{
         $result = $service->joinGroup($groupID, $userId);
         
         if($result == "true"){
+            //if result was found then take user to show all groups page
             return $this->showAllGroups();
         }
         else{
+            //otherwise take user to error page with error message
             return view('profileDisplayError')->with("data", "groupCreateError");
         }
     }
     
-    //method will save you changes after editing a group posting
+    /**
+     * Method will save you changes after editing a group posting
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function editGroupPosting(Request $request){
         
         $this->validateForm($request);
@@ -132,6 +144,12 @@ class GroupController extends Controller{
             return view('profileDisplayError')->with("data", "groupDeleteError");
         }
     }
+    
+    /**
+     * Function used to leave a group
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function leaveGroup(Request $request){
         //get the id
         $userId = $request->input('userID');
@@ -139,6 +157,7 @@ class GroupController extends Controller{
         $groupId = $request->input('groupID');
         //create new service
         $service = new GroupService();
+        //call leave group from group service passing the groupID of the group you want to leave and your id so the database can remove you from the seleceted group
         $result = $service->leaveGroup($groupId, $userId);
         if($result){
             return $this->showAllGroups();
@@ -179,7 +198,11 @@ class GroupController extends Controller{
         return view('myGroups')->with("result",$result);
     }
     
-    //method used to bring up the edit page for the desired group posting the admin or owner is looking to edit
+    /**
+     * method used to bring up the edit page for the desired group posting the admin or owner is looking to edit
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function editGroup(Request $request){
         //gets group id
         $id = $request->input('id');
@@ -191,7 +214,7 @@ class GroupController extends Controller{
         return view('editGroups')->with("result",$result);
     }
     /**
-     * 
+     * Function used to show all members 
      * @param Request $request
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
@@ -205,6 +228,11 @@ class GroupController extends Controller{
         //returns array of groupmodels
         return view('showMembers')->with("result",$result);
     }
+    
+    /**
+     * Function used to show all groups owned by the current logged in user
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function showMyGroups(){
         //get the user id
         $id = Session::get('User')->getId();
@@ -216,11 +244,11 @@ class GroupController extends Controller{
     }
     
     /**
-     * 
+     * Function that will validate information recieved from form
      * @param Request $request
      */
     private function validateForm(Request $request){
-        // Setup Data Validation Rules for Group Creat Form
+        // Setup Data Validation Rules for Group Form
         $rules = ['groupName' => 'Required | Between:1,50',
             'description' => 'Required | Between:1,150'];
         

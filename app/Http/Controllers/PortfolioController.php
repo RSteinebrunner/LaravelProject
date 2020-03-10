@@ -2,12 +2,12 @@
 namespace App\Http\Controllers;
 
 /*
- Project name/Version: LaravelCLC Version: 3
+ Project name/Version: LaravelCLC Version: 5
  Module name: Porfolio Module
- Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
- Date: 2/15/2020
+ Authors: Roland Steinebrunner, Jack Setrak, Anthony Clayton
+ Date: 03/09/2020
  Synopsis: Displays all the data for the portfolio page
- Version#: 1
+ Version#: 2
  References: N/A
   */
 use App\Services\Business\EducationService;
@@ -16,6 +16,10 @@ use App\Services\Business\SkillsService;
 use Illuminate\Support\Facades\Session;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class PortfolioController extends Controller{
+    /**
+     * Function that will show the user their own portfolio
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function showPortfolio(){
         //get the user id
         $id = Session::get('User')->getId();
@@ -24,9 +28,9 @@ class PortfolioController extends Controller{
         $skill = new SkillsService();
         $jobs = new JobHistoryService();
 
-        //get the result from the service
+        //get the result from the services and align them into an array 
         $result = array(0=>$edu->findAllEducation($id),$skill->findAllSkills($id),$jobs->findAllJobHistory($id));
-        //return the view with the data
+        //return the showPortfolio view with the data
         return view('showPortfolio')->with("result",$result);
     }
 }
