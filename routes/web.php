@@ -1,8 +1,8 @@
 <!--  
 Project name/Version: LaravelCLC Version: 3
 Module name: Routes
-Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
-Date: 2/23/2020
+Authors: Roland Steinebrunner, Jack Setrak, Anthony Clayton
+Date: 3/12/2020
 Synopsis: Module provides all routing details for controllers and views
 Version#: 5
 References: N/A
@@ -67,6 +67,7 @@ Route::post('/leaveGroup', 'GroupController@leaveGroup');
 Route::post('/addGroupPosting', 'GroupController@addGroup');
 
 Route::get('/jobPosting', 'JobPostingController@showAllJobs');
+Route::get('/showDetailPage', 'JobPostingController@showJobDetails');
 Route::get('/adminJobPosting', 'JobPostingController@findJob');
 Route::post('/editJobPosting', 'JobPostingController@editPost');
 Route::post('/deleteJobPosting', 'JobPostingController@deletePost');

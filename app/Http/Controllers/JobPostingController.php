@@ -3,9 +3,9 @@ namespace App\Http\Controllers;
 
 /*
  Project name/Version: LaravelCLC Version: 5
- Module name: Education Moduke
+ Module name: Job Posting Module
  Authors: Anthony Clayton, Jack Setrak
- Date: 03/09/2020
+ Date: 03/12/2020
  Synopsis: Module provides all methods needed for job posting, and return views when requested
  Version#: 2
  References: N/A
@@ -131,6 +131,17 @@ class JobPostingController extends Controller{
         $result = $job->findJobById($id);
         //return the view with the data
         return view('editJobPosting')->with("job",$result);
+    }
+    
+    public function showJobDetails(Request $request){
+        //get id
+        $id = $request->input('id');
+        //creat new service
+        $job = new JobPostingService();
+        //get the result from the service
+        $result = $job->findJobById($id);
+        //return the view with the data
+        return view('showJobPostingDetailed')->with("job",$result);
     }
     
     /**
