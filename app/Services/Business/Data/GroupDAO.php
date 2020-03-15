@@ -33,8 +33,10 @@ class GroupDAO{
         }else{
             //running the statement
             $sql_statement = "DELETE FROM `groups` WHERE `groupId` = '$id'";
-            $result = mysqli_query($this->conn, $sql_statement);
-            if($result){
+            $result = mysqli_query($this->conn, $sql_statement);//running the statement
+            $sql_statement2 = "DELETE FROM `groupmembers` WHERE `groupId` = '$id'";
+            $result2 = mysqli_query($this->conn, $sql_statement2);
+            if($result && $result2){
                 //returning if the user was deleted
                 return true;
             } 
