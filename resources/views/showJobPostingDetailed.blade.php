@@ -20,64 +20,21 @@ References: N/A
     <div class = "container">   
     <div class= "row justify-content-center">
     	<div class = "col">
-    	<table class="table table-dark">
-    	<tr><th scope="col">Company</th>
-    	<th scope="col">Position</th>
-    	<th scope="col">Description</th>
-    	<th scope="col">Requirements</th>
-    	<th scope="col">Pay</th>
-    	<th scope="col">Posting Date</th> 
-    	<th scope="col">Interested?</th>
-    	@if(Session::get('Role') == "admin")
-    	<th scope="col">*Actions*</th>    	
-    	@endif
-    	
-    	</tr>
-        		<tr>
-        			<td>{{$job->getCompany()}}</td>
-        			<td>{{$job->getPosition()}}</td>
-        			<td>{{$job->getDescription()}}</td> 
-        			<td>{{$job->getRequirements()}}</td>
-         			<td>{{$job->getPay()}}</td>
-        			<td>{{$job->getPostingDate()}}</td>
-        			<td>
-    					<button class="btn btn-success" type="submit">Apply</button>
-        			</td>
-        			@if(Session::get('Role') == "admin")
-        			<td>
-        			<form action="adminJobPosting">
-        				<input type="hidden" name="_token" value="{{csrf_token()}}" />
-    					<input type="hidden" name="id" value="{{$job->getJobId()}}"> 
-        			    <button class="btn btn-warning" type="submit">Edit</button>       			
-        			</form>
-        			<button type="button" class="btn btn-danger" data-toggle="modal"
-							data-target="#delete{{$job->getJobId()}}">Delete</button>
-        			</td>	
-        			@endif	
-        		</tr>
-        		<!-- The Modal -->
-				<div class="modal fade" id="delete{{$job->getJobId()}}">
-					<div class="modal-dialog modal-dialog-centered modal-sm">
-						<div class="modal-content">
-
-							<!-- Modal Header -->
-							<div class="modal-header">
-								<h4 class="modal-title text-center">Delete Job Posting?</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-
-							<!-- Modal body -->
-							<div class="modal-body" >
-								<form method="post" action="deleteJobPosting">
-    								<input type="hidden" name="_token" value="{{csrf_token()}}" />
-    								<input type="hidden" name="id" value="{{$job->getJobId()}}"> 
-    								<button class="btn btn-danger" type="submit">Delete</button>
-    							</form>	
-							</div>
-						</div>
-					</div>
-				</div>
-        </table>
+		<h3>{{$job->getCompany()}}</h3>
+		<h5>{{$job->getPosition()}}</h5>
+		<h6>Description:</h6>
+		<p>{{$job->getDescription()}}</p> 
+		<h6>Requirements:</h6>
+        <p>{{$job->getRequirements()}}</p>
+        <h6>Pay:</h6>
+        <p>{{$job->getPay()}}</p>
+        <h6>Date Posted:</h6>
+        <p>{{$job->getPostingDate()}}</p>
+    	<form method="post" action="applyJob">
+        <input type="hidden" name="_token" value="{{csrf_token()}}" />
+    	<input type="hidden" name="id" value = "{{$job->getJobId()}}"> 
+        <button class="btn btn-success" type="submit">Apply</button>       			
+        </form>
         </div>
      </div>
      

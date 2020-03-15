@@ -12,6 +12,7 @@ namespace App\Http\Middleware;
  References: N/A
  */
 
+use Illuminate\Support\Facades\Session;
 use Closure;
 
 class MySecurityMiddleware
@@ -39,7 +40,7 @@ class MySecurityMiddleware
         
         $enable = true;
         //if username is set in session then a user is logged in 
-        if($request ->session()->get('username') != null){
+        if(Session::get("User") != null){
             $enable = false;
         }
         

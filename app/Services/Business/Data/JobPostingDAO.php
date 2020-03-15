@@ -93,6 +93,35 @@ class JobPostingDAO{
         }
         
     }
+    //find all jobs in database that match this keyphrase
+    public function searchJobs($terms){
+        //see if the connection failed
+        if ($this->conn->connect_error){
+            echo "Failed to get databse connection!";
+        }else{
+            $sql_statement =  "SELECT * FROM `jobposting` WHERE `position` LIKE '%$terms%' OR `description` LIKE '%$terms%'";
+            $counter = 0;
+            $result = mysqli_query($this->conn, $sql_statement);
+            //run the statment
+            if($result){
+                //loop through all results to create models to make an array
+                while($row = mysqli_fetch_assoc($result)){
+                    //create new model to send back
+                    $post = new JobPostingModel($row['id'],$row['company'], $row['position'], $row['description'], $row['requirements'], $row['pay'], $row['postingDate']);
+                    //add the new models to an array to return
+                    $array[$counter] = $post;
+                    $counter++;
+                }
+                if(isset($array))
+                    //if something is in the array return it
+                    return $array;
+                //return if empty
+                $empty=array();
+                return $empty;
+            }
+        }
+        
+    }
     //creates post when requested 
     public function create(JobPostingModel $post){
         

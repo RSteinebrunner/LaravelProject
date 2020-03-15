@@ -133,6 +133,28 @@ class JobPostingController extends Controller{
         return view('editJobPosting')->with("job",$result);
     }
     
+    //show all jobs after the search term from the form
+    public function searchJobs(Request $request){
+        //get id
+        $term = $request->input('terms');
+        //create new service
+        $job = new JobPostingService();
+        //get the array from the service
+        $result = $job->searchJobs($term);
+        //return the view with the data
+        return view('showJobSearchPosting')->with("job",$result);
+    }
+    
+    //emulate the response for appling to a job
+    public function applyJob(Request $request)
+    {
+        //get id for the job
+        $id = $request->input('id');
+        //for the future a service would be used to apply with the user's sesison id and the id from the form
+        
+        //currently just display a success page
+        return view('applyJobSuccess');
+    }
     public function showJobDetails(Request $request){
         //get id
         $id = $request->input('id');

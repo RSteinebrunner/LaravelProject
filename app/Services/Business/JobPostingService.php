@@ -69,6 +69,17 @@ class JobPostingService{
         return $result;
     } 
     
+    //locate all jobs in database with $terms in them
+    public function searchJobs($terms){
+        //Database Connection
+        $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
+        //make new user in database using education model
+        $posts = new JobPostingDAO($conn);
+        $result = $posts->searchJobs($terms);
+        return $result;
+    } 
+    
+    //edit existing job postings in the database
     public function editPost(JobPostingModel $post){
         //Database Connection
         $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);

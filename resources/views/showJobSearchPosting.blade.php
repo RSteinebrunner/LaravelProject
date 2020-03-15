@@ -20,6 +20,11 @@ References: N/A
     <div class = "container">   
     <div class= "row justify-content-center">
     	<div class = "col">
+    	<form method="post" action="searchJobs">
+        <input type="hidden" name="_token" value="{{csrf_token()}}" />
+    	<input type="text" name="terms" placeholder = "Enter something to search"> 
+        <button class="btn btn-success" type="submit">Search</button>       			
+        </form>
     	<table class="table table-dark">
     	<tr><th scope="col">Company</th>
     	<th scope="col">Position</th>
@@ -31,8 +36,10 @@ References: N/A
     	@if(Session::get('Role') == "admin")
     	<th scope="col">*Actions*</th>    	
     	@endif
+    	
+    	<tbody id="myTable">   	    	
     	</tr>
-        		@foreach($result as $job)
+        		@foreach($job as $job)
         		<tr>
         			<td>{{$job->getCompany()}}</td>
         			<td>{{$job->getPosition()}}</td>
@@ -40,9 +47,13 @@ References: N/A
 <!--        		<td>{{$job->getRequirements()}}</td>
          			<td>{{$job->getPay()}}</td>
         			<td>{{$job->getPostingDate()}}</td>  -->
+        			<form action="showDetailPage">   
+        			<input type="hidden" name="_token" value="{{csrf_token()}}" />
+    				<input type="hidden" name="id" value="{{$job->getJobId()}}">     			
         			<td>
-    					<button class="btn btn-success" type="submit">Apply</button>
+    					<button class="btn btn-primary" type="submit">View</button>
         			</td>
+        			</form>
         			@if(Session::get('Role') == "admin")
         			<td>
         			<form action="adminJobPosting">
@@ -78,7 +89,19 @@ References: N/A
 					</div>
 				</div>
         		@endforeach
+        </tbody>                		
         </table>
+        <script type="text/javascript">
+         // Filter table
+            $(document).ready(function(){
+              $("#tableSearch").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
+        </script>
         </div>
      </div>
      

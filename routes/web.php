@@ -72,7 +72,9 @@ Route::get('/adminJobPosting', 'JobPostingController@findJob');
 Route::post('/editJobPosting', 'JobPostingController@editPost');
 Route::post('/deleteJobPosting', 'JobPostingController@deletePost');
 Route::post('/addJobPosting', 'JobPostingController@addPost');
-    
+Route::post('/searchJobs', 'JobPostingController@searchJobs');
+Route::post('/applyJob', 'JobPostingController@applyJob');
+
 Route::get('/portfolio', 'PortfolioController@showPortfolio');
 
 Route::post('/deleteEducation', 'EducationController@deleteEducation');

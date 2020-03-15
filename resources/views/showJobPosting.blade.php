@@ -20,8 +20,14 @@ References: N/A
     <div class = "container">   
     <div class= "row justify-content-center">
     	<div class = "col">
-    	<input class="form-control mb-4" id="tableSearch" type="text"
+    	<!-- <input class="form-control mb-4" id="tableSearch" type="text"
     		placeholder="Type something to search list items">
+    		 -->
+    	<form method="post" action="searchJobs">
+        <input type="hidden" name="_token" value="{{csrf_token()}}" />
+    	<input type="text" name="terms" placeholder = "Enter something to search"> 
+        <button class="btn btn-success" type="submit">Search</button>       			
+        </form>
     	<table class="table table-dark">
     	<tr><th scope="col">Company</th>
     	<th scope="col">Position</th>
@@ -44,7 +50,7 @@ References: N/A
 <!--        		<td>{{$job->getRequirements()}}</td>
          			<td>{{$job->getPay()}}</td>
         			<td>{{$job->getPostingDate()}}</td>  -->
-        			<form action="showDetailPage">   
+        			<form action="showDetailPage" >   
         			<input type="hidden" name="_token" value="{{csrf_token()}}" />
     				<input type="hidden" name="id" value="{{$job->getJobId()}}">     			
         			<td>
