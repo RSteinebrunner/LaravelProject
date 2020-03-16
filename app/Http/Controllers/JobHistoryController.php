@@ -14,6 +14,8 @@ namespace App\Http\Controllers;
 use App\Models\JobHistoryModel;
 use App\Services\Business\JobHistoryService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Exception;
 //JobHistory controller hold basic methods to either route to other views or request JobHistoryservice for further user specific actions
 class JobHistoryController extends Controller{
     /**
@@ -22,6 +24,7 @@ class JobHistoryController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function deleteJobHistory(Request $request){
+        try{
         //get the id
         $id = $request->input('id');
         //create new JobHistory service
@@ -34,6 +37,13 @@ class JobHistoryController extends Controller{
         else{
             return view('profileDisplayError');
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -42,6 +52,7 @@ class JobHistoryController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function addJobHistory(Request $request){
+        try{
         $this->validateForm($request);
         //pull form data to make JobHistory
         $userId = $request->input('userId');
@@ -65,6 +76,13 @@ class JobHistoryController extends Controller{
         }
         else{
             return view('profileDisplayError')->with("data","JobHistoryInsertion");
+        }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
         }
     }
     

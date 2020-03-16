@@ -12,6 +12,8 @@ namespace App\Http\Controllers;
   */
 use App\Models\SkillsModel;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Exception;
 use App\Services\Business\SkillsService;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class SkillsController extends Controller{
@@ -21,6 +23,7 @@ class SkillsController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function deleteSkills(Request $request){
+        try{
         //get the id
         $id = $request->input('id');
         //create new skills service
@@ -36,6 +39,13 @@ class SkillsController extends Controller{
             //reutrn to error page stating a specific error message
             return view('managerError');
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -44,6 +54,7 @@ class SkillsController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function addSkill(Request $request){
+        try{
         //pull form data to make user
         $userId = $request->input('id');
         $skill = $request->input('skill');
@@ -61,6 +72,13 @@ class SkillsController extends Controller{
         }
         //if result comes back as false then reutrn to error page stating a specific error message
         return view('managerError')->with("result",$result);
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     

@@ -14,6 +14,8 @@ use App\Services\Business\EducationService;
 use App\Services\Business\JobHistoryService;
 use App\Services\Business\SkillsService;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
+use Exception;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class PortfolioController extends Controller{
     /**
@@ -21,6 +23,7 @@ class PortfolioController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function showPortfolio(){
+        try{
         //get the user id
         $id = Session::get('User')->getId();
         //creat new services
@@ -32,5 +35,12 @@ class PortfolioController extends Controller{
         $result = array(0=>$edu->findAllEducation($id),$skill->findAllSkills($id),$jobs->findAllJobHistory($id));
         //return the showPortfolio view with the data
         return view('showPortfolio')->with("result",$result);
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
 }

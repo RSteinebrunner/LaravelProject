@@ -13,6 +13,8 @@ namespace App\Http\Controllers;
 use App\Models\EducationModel;
 use App\Services\Business\EducationService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Exception;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class EducationController extends Controller{
     
@@ -22,6 +24,7 @@ class EducationController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function deleteEducation(Request $request){
+        try{
         //get the id
         $id = $request->input('id');
         //create new service
@@ -36,6 +39,13 @@ class EducationController extends Controller{
             //otherwise take user back to error page
             return view('managerError');
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -44,6 +54,7 @@ class EducationController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function addEducation(Request $request){
+        try{
         //validate information recieved from form
         $this->validateForm($request);
         //pull form data to make user
@@ -66,6 +77,13 @@ class EducationController extends Controller{
         }
         else {
             return view('profileDisplayError')->with("data","educationInsert");
+        }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
         }
     }
 

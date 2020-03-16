@@ -14,6 +14,8 @@ use App\Models\UserModel;
 use App\Services\Business\AdminService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
+use Exception;
 class AdminController extends Controller{
     
     /**
@@ -22,6 +24,7 @@ class AdminController extends Controller{
      * @return \Illuminate\Http\RedirectResponse
      */
     public function showAllUsers(Request $request){
+        try{
         //if not a admin rereoute to login
         if(Session::get('Role') != "admin"){
             return redirect()->route('login');
@@ -30,6 +33,13 @@ class AdminController extends Controller{
         $users = new AdminService();
         $result = $users->findAllUsers($id);
         return view('showAdmin')->with('result',$result);
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -38,6 +48,7 @@ class AdminController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function changeRole(Request $request){
+        try{
         //recieve form information of the user the admin is trying to edit
         $id = $request->input('id');
         $role = $request->input('role');
@@ -55,6 +66,13 @@ class AdminController extends Controller{
         else{
             return view('managerError');
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -63,6 +81,7 @@ class AdminController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function deleteUser(Request $request){
+        try{
         //recieve the id of the user an admin is trying to delete
         $id = $request->input('id');
         $users = new AdminService();
@@ -77,6 +96,13 @@ class AdminController extends Controller{
         else{
             return view('managerError');
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -85,6 +111,7 @@ class AdminController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function suspendUser(Request $request){
+        try{
         $id = $request->input('id');
         $status = $request->input('status');
         $users = new AdminService();
@@ -98,7 +125,14 @@ class AdminController extends Controller{
         }
         else{
             return view('managerError');
-        }       
+        }     
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -107,6 +141,7 @@ class AdminController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function userDetails(Request $request){
+        try{
         $id = $request->input('id');
         $users = new AdminService();
         //call method in admin service to return the user that matches the passed Id parameter 
@@ -117,6 +152,13 @@ class AdminController extends Controller{
         else{
             return view('managerError');
         }   
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -125,6 +167,7 @@ class AdminController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function updateUser(Request $request){
+        try{
         //Validate Form Data
         $this->validateForm($request);
         //pull form data to make user
@@ -150,7 +193,14 @@ class AdminController extends Controller{
         }
         else{
             return view('managerError');
-        }     
+        } 
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**

@@ -14,6 +14,8 @@ use App\Models\GroupModel;
 use App\Services\Business\GroupService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
+use Exception;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class GroupController extends Controller{
     
@@ -23,12 +25,20 @@ class GroupController extends Controller{
    * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
    */
     public function searchForGroup(Request $request){
+        try{
         $searched = $request->input('search');
         $service = new GroupService();
         //searching for particular groups
         $result = $service->findGroup($searched);
         //retuning the view with the groups
         return view('showGroups')->with("result",$result);
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
         
     }
     
@@ -38,12 +48,20 @@ class GroupController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function showGroupMembers(Request $request){
+        try{
         $group = $request->input('groupId');
         $service = new GroupService();
         //searching for particular groups
         $result = $service->findGroupMembers($group);
         //retuning the view with the group members
         return view('showGroupMembers')->with("result",$result);
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
         
     }
     
@@ -53,6 +71,7 @@ class GroupController extends Controller{
      * @return |\Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function addGroup(Request $request){
+        try{
         //pull form data to make a posting 
         //extract data to send to the service
         $this->validateForm($request);
@@ -72,6 +91,13 @@ class GroupController extends Controller{
         else{
             return view('profileDisplayError')->with("data", "groupCreateError");
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -80,6 +106,7 @@ class GroupController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function joinGroup(Request $request){
+        try{
         //extract data to send to the service
         $groupID = $request->input('groupID');
         $userId = $request->input('userID');
@@ -95,6 +122,13 @@ class GroupController extends Controller{
             //otherwise take user to error page with error message
             return view('profileDisplayError')->with("data", "groupCreateError");
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -103,7 +137,7 @@ class GroupController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function editGroupPosting(Request $request){
-        
+        try{
         $this->validateForm($request);
         //pull form data to make a change
         //extract data to send to the service
@@ -124,6 +158,13 @@ class GroupController extends Controller{
         else{
             return view('profileDisplayError')->with("data", $result);
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -132,6 +173,7 @@ class GroupController extends Controller{
      * @return |\Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function deleteGroup(Request $request){
+        try{
         //get the id
         $groupId = $request->input('id');
         //create new service
@@ -143,6 +185,13 @@ class GroupController extends Controller{
         else{
             return view('profileDisplayError')->with("data", "groupDeleteError");
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -151,6 +200,7 @@ class GroupController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function leaveGroup(Request $request){
+        try{
         //get the id
         $userId = $request->input('userID');
         //get the group id
@@ -165,6 +215,13 @@ class GroupController extends Controller{
         else{
             return view('profileDisplayError')->with("data", "groupLeaveError");
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
   
 
@@ -174,12 +231,20 @@ class GroupController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function showAllGroups(){
+        try{
         //creat new service
         $gs = new GroupService();
         //get the result from the service
         $result = $gs->findAllGroups();
         //return the view with the data
         return view('showGroups')->with("result",$result);
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -188,6 +253,7 @@ class GroupController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function showAllOwnerGroups(Request $request){
+        try{
         //gets user id
         $id = $request->input('id');
         //creat new service
@@ -196,6 +262,13 @@ class GroupController extends Controller{
         $result = $gs->findAllOwnerGroups($id);
         //return the view with the data
         return view('myGroups')->with("result",$result);
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -204,6 +277,7 @@ class GroupController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function editGroup(Request $request){
+        try{
         //gets group id
         $id = $request->input('id');
         //creat new service
@@ -212,6 +286,13 @@ class GroupController extends Controller{
         $result = $groups->findGroup($id);
         //return the view with the data
         return view('editGroups')->with("result",$result);
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     /**
      * Function used to show all members 
@@ -219,6 +300,7 @@ class GroupController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function showAllMembers(Request $request){
+        try{
         //gets group id
         $groupID = $request->input('id');
         //creat new service
@@ -227,6 +309,13 @@ class GroupController extends Controller{
         $result = $groups->findAllMembers($groupID);
         //returns array of groupmodels
         return view('showMembers')->with("result",$result);
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -234,6 +323,7 @@ class GroupController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function showMyGroups(){
+        try{
         //get the user id
         $id = Session::get('User')->getId();
         //creat new services
@@ -241,6 +331,13 @@ class GroupController extends Controller{
         //get the result from the service
         $result = array(0=>$service->findAllOwnerGroups($id), $service->findAllParticipation($id));
         return view('showMyGroups')->with("result", $result);
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**

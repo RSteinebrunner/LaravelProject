@@ -13,6 +13,8 @@ namespace App\Http\Controllers;
 use App\Models\UserModel;
 use App\Services\Business\RegistrationService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Exception;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class RegistrationController extends Controller{
     /**
@@ -21,6 +23,7 @@ class RegistrationController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function createUser(Request $request){
+        try{
         //Validate Form Data
         $this->validateForm($request);
         //pull form data to make user
@@ -50,7 +53,14 @@ class RegistrationController extends Controller{
             return view('showRegister')->with("error","Error");
         }
         //otherwise take user to register failur incase the register process failed to proceed
-        return view('registerFailure')->with("result",$result);       
+        return view('registerFailure')->with("result",$result);   
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**

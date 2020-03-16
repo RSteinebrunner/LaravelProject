@@ -12,6 +12,8 @@ namespace App\Http\Controllers;
   */
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
+use Exception;
 use App\Services\Business\LoginService;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class LoginController extends Controller{
@@ -23,6 +25,7 @@ class LoginController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function authenticate(Request $request){
+        try{
         //Validate Form Data
         $this->validateForm($request);
         // get form data
@@ -38,7 +41,14 @@ class LoginController extends Controller{
         } else {
             //if no user is found then return the user to login failed view with result
             return view('loginFailure')->with("result", $result);
-       }         
+       }   
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**

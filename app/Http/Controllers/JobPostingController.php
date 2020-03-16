@@ -14,6 +14,8 @@ use App\Models\JobPostingModel;
 use App\Services\Business\JobPostingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
+use Exception;
 //controller hold basic methods to either route to other views or request securityservice for further admin specific actions
 class JobPostingController extends Controller{
     
@@ -23,6 +25,7 @@ class JobPostingController extends Controller{
    * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
    */
     public function addPost(Request $request){
+        try{
         //pull form data to make a posting 
         //extract data to send to the service
         $this->validateForm($request);
@@ -48,6 +51,13 @@ class JobPostingController extends Controller{
             //otherwise take user to error page with error message
             return view('profileDisplayError')->with("data", "jobPostingError");
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -56,6 +66,7 @@ class JobPostingController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function deletePost(Request $request){
+        try{
         //get the id
         $id = $request->input('id');
         //create new service
@@ -70,6 +81,13 @@ class JobPostingController extends Controller{
             //otherwise take user to error page with error message
             return view('profileDisplayError')->with("data", "jobDeleteError");
         }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
+        }
     }
     
     /**
@@ -78,6 +96,7 @@ class JobPostingController extends Controller{
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function editPost(Request $request){
+        try{
    
         $this->validateForm($request);
         //pull form data to make a change
@@ -101,6 +120,13 @@ class JobPostingController extends Controller{
         }
         else{
             return view('profileDisplayError')->with("data", "jobPostingError");
+        }
+        }
+        catch(ValidationException $e1){
+            throw $e1;
+        }
+        catch(Exception $e2){
+            //return view("systemException");
         }
     }
     
