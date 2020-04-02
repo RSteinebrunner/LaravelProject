@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
  Version#: 2
  References: N/A
   */
+use App\Http\Services\Utility\ILoggerService;
 use App\Models\UserModel;
 use App\Services\Business\AdminService;
 use Illuminate\Http\Request;
@@ -18,6 +19,11 @@ use Illuminate\Validation\ValidationException;
 use Exception;
 class AdminController extends Controller{
     
+    protected $logger;
+    
+    public function __construct(ILoggerService $logger){
+        $this->logger = $logger;
+    }
     /**
      * gets the user id from session, requests an array from the admin service
      * @param Request $request
@@ -25,6 +31,7 @@ class AdminController extends Controller{
      */
     public function showAllUsers(Request $request){
         try{
+            $this->logger->info("Entering AdminController.showAllUsers()");
         //if not a admin rereoute to login
         if(Session::get('Role') != "admin"){
             return redirect()->route('login');
