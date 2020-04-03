@@ -14,10 +14,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Exception;
+use App\Http\Services\Utility\ILoggerService;
 use App\Services\Business\LoginService;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class LoginController extends Controller{
+    protected $logger;
     
+    public function __construct(ILoggerService $logger){
+        $this->logger = $logger;
+    }
     
     /**
      * Function to authenicate that a user can use this account to login into the site 
@@ -26,6 +31,7 @@ class LoginController extends Controller{
      */
     public function authenticate(Request $request){
         try{
+            $this->logger->info("entering loginController.authenticate()");
         //Validate Form Data
         $this->validateForm($request);
         // get form data
@@ -37,8 +43,10 @@ class LoginController extends Controller{
         $result = $isUser->authenticate($username, $password);
         // check if user was found
         if ($result) {
+            $this->logger->info("exiting logincontroller.authenticate() with success");
             return view('loginSuccess');
         } else {
+            $this->logger->info("Exiting logincontroller() with fail");
             //if no user is found then return the user to login failed view with result
             return view('loginFailure')->with("result", $result);
        }   
@@ -57,6 +65,7 @@ class LoginController extends Controller{
      */
     public function logoutUser()
     {
+        $this->logger->info("Logging user out");
         Session::flush();
         return redirect()->route('login');
     }
