@@ -26,7 +26,7 @@ class LoggingServiceProvider extends ServiceProvider
     public function register()
     {
         //used for only one instance
-        $this->app->singleton('App\Http\Services\Utility\ILoggerService', function($app){
+        $this->app->singleton('App\Services\Utility\ILoggerService', function($app){
            return new MyLogger3(); 
         });
         /*
@@ -41,6 +41,6 @@ class LoggingServiceProvider extends ServiceProvider
     
     public function provides(){
         echo "Deferred true and i am here in provides()";
-        return ['App\Http\Services\Utility\ILoggerService'];
+        return ['App\Services\Utility\ILoggerService'];
     }
 }
