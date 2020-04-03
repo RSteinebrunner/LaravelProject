@@ -19,7 +19,7 @@ use App\Services\Business\LoginService;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class LoginController extends Controller{
     protected $logger;
-    
+    //create the logger to be used
     public function __construct(ILoggerService $logger){
         $this->logger = $logger;
     }
@@ -31,6 +31,7 @@ class LoginController extends Controller{
      */
     public function authenticate(Request $request){
         try{
+            //log the call
             $this->logger->info("entering loginController.authenticate()");
         //Validate Form Data
         $this->validateForm($request);
@@ -52,9 +53,13 @@ class LoginController extends Controller{
        }   
         }
         catch(ValidationException $e1){
+            //log the error
+            $this->logger->warning("validation exception in logincontroller.authenticate()", $e1);
             throw $e1;
         }
         catch(Exception $e2){
+            //log the system exception
+            $this->logger->warning("system exception in logincontroller.authenticate()", $e2);
             //return view("systemException");
         }
     }
