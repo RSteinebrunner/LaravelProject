@@ -10,7 +10,7 @@ namespace App\Http\Controllers;
  Version#: 2
  References: N/A
   */
-use App\Http\Services\Utility\ILoggerService;
+use App\Services\Utility\ILoggerService;
 use App\Models\UserModel;
 use App\Services\Business\AdminService;
 use Illuminate\Http\Request;
@@ -221,7 +221,7 @@ class AdminController extends Controller{
             'lastName' => 'Required | Between:1,24',
             'username' => 'Required | Between:1,24',
             'email' => 'Required | Between:1,30 | email',
-            'age' => 'Required | Between:1,3 | numeric',
+            'age' => 'Required | digits:2 | numeric',
             'password' => 'Required | Between:1,24',
             'gender' => 'Required | Between:1,24',
             'address' => 'Required | Between:10,80',
