@@ -1,7 +1,7 @@
 <?php
 namespace App\Services\Utility;
 
-use App\Http\Services\Utility\ILoggerService;
+use App\Services\Utility\ILoggerService;
 use Illuminate\Support\Facades\Log;
 
 class MyLogger3 implements ILoggerService

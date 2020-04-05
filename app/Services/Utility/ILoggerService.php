@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Services\Utility;
+namespace App\Services\Utility;
 
 interface ILoggerService
 {

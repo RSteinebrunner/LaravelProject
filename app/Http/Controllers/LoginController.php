@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Exception;
-use App\Http\Services\Utility\ILoggerService;
+use App\Services\Utility\ILoggerService;
 use App\Services\Business\LoginService;
 //controller hold basic methods to either route to other views or request securityservice for further user specific actions
 class LoginController extends Controller{
