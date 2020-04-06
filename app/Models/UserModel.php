@@ -12,7 +12,7 @@ References: N/A
 -->
  */
 //user model class outlines all user data
-class UserModel{    
+class UserModel implements \JsonSerializable{    
     private $userId = null;
     private $username;
     private $password;
@@ -28,6 +28,7 @@ class UserModel{
     private $role = null;
     private $isSuspended = null;
     
+  
     public function getId(){
         return $this->userId;
     }
@@ -94,5 +95,10 @@ class UserModel{
         $this->role = $role;
         $this->isSuspended = $suspended;
     }
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+
 }
 ?>

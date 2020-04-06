@@ -13,7 +13,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Exception;
 use App\Services\Business\JobPostingService;
-use App\Models\DTO;
+use App\Models\DTO; 
 
 class jobsRestController extends Controller
 {

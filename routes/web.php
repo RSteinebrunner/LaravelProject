@@ -107,7 +107,10 @@ Route::post('/userDetails', 'AdminController@userDetails');
 Route::post('/updateDetails', 'AdminController@updateUser');
 Route::post('/changeRole', 'AdminController@changeRole');
 
-
+//Rest services
+Route::resource('/userProfile', 'usersRestController');
+Route::resource('/allJobs', 'jobsRestController');
+Route::resource('/getJob', 'jobsRestController');
 
 
 

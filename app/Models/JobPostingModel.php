@@ -12,7 +12,7 @@ namespace App\Models;
  -->
  */
 
-class JobPostingModel
+class JobPostingModel implements \JsonSerializable
 {
    private $id = NULL;
    private $company;
@@ -92,6 +92,11 @@ class JobPostingModel
     {
         return $this->postingDate;
     }
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+
 
 
    

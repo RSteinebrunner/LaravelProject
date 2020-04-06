@@ -1,5 +1,5 @@
 <?php 
-namespace App\Http\Models;
+namespace App\Models;
 
 //refactor and rename as CredintialModel for better practice
 class DTO implements \JsonSerializable{

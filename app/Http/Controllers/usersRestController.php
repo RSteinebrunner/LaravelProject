@@ -12,7 +12,7 @@ namespace App\Http\Controllers;
  */
 use Illuminate\Http\Request;
 use Exception;
-use App\Services\Business\SecurityService;
+use App\Services\Business\AdminService;
 use App\Models\DTO;
 class usersRestController extends Controller
 {
@@ -24,7 +24,7 @@ class usersRestController extends Controller
     public function index(){
         try {
             //call service to get all users'
-            $service = new SecurityService();
+            $service = new AdminService();
             $users = $service->findAllUsers();
             //create dto
             $dto = new DTO(0, "OK", $users);
@@ -71,7 +71,7 @@ class usersRestController extends Controller
     public function show($id){
         try {
             //call service to get job by id
-            $service = new SecurityService();
+            $service = new AdminService();
             $user = $service->findUserById($id);
             //create dto
             if($user == null){
