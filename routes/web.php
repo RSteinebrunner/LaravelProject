@@ -40,6 +40,15 @@ Route::get('/login',function () {
 Route::get('/register',function () {
     return view('showRegister');
 });
+Route::get('/newEducation',function () {
+   return view('addEducation');
+});
+Route::get('/newSkills', function () {
+    return view('addSkills');
+});
+Route::get('/newJobHistory', function () {
+    return view('addJobHistory');
+});
 Route::get('/editPortfolio',function () {
     return view('editPortfolio');
 });

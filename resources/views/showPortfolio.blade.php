@@ -97,7 +97,7 @@ References: N/A
 	<div class="row">
 		<div class="col">
 			<button class="btn btn-success"
-				onclick="window.location.href = 'addEducation';">Add New</button>
+				onclick="window.location.href = 'newEducation';">Add New</button>
 		</div>
 	</div>
 </div>
@@ -156,7 +156,7 @@ References: N/A
 	<div class="row">
 		<div class="col">
 			<button class="btn btn-success"
-				onclick="window.location.href = 'addSkills';">Add New</button>
+				onclick="window.location.href = 'newSkills';">Add New</button>
 		</div>
 	</div>
 </div>
@@ -220,7 +220,7 @@ References: N/A
 	<div class="row">
 		<div class="col">
 			<button class="btn btn-success"
-				onclick="window.location.href = 'addJobHistory';">Add New</button>
+				onclick="window.location.href = 'newJobHistory';">Add New</button>
 		</div>
 	</div>
 </div>
