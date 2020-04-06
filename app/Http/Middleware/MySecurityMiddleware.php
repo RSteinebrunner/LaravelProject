@@ -12,7 +12,6 @@ namespace App\Http\Middleware;
  References: N/A
  */
 
-use Illuminate\Support\Facades\Session;
 use Closure;
 
 class MySecurityMiddleware
@@ -33,14 +32,17 @@ class MySecurityMiddleware
             $request->is('login') ||            
             $request->is('doLogin') || 
             $request->is('register') || 
-            $request->is('doRegister'))
+            $request->is('doRegister') ||
+            $request->is('userProfile/*') ||
+            $request->is('allJobs') ||
+            $request->is('getJob/*')) 
         {
             $secureCheck = false;    
         }
         
         $enable = true;
         //if username is set in session then a user is logged in 
-        if(Session::get("User") != null){
+        if($request->session()->get('username') != null){
             $enable = false;
         }
         
