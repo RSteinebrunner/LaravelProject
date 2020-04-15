@@ -43,7 +43,7 @@ class RegistrationController extends Controller{
         $makeUser = new RegistrationService();
         //result will return the output of create method within the registeration service
         $result = $makeUser->create($newUser);
-        if($result){
+        if($result == "true"){
             //if result is true then take user to the register success view
             return view('registerSuccess');
         }
@@ -74,7 +74,7 @@ class RegistrationController extends Controller{
             'lastName' => 'Required | Between:1,24',
             'username' => 'Required | Between:1,24',
             'email' => 'Required | Between:1,30 | email',
-            'age' => 'Required | Between:1,3 | numeric',
+            'age' => 'Required | numeric',
             'password' => 'Required | Between:1,24',
             'gender' => 'Required | Between:1,24',
             'address' => 'Required | Between:10,80',

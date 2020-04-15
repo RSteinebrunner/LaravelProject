@@ -33,26 +33,25 @@ class LoginController extends Controller{
         try{
             //log the call
             $this->logger->info("entering loginController.authenticate()");
-        //Validate Form Data
-        $this->validateForm($request);
-        // get form data
-        $username = $request->input('username');
-        $password = $request->input('password');
-        // create security service
-        $isUser = new LoginService();
-        // send username and password to service
-        $result = $isUser->authenticate($username, $password);
-        // check if user was found
-        if ($result) {
-            $this->logger->info("exiting logincontroller.authenticate() with success");
-            return view('loginSuccess');
-        } else {
-            $this->logger->info("Exiting logincontroller() with fail");
-            //if no user is found then return the user to login failed view with result
-            return view('loginFailure')->with("result", $result);
-       }   
-        }
-        catch(ValidationException $e1){
+            //Validate Form Data
+            $this->validateForm($request);
+            // get form data
+            $username = $request->input('username');
+            $password = $request->input('password');
+            // create security service
+            $isUser = new LoginService();
+            // send username and password to service
+            $result = $isUser->authenticate($username, $password);
+            // check if user was found
+            if ($result=="true") {
+                $this->logger->info("exiting logincontroller.authenticate() with success");
+                return view('loginSuccess');
+            } else {
+                $this->logger->info("Exiting logincontroller() with fail");
+                //if no user is found then return the user to login failed view with result
+                return view('loginFailure')->with("result", $result);
+           }   
+        }catch(ValidationException $e1){
             //log the error
             $this->logger->warning("validation exception in logincontroller.authenticate()");
             throw $e1;

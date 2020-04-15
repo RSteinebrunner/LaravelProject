@@ -36,7 +36,7 @@ class RegistrationService{
         $security = new RegistrationDAO($conn);
         $result = $security->findByUsername($user->getUsername());
         //check if it is duplicate
-        if($result == "true"){
+        if($result == true){
             //return duplicate to controller if true
             return "duplicate";
         }
@@ -44,7 +44,7 @@ class RegistrationService{
             //if no duplicate found make the user
             $result = $security->makeUser($user);
             //relay if successfull to the controller
-            if($result=="true")
+            if($result==true)
                 return "true";
             return "false";
         }
