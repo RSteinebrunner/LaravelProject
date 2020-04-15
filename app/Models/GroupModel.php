@@ -2,7 +2,7 @@
 namespace App\Models;
 /*
  * <!--
- Project name/Version: LaravelCLC Version: 4
+ Project name/Version: LaravelCLC Version: 6
  Module name: Group Model
  Authors: Anthony Clayton
  Date: 3/2/2020

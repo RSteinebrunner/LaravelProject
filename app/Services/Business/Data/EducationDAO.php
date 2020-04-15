@@ -4,7 +4,7 @@ use App\Models\EducationModel;
 use Illuminate\Support\Facades\Log;
 
 /*
- Project name/Version: LaravelCLC Version: 4
+ Project name/Version: LaravelCLC Version: 6
  Module name: education Module
  Authors:Anthony Clayton, Roland Steinebrunner
  Date: 2/25/2020

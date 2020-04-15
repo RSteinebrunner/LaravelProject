@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 /*
- Project name/Version: LaravelCLC Version: 5
+ Project name/Version: LaravelCLC Version: 6
  Module name: Skill Module
  Authors: Roland Steinebrunner, Jack Setrak
  Date: 03/09/2020

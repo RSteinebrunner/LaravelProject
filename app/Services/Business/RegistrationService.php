@@ -6,7 +6,7 @@ use App\Services\Business\Data\RegistrationDAO;
 use mysqli;
 /*
  <!--
- Project name/Version: LaravelCLC Version: 3
+ Project name/Version: LaravelCLC Version: 6
  Module name: Registration Module
  Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
  Date: 2/23/2020

@@ -4,7 +4,7 @@ use App\Models\UserModel;
 use Illuminate\Support\Facades\Session;
 
 /*
- Project name/Version: LaravelCLC Version: 5
+ Project name/Version: LaravelCLC Version: 6
  Module name: Administration Module
  Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
  Date: 3/9/2020

@@ -1,5 +1,5 @@
 <!--  
-Project name/Version: LaravelCLC Version: 5
+Project name/Version: LaravelCLC Version: 6
 Module name: Group Module
 Authors: Jack Setrak, Roland Steinebrunner
 Date: 3/9/2020

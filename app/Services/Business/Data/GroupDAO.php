@@ -3,7 +3,7 @@ namespace App\Services\Business\Data;
 use App\Models\GroupModel;
 
 /*
- Project name/Version: LaravelCLC Version: 4
+ Project name/Version: LaravelCLC Version: 6
  Module name: Group Module
  Authors: Anthony Clayton, Roland Steinebrunner
  Date: 3/2/2020

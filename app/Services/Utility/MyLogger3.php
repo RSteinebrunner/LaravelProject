@@ -1,6 +1,14 @@
 <?php
 namespace App\Services\Utility;
-
+/*
+ Project name/Version: LaravelCLC Version: 6
+ Module name: Logger Module
+ Authors: Anthony Clayton
+ Date: 04/5/2020
+ Synopsis: A custom logger class made to display any logging information
+ Version#: 1
+ References: N/A
+ */
 use App\Services\Utility\ILoggerService;
 use Illuminate\Support\Facades\Log;
 

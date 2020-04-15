@@ -1,5 +1,5 @@
 <!--  
-Project name/Version: LaravelCLC Version: 5
+Project name/Version: LaravelCLC Version: 6
 Module name: Job Posting Module
 Authors: Roland Steinebrunner, Anthony Clayton, Jack Setrak
 Date: 3/12/2020

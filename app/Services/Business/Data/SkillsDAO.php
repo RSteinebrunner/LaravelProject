@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\SkillsModel;
 
 /*
- Project name/Version: LaravelCLC Version: 4
+ Project name/Version: LaravelCLC Version: 6
  Module name: Skill Module
  Authors: Roland Steinebrunner, Jack Sidrak
  Date: 2/25/2020

@@ -1,6 +1,14 @@
 <?php 
 namespace App\Models;
-
+/*
+ Project name/Version: LaravelCLC Version: 6
+ Module name: Logger Module
+ Authors: Anthony Clayton
+ Date: 04/05/2020
+ Synopsis: DTO class that helps to structure data from different requests
+ Version#: 1
+ References: N/A
+ */
 //refactor and rename as CredintialModel for better practice
 class DTO implements \JsonSerializable{
     

@@ -2,7 +2,7 @@
 namespace App\Models;
 /*
  * <!--
- Project name/Version: LaravelCLC Version: 1
+ Project name/Version: LaravelCLC Version: 6
  Module name: SkillModel
  Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
  Date: 2/23/2020

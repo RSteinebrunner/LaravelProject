@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 /*
- Project name/Version: LaravelCLC Version: 5
+ Project name/Version: LaravelCLC Version: 6
  Module name: Login Module
  Authors: Roland Steinebrunner, Jack Setrak, Anthony Clayton
  Date: 03/09/2020
@@ -54,12 +54,12 @@ class LoginController extends Controller{
         }
         catch(ValidationException $e1){
             //log the error
-            $this->logger->warning("validation exception in logincontroller.authenticate()", $e1);
+            $this->logger->warning("validation exception in logincontroller.authenticate()");
             throw $e1;
         }
         catch(Exception $e2){
             //log the system exception
-            $this->logger->warning("system exception in logincontroller.authenticate()", $e2);
+            $this->logger->warning("system exception in logincontroller.authenticate()");
             //return view("systemException");
         }
     }

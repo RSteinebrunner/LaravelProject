@@ -2,7 +2,7 @@
 namespace App\Models;
 /*
  * <!--
- Project name/Version: LaravelCLC Version: 4
+ Project name/Version: LaravelCLC Version: 6
  Module name: EducationModel
  Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
  Date: 2/15/2020

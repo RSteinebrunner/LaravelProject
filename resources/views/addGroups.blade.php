@@ -1,5 +1,5 @@
 <!--  
-Project name/Version: LaravelCLC Version: 5
+Project name/Version: LaravelCLC Version: 6
 Module name: Portfolio Module
 Authors: Roland Steinebrunner, Anthony Clayton
 Date: 3/9/2020

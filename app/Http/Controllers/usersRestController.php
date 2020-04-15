@@ -70,7 +70,7 @@ class usersRestController extends Controller
      */
     public function show($id){
         try {
-            //call service to get job by id
+            //call service to get user by id
             $service = new AdminService();
             $user = $service->findUserById($id);
             //create dto

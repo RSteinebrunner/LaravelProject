@@ -2,7 +2,7 @@
 namespace App\Models;
 /*
  * <!--  
-Project name/Version: LaravelCLC Version: 3
+Project name/Version: LaravelCLC Version: 6
 Module name: JobHistory Module
 Authors: Jack Sidrak
 Date: 1/23/2020

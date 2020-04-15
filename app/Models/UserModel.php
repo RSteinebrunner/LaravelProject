@@ -2,7 +2,7 @@
 namespace App\Models;
 /*
  * <!--  
-Project name/Version: LaravelCLC Version: 1
+Project name/Version: LaravelCLC Version: 6
 Module name: UserModel
 Authors: Roland Steinebrunner, Jack Sidrak, Anthony Clayton
 Date: 1/19/2020

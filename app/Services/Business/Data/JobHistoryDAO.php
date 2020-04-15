@@ -4,7 +4,7 @@ use App\Models\JobHistoryModel;
 use Illuminate\Support\Facades\Log;
 
 /*
- Project name/Version: LaravelCLC Version: 3
+ Project name/Version: LaravelCLC Version: 6
  Module name: JobHistory Module
  Authors: Jack Sidrak, Roland Steinebrunner
  Date: 2/25/2020

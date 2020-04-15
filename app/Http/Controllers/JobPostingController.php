@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 /*
- Project name/Version: LaravelCLC Version: 5
+ Project name/Version: LaravelCLC Version: 6
  Module name: Job Posting Module
  Authors: Anthony Clayton, Jack Setrak
  Date: 03/12/2020

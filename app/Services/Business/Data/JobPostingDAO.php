@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\JobPostingModel;
 
 /*
- Project name/Version: LaravelCLC Version: 3
+ Project name/Version: LaravelCLC Version: 6
  Module name: Job Posting Module
  Authors:Anthony Clayton
  Date: 2/20/2020

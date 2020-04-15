@@ -2,7 +2,7 @@
 namespace App\Services\Business;
 /*
 <!--  
-Project name/Version: LaravelCLC Version: 4
+Project name/Version: LaravelCLC Version: 6
 Module name: Group Module
 Authors: Anthony Clayton
 Date: 3/2/2020
