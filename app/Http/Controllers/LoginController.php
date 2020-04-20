@@ -39,7 +39,9 @@ class LoginController extends Controller{
             $username = $request->input('username');
             $password = $request->input('password');
             // create security service
+            
             $isUser = new LoginService();
+            
             // send username and password to service
             $result = $isUser->authenticate($username, $password);
             // check if user was found

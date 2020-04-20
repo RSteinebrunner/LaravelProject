@@ -31,6 +31,7 @@ class LoginService{
     }
     //The user's username and password are used to authenicate if the use is found in the database and returns true if a match was found
     public function authenticate($username, $password){
+        
         //assume did not find
         $result = false;
         //Set up connection
@@ -38,18 +39,21 @@ class LoginService{
         //check for user
         $security = new LoginDAO($conn);
         $user= $security->findUser($username,$password);
-        if($user != null && $user->getStatus() == "true")
-        {
-            return "Suspended";
-        }
-        else if($user->getUsername() == $username && $user->getPassword() == $password){
-            Session::put('User',$user);
-            Session::put('Role', $user->getRole());
-            return "true";
-        }
-        else{
-            return "false";
-        }
+        
+            if($user != null && $user->getStatus() == "true")
+            {
+                return "Suspended";
+            }
+            else if($user != null && $user->getUsername() == $username && $user->getPassword() == $password){
+                Session::put('User',$user);
+                Session::put('Role', $user->getRole());
+                return "true";
+            }
+            else{
+                return "false";
+            }
+            
+            
     }
   
 }
