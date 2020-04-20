@@ -46,7 +46,8 @@ class LoginController extends Controller{
             if ($result=="true") {
                 $this->logger->info("exiting logincontroller.authenticate() with success");
                 return view('loginSuccess');
-            } else {
+            } 
+            else {
                 $this->logger->info("Exiting logincontroller() with fail");
                 //if no user is found then return the user to login failed view with result
                 return view('loginFailure')->with("result", $result);

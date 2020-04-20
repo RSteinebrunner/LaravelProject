@@ -38,7 +38,11 @@ class LoginService{
         //check for user
         $security = new LoginDAO($conn);
         $user= $security->findUser($username,$password);
-        if($user != null && $user->getUsername() == $username && $user->getPassword() == $password){
+        if($user != null && $user->getStatus() == "true")
+        {
+            return "Suspended";
+        }
+        else if($user->getUsername() == $username && $user->getPassword() == $password){
             Session::put('User',$user);
             Session::put('Role', $user->getRole());
             return "true";
